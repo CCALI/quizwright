@@ -54,7 +54,7 @@
                 <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Lessons <i class="glyphicon glyphicon-chevron-down"></i></a>
                     <ul class="nav nav-stacked collapse in" id="userMenu">
                         <li class="active"> <a href="#"><i class="glyphicon glyphicon-th-list"></i> List</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-plus"></i> New</a></li>
+                        <li><a id="new" href="#"><i class="glyphicon glyphicon-plus"></i> New</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Options</a></li>
                         
                     </ul>
@@ -115,7 +115,7 @@
             <hr>
 
             <div class="row">
- 
+				<div id="newlesson"></div>
             </div>
             <!--/row-->
 
