@@ -7,6 +7,15 @@ $('[data-toggle=collapse]').click(function(){
   	$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
 });
 $("#new").click(function(){
-                $("#newlesson").load("newlesson.inc"); 
+                $("#newlesson").load("./includes/newlesson.inc"); 
+            });
+$("#info").click(function(){
+                $("#newlesson").load("./includes/newlesson.inc"); 
+            });
+$("#page").click(function(){
+                $("#newlesson").load("./includes/page.inc"); 
+            });
+$("#question").click(function(){
+                $("#newlesson").load("./includes/question.inc"); 
             });
 });
