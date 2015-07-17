@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php
+require ("./includes/config.php");
+if (isset($_POST["submit"])){
+	$data = json_encode($_POST);
+	$uid = UID;
+	$mysqli->query("INSERT INTO info (lid,uid,data) VALUES ('',$uid,'$data')");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
