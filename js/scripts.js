@@ -6,9 +6,9 @@ $('[data-toggle=collapse]').click(function(){
   	// toggle icon
   	$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
 });
-$("#new").click(function(){
+/*$("#new").click(function(){
                 $("#newlesson").load("./includes/newlesson.inc"); 
-            });
+            });*/
 $("#info").click(function(){
                 $("#newlesson").load("./includes/newlesson.inc"); 
             });
