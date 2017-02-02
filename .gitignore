@@ -1,3 +1,5 @@
 ## ignore our config file. See config.php.sample for a blank
 
 includes/config.php
+.gitignore~
+.htaccess~
