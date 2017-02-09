@@ -15,10 +15,12 @@
 	</head>
 	<body>
 <?php
+session_start();
 require ("./includes/config.php");
 
 // check for logged in user
 if (isset($_SESSION['username'])){
+	$username = $_SESSION['username'];
 	include("./includes/home.php");
 } else {
 	include("./includes/register.php");
@@ -27,7 +29,7 @@ if (isset($_SESSION['username'])){
 
 if (isset($_POST["lesson-submit"])){
 	$data = json_encode($_POST);
-	$uid = UID;
+	$uid = $_SESSION['uid'];
 	$mysqli->query("INSERT INTO info (lid,uid,data) VALUES ('',$uid,'$data')");
 }
 ?>

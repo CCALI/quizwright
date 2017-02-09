@@ -16,7 +16,10 @@ $result = $mysqli->query($query);
 $count = mysqli_num_rows($result);
 //3.1.2 If the posted values are equal to the database values, then session will be created for the user.
 if ($count == 1){
-$_SESSION['username'] = $username;
+	$row = $result->fetch_array(MYSQLI_ASSOC);
+	
+	$_SESSION['username'] = $row['username'];
+	$_SESSION['uid'] = $row['uid'];
 }else{
 //3.1.3 If the login credentials doesn't match, he will be shown with an error message.
 $fmsg = "Invalid Login Credentials.";
@@ -25,7 +28,7 @@ $fmsg = "Invalid Login Credentials.";
 //3.1.4 if the user is logged in Greets the user with message
 if (isset($_SESSION['username'])){
 $username = $_SESSION['username'];
-include("./home.php");
+header('Location:'.SITE_URL);
  
 }else{
 //3.2 When the user visits the page first time, simple login form will be displayed.

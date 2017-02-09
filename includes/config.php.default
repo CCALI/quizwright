@@ -14,4 +14,6 @@ $mysqli = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 // user management
 define('USER_MGMNT', 'local');
 
+//full URL of your site
+define('SITE_URL', 'http://where.is.my.site/')
 ?>
