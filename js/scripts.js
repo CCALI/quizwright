@@ -18,4 +18,7 @@ $("#page").click(function(){
 $("#question").click(function(){
                 $("#newlesson").load("./includes/question.inc"); 
             });
+$("#login").click(function(){
+				$("#userforms").load("./includes/login.php");
+			});
 });

@@ -10,4 +10,8 @@ define('DB_PASSWORD', 'your db password');
 define('DB_HOST', 'localhost');
 
 $mysqli = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+
+// user management
+define('USER_MGMNT', 'local');
+
 ?>
