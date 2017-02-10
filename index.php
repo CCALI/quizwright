@@ -1,7 +1,12 @@
 <?php
 session_start();
 require ("./includes/config.php");
-//$username = $_SESSION['username'];
+
+if (isset($_POST["lesson-submit"])){
+	$data = json_encode($_POST);
+	$uid = $_SESSION['uid'];
+	$mysqli->query("INSERT INTO info (lid,uid,data) VALUES ('',$uid,'$data')");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,20 +23,10 @@ require ("./includes/config.php");
 		<![endif]-->
 		<link href="css/styles.css" rel="stylesheet">
 	</head>
-	<body>
-		
+	<body>		
 <?php
-
 // load user control
 	include("./local_user.php");
-
-
-// handle form submits. Needs to move
-if (isset($_POST["lesson-submit"])){
-	$data = json_encode($_POST);
-	$uid = $_SESSION['uid'];
-	$mysqli->query("INSERT INTO info (lid,uid,data) VALUES ('',$uid,'$data')");
-}
 ?>
 <footer class="text-center">&copy; 2017 CALI</footer>
 

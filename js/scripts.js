@@ -18,7 +18,7 @@ $("#page").click(function(){
 $("#question").click(function(){
                 $("#newlesson").load("./includes/question.inc"); 
             });
-$("#register").click(function(){
-				$("#userforms").load("./includes/register.php");
-			});
+$("#list").click(function(){
+                $("#newlesson").load("./includes/list.php"); 
+            });
 });

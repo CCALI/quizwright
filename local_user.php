@@ -11,8 +11,7 @@
 $user = htmlspecialchars($_GET['u']);
 
 switch($user) {
-	case "login":
-				
+	case "login":				
 		if (isset($_POST['username']) and isset($_POST['password'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
@@ -25,21 +24,37 @@ switch($user) {
 			$_SESSION['uid'] = $row['uid'];
 		}else{
 		$fmsg = "Invalid Login Credentials.";
-		}
+			}
 		}
 		if (isset($_SESSION['username'])){
-		$username = $_SESSION['username'];
-		var_dump($_SESSION);
-		include('./includes/home.php');
-		//header('Location:'.SITE_URL); 
+			$username = $_SESSION['username'];
+			include('./includes/home.php'); 
 		}else{
-		include('./includes/login.php');
+			$regalert = $_SESSION['regalert'];
+			include('./includes/login.php');
 		}
 		break;
 	case "register":
-		break;
-	case "logout":
+		if (isset($_POST['r_username']) && isset($_POST['r_password'])){
+        $username = $_POST['r_username'];
+		$email = $_POST['r_email'];
+        $password = $_POST['r_password'];
+ 
+        $query = "INSERT INTO `people` (uid, username, email, password) VALUES ('','$username', '$email', '$password')";
 		
+        $result = $mysqli->query($query);
+		}
+        if($result){
+            $_SESSION['regalert'] = "You've registered successfully. Enjoy the site.";
+			header('Location:'.SITE_URL);
+        }else{
+            $fmsg ="User Registration Failed";
+			session_destroy();
+			include('./includes/register.php');
+			}
+		
+		break;
+	case "logout":	
 		session_destroy();
 		header('Location:'.SITE_URL.'?u=login');
 		break;
