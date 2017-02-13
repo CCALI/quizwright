@@ -26,7 +26,7 @@ if (isset($_POST["lesson-submit"])){
 	<body>		
 <?php
 // load user control
-	include("./local_user.php");
+	include(USER_MGMNT);
 ?>
 <footer class="text-center">&copy; 2017 CALI</footer>
 
