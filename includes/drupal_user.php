@@ -38,9 +38,11 @@ $user = htmlspecialchars($_GET['u']);
 				$password = $account->pass;
 				// 1: check to see if user in people table
 				$query = "SELECT * FROM `people` WHERE username='$name' and password='$password'";
-				if($result = $mysqli->query($query)){
-					$row = $result->fetch_array(MYSQLI_ASSOC);	
-					$_SESSION['username'] = $row['name'];
+				$result = $mysqli->query($query);
+				$count = mysqli_num_rows($result);
+				if ($count == 1){
+					$row = $result->fetch_array(MYSQLI_ASSOC);
+					$_SESSION['username'] = $row['username'];
 					$_SESSION['uid'] = $row['uid'];
 				} else {
 					// 2: if not add to people table
