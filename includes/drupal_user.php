@@ -37,7 +37,12 @@ $user = htmlspecialchars($_GET['u']);
 				$email = $account->mail;
 				$password = $account->pass;
 				// 1: check to see if user in people table
-				$query = "SELECT * FROM `people` WHERE username='$name' and password='$password'";
+				/**
+				 * at this point we've verified the passwd in Drupal and
+				 * matched it to a username. If that username already exists
+				 * in the local people table, let's just carry on
+				 */
+				$query = "SELECT * FROM `people` WHERE username='$name'";
 				$result = $mysqli->query($query);
 				$count = mysqli_num_rows($result);
 				if ($count == 1){
@@ -46,7 +51,9 @@ $user = htmlspecialchars($_GET['u']);
 					$_SESSION['uid'] = $row['uid'];
 				} else {
 					// 2: if not add to people table
-					$query = "INSERT INTO `people` (uid, username, email, password) VALUES ('','$name', '$email', '$password')";
+					// let's stash the drupal user object in the people table.
+					$data = json_encode($account);
+					$query = "INSERT INTO `people` (uid, username, email, password, data) VALUES ('','$name', '$email', '$password', '$data')";
 					if($result = $mysqli->query($query)){
 						$uid = $mysqli->insert_id;
 						$_SESSION['username'] = $name;
@@ -61,8 +68,6 @@ $user = htmlspecialchars($_GET['u']);
 				
 				// 3: update user in people table if necessary
 				
-				// 4: set $_SESSION
-				
 				
 			}
 			
@@ -75,26 +80,13 @@ $user = htmlspecialchars($_GET['u']);
 			$username = $_SESSION['username'];
 			include('./includes/home.php'); 
 		}else{
-			var_dump($_SESSION);
+			
 			include('./includes/login.php');
 		}
 		break;
 	case "register":
-		if (isset($_POST['r_username']) && isset($_POST['r_password'])){
-        $username = $_POST['r_username'];
-		  $email = $_POST['r_email'];
-        $password = $_POST['r_password'];
- 
-        
-		}
-        if($result){
-            $_SESSION['regalert'] = "You've registered successfully. Enjoy the site.";
-			header('Location:'.SITE_URL);
-        }else{
-            $fmsg ="User Registration Failed";
-			session_destroy();
-			include('./includes/register.php');
-			}
+		
+		header('Location:'.DRUPAL_REGISTER);
 		
 		break;
 	case "logout":	

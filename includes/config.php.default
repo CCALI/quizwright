@@ -13,6 +13,7 @@ $mysqli = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 
 // full path to user management
 define('USER_MGMNT', '/local/var/www/caw/local_user.php');
+define('DRUPAL_REGISTER', 'http://your.drupal/regsiter/page');
 
 // define connection info for user info source.
 // could be another db or something like LDAP
