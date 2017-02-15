@@ -24,17 +24,47 @@ $user = htmlspecialchars($_GET['u']);
  switch($user) {
 	case "login":				
 		if (isset($_POST['username']) and isset($_POST['password'])){
-		$username = $_POST['username'];
+		$name = $_POST['username'];
 		$password = $_POST['password'];
-		$query = "SELECT * FROM `users` WHERE name='$username'";
+		$query = "SELECT * FROM `users` WHERE name='$name'";
 		$result = $umysqli->query($query);
 		$count = mysqli_num_rows($result);
 		if ($count == 1){
-			$row = $result->fetch_array(MYSQLI_ASSOC);	
-			$_SESSION['username'] = $row['name'];
-			$_SESSION['uid'] = $row['uid'];
-			var_dump($_SESSION);
-			die;
+			$account = $result->fetch_object();	
+			
+			if(user_check_password($password, $account)){
+				$name = $account->name;
+				$email = $account->mail;
+				$password = $account->pass;
+				// 1: check to see if user in people table
+				$query = "SELECT * FROM `people` WHERE username='$name' and password='$password'";
+				if($result = $mysqli->query($query)){
+					$row = $result->fetch_array(MYSQLI_ASSOC);	
+					$_SESSION['username'] = $row['name'];
+					$_SESSION['uid'] = $row['uid'];
+				} else {
+					// 2: if not add to people table
+					$query = "INSERT INTO `people` (uid, username, email, password) VALUES ('','$name', '$email', '$password')";
+					if($result = $mysqli->query($query)){
+						$uid = $mysqli->insert_id;
+						$_SESSION['username'] = $name;
+						$_SESSION['uid'] = $uid;
+					} else {
+						 printf("Error: %s\n", $mysqli->error);
+					}
+					
+					
+				}
+				
+				
+				// 3: update user in people table if necessary
+				
+				// 4: set $_SESSION
+				
+				
+			}
+			
+			
 		}else{
 		$fmsg = "Invalid Login Credentials.";
 			}
@@ -43,19 +73,17 @@ $user = htmlspecialchars($_GET['u']);
 			$username = $_SESSION['username'];
 			include('./includes/home.php'); 
 		}else{
-			$regalert = $_SESSION['regalert'];
+			var_dump($_SESSION);
 			include('./includes/login.php');
 		}
 		break;
 	case "register":
 		if (isset($_POST['r_username']) && isset($_POST['r_password'])){
         $username = $_POST['r_username'];
-		$email = $_POST['r_email'];
+		  $email = $_POST['r_email'];
         $password = $_POST['r_password'];
  
-        $query = "INSERT INTO `people` (uid, username, email, password) VALUES ('','$username', '$email', '$password')";
-		
-        $result = $mysqli->query($query);
+        
 		}
         if($result){
             $_SESSION['regalert'] = "You've registered successfully. Enjoy the site.";
