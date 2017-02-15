@@ -10,4 +10,20 @@ define('DB_PASSWORD', 'your db password');
 define('DB_HOST', 'localhost');
 
 $mysqli = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+
+// full path to user management
+define('USER_MGMNT', '/local/var/www/caw/local_user.php');
+define('DRUPAL_REGISTER', 'http://your.drupal/regsiter/page');
+
+// define connection info for user info source.
+// could be another db or something like LDAP
+define('UDB_NAME', 'user db');
+define('UDB_USER', 'user db username');
+define('UDB_PASSWORD', 'user db password');
+define('UDB_HOST', 'localhost');
+
+$umysqli = new mysqli(UDB_HOST,UDB_USER,UDB_PASSWORD,UDB_NAME);
+
+//full URL of your site
+define('SITE_URL', 'http://where.is.my.site/')
 ?>

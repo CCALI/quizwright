@@ -48,13 +48,22 @@ CREATE TABLE `page` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `page`
+-- Table structure for table `people`
 --
 
-LOCK TABLES `page` WRITE;
-/*!40000 ALTER TABLE `page` DISABLE KEYS */;
-/*!40000 ALTER TABLE `page` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `people`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `people` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `data` text NULL,
+  PRIMARY KEY (`uid`,`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 --
 -- Dumping events for database 'lessons'
