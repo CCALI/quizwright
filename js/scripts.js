@@ -9,16 +9,23 @@ $('[data-toggle=collapse]').click(function(){
 /*$("#new").click(function(){
                 $("#newlesson").load("./includes/newlesson.inc"); 
             });*/
-$("#info").click(function(){
-                $("#newlesson").load("./includes/newlesson.inc"); 
+$("#lesson-info").click(function(){
+                $("#main-panel").load("./includes/lesson-new.inc"); 
             });
 $("#page").click(function(){
-                $("#newlesson").load("./includes/page.inc"); 
+                $("#main-panel").load("./includes/page.inc"); 
             });
-$("#question").click(function(){
-                $("#newlesson").load("./includes/question.inc"); 
+$("#question-new").click(function(){
+                $("#main-panel").load("./includes/page-quiz.inc"); 
             });
-$("#list").click(function(){
-                $("#newlesson").load("./includes/list.php"); 
+$("#quiz-new").click(function(){
+                $("#main-panel").load("./includes/quiz-prep-pages.php"); 
             });
+
+				
+$("#lesson-list").click(function(){
+                $("#main-panel").load("./includes/lesson-list.php"); 
+            });
+
+
 });
