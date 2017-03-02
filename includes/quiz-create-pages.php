@@ -1,27 +1,21 @@
 <?php
-	// 2/28/2017 Update given page id - if id is blank, it's a new page. 
+	// 3/2/2017 Given list of checked pages, add them to a new quiz.
 	// Result is just json info. 
 
 	require ("user-session.php");
-
-	$data = json_encode($_POST);
-	echo $data;
-	$uid = $_SESSION['uid'];
-	$pid = $_POST['pid'];
-	/*
-	if (!isset($pid))
-	{	// No ID? Must be a brand new page.
-		$SQL="INSERT INTO page (uid,data) VALUES ( $uid,'$data')";
-		$mysqli->query($SQL);
-	}
-	else
-	{	// Override our page data. 
-		$pid = intval($pid);
-		$SQL="UPDATE page (data) VALUES ( '$data') where pid = $pid and uid = $uid";
-		$mysqli->query($SQL);
-	}
-
-	*/
 	
-	echo json_encode(array('SQL'=>$SQL, "POST"=>$_POST));
+	$pages=array();
+	foreach ($_POST as $key => $value)
+	{
+		$pid = intval($key);
+		if ($value=='on' && $pid>0)
+		{
+			array_push($pages,$pid);
+		} 
+	}
+	
+	$data = json_encode(array("pages"=>$pages));
+	$mysqli->query("INSERT INTO info (lid,uid,data) VALUES ('',$uid,'$data')");
+	$last_id = $mysqli->insert_id;
+	echo json_encode(array("lid"=>$last_id, 'SQL'=>$SQL, "POST"=>$_POST));
 ?>

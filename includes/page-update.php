@@ -5,17 +5,19 @@
 	require ("user-session.php");
 
 	$data = json_encode($_POST);
-	$uid = $_SESSION['uid'];
 	$pid = $_POST['pid'];
 	if (!isset($pid))
 	{	// No ID? Must be a brand new page.
-		$SQL="INSERT INTO page (uid,data) VALUES ( $uid,'$data')";
-		$mysqli->query($SQL);
+		if ($_POST['page-question'] != '')
+		{
+			$SQL="INSERT INTO page (uid,data) VALUES ( $uid,'$data')";
+			$mysqli->query($SQL);
+		}
 	}
 	else
 	{	// Override our page data. 
 		$pid = intval($pid);
-		$SQL="UPDATE page (data) VALUES ( '$data') where pid = $pid and uid = $uid";
+		$SQL="UPDATE page set data = '$data' where pid = $pid and uid = $uid";
 		$mysqli->query($SQL);
 	}
 

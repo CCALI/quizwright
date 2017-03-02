@@ -23,9 +23,12 @@ $("#quiz-new").click(function(){
             });
 
 				
-$("#lesson-list").click(function(){
-                $("#main-panel").load("./includes/lesson-list.php"); 
+$("#quiz-list").click(function(){
+                $("#main-panel").load("./includes/quiz-list.php"); 
             });
 
+$("#profile-edit, #author-edit").click(function(){
+                $("#main-panel").load("./includes/profile.php"); 
+            });
 
 });

@@ -5,6 +5,7 @@
     <fieldset>
         <legend>Quiz Question</legend> <!-- Textarea -->
 
+		  <input type="hidden" name="page-type" value="Quiz" />
         <div class="form-group">
             <label class="col-sm-2 control-label" for="page">Text of your question</label>
 
@@ -54,7 +55,7 @@
         <!-- Button -->
 
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="page-submit">Add question</label>
+            <label class="col-sm-2 control-label" for="page-submit">Done?</label>
 
             <div class="col-sm-3">
                 <button id="page-submit" name="page-submit" class="btn btn-primary">Add another question</button>
@@ -62,7 +63,7 @@
             <div class="col-sm-2">
             or</div>
             <div class="col-sm-3">
-                <button id="page-submit-prepare" name="page-submit-prepare" class="btn btn-primary">Prepare Quiz</button>
+                <button id="page-submit-prepare" name="page-submit-prepare" class="btn btn-primary">Prepare the Quiz</button>
             </div>
         </div>
         
