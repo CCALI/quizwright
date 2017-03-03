@@ -1,37 +1,120 @@
 <?php
-	// 2/28/2017 Return CALI Author Viewer compatible Bookdata XML for this quiz.
-	require ("./includes/config.php");
+// 2/28/2017 Return CALI Author Viewer compatible Bookdata XML for this quiz.
+require ("./includes/config.php");
 
-	header('Content-Type: text/xml');
+header('Content-Type: text/xml');
+//header('Content-Type: text/plain'); plain text for debugging in case XML gives errors
 
-	// Note: user id is ignored since students will need this
-	$lid = intval($_GET['lid']);
-	$SQL="select data from info where lid = $lid";
-	if ($result = $mysqli->query($SQL))
+// Note: user id is ignored since students will need this
+$lid = intval($_GET['lid']);
+$SQL="select data from info where lid = $lid";
+if ($result = $mysqli->query($SQL))
+{
+	while ($row = $result->fetch_assoc())
 	{
-		while ($row = $result->fetch_assoc())
-		{
-			$data = json_decode($row['data'], TRUE);
-			echo BuildXML($data);
-			return;
-		}
+		$data = json_decode($row['data'], TRUE);
+		echo BuildXML($mysqli,$data);
+		return;
 	}
+}
 
-	echo '<xml>Need lesson id</xml>';
+echo '<xml>Need lesson id</xml>';
 	
 	
 	
-function BuildXML($data)
-{	// 3/2/2017 SJG 
+function BuildXML($mysqli,$data)
+{	// 3/2/2017 SJG $data is lesson $data block with meta info and page list.
 	$xml='';
 	$info=array(
 		'TITLE'=>$data['title'],
 		'SUBJECTAREA'=>$data['subjectarea']);
-	//foreach ($info as $key=>$value) $xml.='<'.$key.'>'.$value.'</'
-		
+	$xml.='<INFO>';
+	foreach ($info as $key=>$value) $xml.='<'.$key.'>'.htmlspecialchars( $value).'</'.$key.'>';
+	$xml.='</INFO>';	
 	
-	
-	//<PAGE ID="Contents" TYPE="Topics" STYLE="0" NEXTPAGEDISABLED="True" SORTNAME="Contents"><TOC><UL><LI><A HREF="Introduction">Introduction</A></LI><LI><A HREF="Question 1">Questions</A></LI><LI><A HREF="Conclusion">Conclusion</A></LI></UL></TOC> </PAGE> 
+	$firstPage='Question 1';
+	$toc='<PAGE ID="Contents" TYPE="Topics" STYLE="0" NEXTPAGEDISABLED="True" SORTNAME="Contents"><TOC><UL><LI><A HREF="Question 1">Questions</A></LI>'
+		//.'<LI><A HREF="Conclusion">Conclusion</A></LI>
+		.'</UL></TOC> </PAGE>';
+	$xml .= $toc;
+	$numPages = count($data['pages']);
+	$pageNum=0;
+	if ($numPages>0)
+	{ 
+		foreach ($data['pages'] as $pid)
+		{
+			$pid=intval($pid);
+			$sql = "SELECT data FROM `page` WHERE pid = $pid";
+			if ($result = $mysqli->query($sql))
+			{
+				if ($row = $result->fetch_assoc())
+				{
+					// check page type so we get accurate detail (but as of 3/2017 there are all quiz type) which translates to Multiple Choice type.
+					$page = json_decode($row['data'], TRUE);
+					$pageNum++;
+/*	Sample multiple choice question
+ *<PAGE ID="Question 20.2" TYPE="Multiple Choice" STYLE="Choose List" NEXTPAGE="Question 21" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Question 20. 2">
+	<QUESTION ALIGN="AUTO">
+		<P>If parties do not agree on a place of delivery, the place of delivery is:</P>
+	</QUESTION>
+	<DETAIL>
+		<P>seller's place of business (or residence if none).</P>
+	</DETAIL>
+	<DETAIL>
+		<P>buyer's place of business (or residence if none).</P>
+	</DETAIL>
+	<DETAIL>
+		<P>a point halfway between seller's and buyer's place of business.</P>
+	</DETAIL>
+	<DETAIL>
+		<P>Hoboken, New Jersey.</P>
+	</DETAIL>
+	<FEEDBACK BUTTON="1" DETAIL="1" GRADE="RIGHT">
+		<P>Right! The authority for this answer is UCC &#167;&#160;2-308.</P>
+	</FEEDBACK>
+	<FEEDBACK BUTTON="1" DETAIL="2" GRADE="WRONG">
+		<P>Sorry.</P>
+	</FEEDBACK>
+	<FEEDBACK BUTTON="1" DETAIL="3" GRADE="WRONG">
+		<P>Sorry.</P>
+	</FEEDBACK>
+	<FEEDBACK BUTTON="1" DETAIL="4" GRADE="WRONG">
+		<P>I'm glad you have a sense of humor, but I hope you get it right on the next try.</P>
+	</FEEDBACK>
+</PAGE>
+*/
+					$pageName = 'Question '.$pageNum;
+					$nextPage = ($pageNum < $numPages) ? ('Question '.($pageNum+1)) : ('Contents');
+					$pageText = $page['page-question'];
+					$choices=array(); // assemble feedbacks, which we will shuffle
+					$choices[] = array("DETAIL"=>$page['page-choice-correct-text'],"GRADE"=>"RIGHT");
+					for ($wrong=1;$wrong<=7;$wrong++)
+					{
+						$wrongText = $page['page-choice-wrong-'.$wrong.'-text'];
+						if ($wrongText!=''){							
+							$choices[] = array("DETAIL"=>$wrongText,"GRADE"=>"WRONG");
+							}
+					} 
+					shuffle($choices);
+					
+					$pageXML='<PAGE ID="'.$pageName.'" TYPE="Multiple Choice" STYLE="Choose List" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'
+						.'<QUESTION ALIGN="AUTO">'.$pageText.'</QUESTION>';
+					$choicei=0;
+					$details='';
+					$feedbacks='';
+					foreach($choices as $choice)
+					{
+						$choicei++;
+						$details .= '<DETAIL>'.$choice['DETAIL'].'</DETAIL>';
+						$feedbacks.='<FEEDBACK BUTTON="1" DETAIL="'.$choicei.'" GRADE="'.$choice['GRADE'].'"></FEEDBACK>';
+					}
+					$pageXML .= $details.$feedbacks;
+					$pageXML.='</PAGE>';
+					$xml .= $pageXML;
+				}
+			}
+		}				
+	}
 
 	$xml = '<?xml version="1.0" ?><BOOK>'.$xml.'</BOOK>';
 	return $xml;

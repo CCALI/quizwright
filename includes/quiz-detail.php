@@ -8,17 +8,17 @@
 
 	 
 <?php
-	require ("user-session.php");
-	$lid = intval($_REQUEST['lid']);
-	$sql = "SELECT * FROM `info` WHERE uid = '$uid' and lid = $lid";
-	if ($result = $mysqli->query($sql))
+require ("user-session.php");
+$lid = intval($_REQUEST['lid']);
+$sql = "SELECT * FROM `info` WHERE uid = '$uid' and lid = $lid";
+if ($result = $mysqli->query($sql))
+{
+	if ($row = $result->fetch_assoc())
 	{
-		if ($row = $result->fetch_assoc())
-		{
-			$data = json_decode($row['data'], TRUE);
-			$numPages = count($data['pages']); // .pages is array of pid's, order matches lesson order.
-			?>
-<ul>
+		$data = json_decode($row['data'], TRUE);
+		$numPages = count($data['pages']); // .pages is array of pid's, order matches lesson order.
+		?>
+		<ul>
 			<li>Title: <?=$data['title']?></li>
 			<li><?=$numPages?> Questions</li>
 			
@@ -48,10 +48,10 @@
 				}
 			}
 			?>
-			</ul>
-			<?php 
-		}
+		</ul>
+		<?php 
 	}
+}
 ?>
 
  

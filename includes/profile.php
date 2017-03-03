@@ -4,7 +4,7 @@
 
 require ("user-session.php");
 
-$sql = "SELECT * FROM `people` WHERE uid = '$uid'";
+$sql = "SELECT profile FROM `people` WHERE uid = '$uid'";
 if ($result = $mysqli->query($sql)) {
 	 while ($row = $result->fetch_assoc()) {
         $data = json_decode($row['profile'], TRUE); 
@@ -18,12 +18,17 @@ if ($result = $mysqli->query($sql)) {
 <!-- Form Name -->
 <legend>Author Profile Information</legend>
 
+<div class="panel panel-default">
+  <div class="panel-body">
+    This information will appear on the first screen for quiz takers. 
+  </div>
+</div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-sm-2 control-label" for="authorname">Author Name</label>
+  <label class="col-sm-2 control-label" for="authorfullname">Author Name</label>
   <div class="col-sm-8">
-    <input id="authorname" name="fullname" placeholder="Your full name here" class="form-control" type="text" value="<?=$data['author-name']?>">
+    <input id="authorfullname" name="authorfullname" placeholder="Your full name here" class="form-control" type="text" value="<?=$data['authorfullname']?>">
     
   </div>
 </div>
@@ -32,7 +37,7 @@ if ($result = $mysqli->query($sql)) {
 <div class="form-group">
   <label class="col-sm-2 control-label" for="authortitle">Author title</label>
   <div class="col-sm-8">
-    <input id="authortitle" name="title" placeholder="Your title" class="form-control" type="text">
+    <input id="authortitle" name="authortitle" placeholder="Your title" class="form-control" type="text" value="<?=$data['authortitle']?>">
     
   </div>
 </div>
@@ -41,25 +46,25 @@ if ($result = $mysqli->query($sql)) {
 <div class="form-group">
   <label class="col-sm-2 control-label" for="authorschool">School</label>
   <div class="col-sm-8">
-    <input id="authorschool" name="school" placeholder="Your school" class="form-control" type="text">
+    <input id="authorschool" name="authorschool" placeholder="Your school" class="form-control" type="text" value="<?=$data['authorschool']?>">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-sm-2 control-label" for="email">Email</label>
+  <label class="col-sm-2 control-label" for="authoremail">Email</label>
   <div class="col-sm-8">
-    <input id="email" name="email" placeholder="Your email address" class="form-control" type="text">
+    <input id="authoremail" name="authoremail" placeholder="Your email address" class="form-control" type="text" value="<?=$data['authoremail']?>">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-sm-2 control-label" for="phone">Phone</label>
+  <label class="col-sm-2 control-label" for="authorphone">Phone</label>
   <div class="col-sm-8">
-    <input id="phone" name="phone" placeholder="234-456-7890" class="form-control" type="text">
+    <input id="authorphone" name="authorphone" placeholder="234-456-7890" class="form-control" type="text" value="<?=$data['authorphone']?>">
     
   </div>
 </div>
@@ -76,8 +81,11 @@ if ($result = $mysqli->query($sql)) {
 <!-- Button -->
 <div class="form-group">
   <label class="col-sm-2 control-label" for="submit">All done?</label>
-  <div class="col-sm-8">
+  <div class="col-sm-4">
     <button id="profile-submit"  class="btn btn-primary">Update</button>
+  </div>
+  <div class="col-sm-4">
+    <div id="success"></div>
   </div>
 </div>
 
@@ -100,9 +108,9 @@ if ($result = $mysqli->query($sql)) {
 
 <script> 
 $('#profile-submit').click(function(){ // Save profile to people
+  $("#success").html('');
 	$.post( "./includes/profile-update.php", $( "#profile-form" ).serialize() ,function( data ) {
-      
-		//$("#main-panel").load("./includes/lesson-new-auto.php?lid=" + data.lid); 
+    $("#success").html('<div class="alert alert-success" role="alert">Updated</div>'); 
 	});
 	return false;
 });
