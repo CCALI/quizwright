@@ -77,12 +77,12 @@
 
             <ul class="nav nav-pills nav-stacked">
                 <li class="nav-header"></li>
-                <li><a href="#"><i class="glyphicon glyphicon-list"></i> Layouts &amp; Templates</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> Toolbox</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-link"></i> Widgets</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Reports</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-book"></i> Pages</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-star"></i> Social Media</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-list"></i> This is a list</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> of things </a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-link"></i>to assist</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> teachers</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-book"></i> creating</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-star"></i> quizzes</a></li>
             </ul>
 
            
@@ -91,19 +91,7 @@
         <div class="col-sm-9">
 
             <!-- column 2 -->
-            <ul class="list-inline pull-right">
-                <li><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-comment"></i><span class="count">3</span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">1. Is there a way..</a></li>
-                        <li><a href="#">2. Hello, admin. I would..</a></li>
-                        <li><a href="#"><strong>All messages</strong></a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li>
-                <li><a title="Add Widget" data-toggle="modal" href="#addWidgetModal"><span class="glyphicon glyphicon-plus-sign"></span> Add Widget</a></li>
-            </ul>
-            <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> My Dashboard</strong></a>
+            <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> QuizWright Builder</strong></a>
             <hr>
 
             <div class="row">
