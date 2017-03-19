@@ -7,14 +7,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CALI Author Web</a>
+            <a class="navbar-brand" href="#">CALI QuizWright</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i> <?php echo $username; ?> <span class="caret"></span></a>
                     <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                        <li><a href="#">My Profile</a></li>
+                        <li><a id="profile-edit" href="#">My Profile</a></li>
                     </ul>
                 </li>
                 <li><a href="?u=logout"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
@@ -34,14 +34,18 @@
             <hr>
 
             <ul class="nav nav-stacked">
-                <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Lessons <i class="glyphicon glyphicon-chevron-down"></i></a>
+                <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Quizzes <i class="glyphicon glyphicon-chevron-down"></i></a>
                     <ul class="nav nav-stacked collapse in" id="userMenu">
-                        <li class="active"> <a id="list" href="#"><i class="glyphicon glyphicon-th-list"></i> List</a></li>
+								
+                        <li><a id="author-edit" href="#"> <i  class="glyphicon glyphicon-user"></i> My Profile</a></li>
+                        <li class="active"> <a id="quiz-list" href="#"><i class="glyphicon glyphicon-th-list"></i> Quiz List</a></li>
+                        <li class="active"> <a id="question-list" href="#"><i class="glyphicon glyphicon-th-list"></i> Question List</a></li>
                         <li><a id="new" href="#" data-toggle="collapse" data-target="#lessonMenu"><i class="glyphicon glyphicon-plus"></i> New</a></li>
 						<ul class="nav nav-stacked collapse" id="lessonMenu">
-							<li><a id="info" href="#" ><i class="glyphicon glyphicon-plus"></i>Info</a></li>
-							<li><a id="page" href="#" ><i class="glyphicon glyphicon-plus"></i>Page</a></li>
-							<li><a id="question" href="#" ><i class="glyphicon glyphicon-plus"></i>Question</a></li>
+							<!--<li><a id="lesson-info" href="#" ><i class="glyphicon glyphicon-plus"></i>Info</a></li>-->
+							<!--<li><a id="page" href="#" ><i class="glyphicon glyphicon-plus"></i>Page</a></li>-->
+							<li><a id="question-new" href="#" ><i class="glyphicon glyphicon-plus"></i>Question</a></li>
+							<li><a id="quiz-new" href="#" ><i class="glyphicon glyphicon-plus"></i>Quiz</a></li>
 						</ul>
                         <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Options</a></li>
                         
@@ -103,7 +107,7 @@
             <hr>
 
             <div class="row">
-				<div id="newlesson"></div>
+				<div id="main-panel"></div>
             </div>
             <!--/row-->
 
