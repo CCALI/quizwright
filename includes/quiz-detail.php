@@ -1,4 +1,4 @@
-<!-- List quiz details  -->
+<!-- List one quiz's details  -->
 <form class="form-horizontal" method="post">
     <fieldset>
     <legend>Quiz Details</legend>
@@ -32,17 +32,32 @@ if ($result = $mysqli->query($sql))
 					{
 						if ($row = $result->fetch_assoc())
 						{
-							// check page type so we get accurate detail (but as of 3/2017 there are all quiz type)
+							// Check page type so we get accurate detail (but as of 3/2017 there are all quiz type)
 							$page = json_decode($row['data'], TRUE);
-							echo '<li>'.$page['pid'].':'.$page['page-question'];
-							echo '<ul>';
-							echo '<li>'.$page['page-choice-correct-text'];
-							for ($wrong=1;$wrong<=7;$wrong++)
+							//var_dump($page);
+							$pagetype = $page['page-type'];
+							echo '<li>#'.$pid.': '.$page['page-question'];
+							switch ($pagetype)
 							{
-								$wrongText = $page['page-choice-wrong-'.$wrong.'-text'];
-								if ($wrongText!='') echo '<li>'.$wrongText;
+								
+								case 'quiz-tf':	// True/false 
+									$istrue = $page['true-is-correct']=='true';
+									echo '(T/F)';
+									break;
+								
+								case 'Quiz':	// Multiple choice: 1 correct, 1-N wrong.
+								case 'quiz-mc':
+								case '':
+									echo '<ul>';
+									echo '<li>'.$page['page-choice-correct-text'];
+									for ($wrong=1;$wrong<=7;$wrong++)
+									{
+										$wrongText = $page['page-choice-wrong-'.$wrong.'-text'];
+										if ($wrongText!='') echo '<li>'.$wrongText;
+									}
+									echo '</ul>';
+									break;
 							}
-							echo '</ul>';
 						}
 					}
 				}

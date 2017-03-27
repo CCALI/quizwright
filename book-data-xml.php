@@ -51,8 +51,42 @@ function BuildXML($mysqli,$data)
 				{
 					// check page type so we get accurate detail (but as of 3/2017 there are all quiz type) which translates to Multiple Choice type.
 					$page = json_decode($row['data'], TRUE);
+					$pagetype = $page['page-type'];
 					$pageNum++;
-/*	Sample multiple choice question
+					$pageName = 'Question '.$pageNum;
+					$nextPage = ($pageNum < $numPages) ? ('Question '.($pageNum+1)) : ('Contents');
+					$pageText = $page['page-question'];
+					$pageXML='';
+					switch ($pagetype)
+					{
+						case 'quiz-tf':
+/* Sample True/False question XML from CALI Lesson
+<PAGE ID="Erie Origins 3" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Erie Origins: SWIFT FALSE" NEXTPAGEDISABLED="True">
+	<QUESTION ALIGN="AUTO">
+		<P>
+			<b>TRUE OR FALSE: Under</b>
+			<b>
+				<i>Swift v. Tyson</i>
+			</b>
+			<b>, state common law did not count as "law" that could apply in federal court through the Rules of Decision Act.</b>
+		</P>
+	</QUESTION>
+	<BUTTON>TRUE</BUTTON>
+	<BUTTON>FALSE</BUTTON>
+	<FEEDBACK BUTTON="1" DETAIL="1" GRADE="RIGHT" NEXTPAGE="Erie Origins: SWIFT TRUE"></FEEDBACK>
+	<FEEDBACK BUTTON="2" DETAIL="1" GRADE="WRONG" NEXTPAGE="Erie Origins: SWIFT FALSE"></FEEDBACK>
+</PAGE>
+*/							
+							$istrue = $page['true-is-correct']=='true';
+							$pageXML = '<BUTTON>True</BUTTON><BUTTON>False</BUTTON>'
+								.'<FEEDBACK BUTTON="1" DETAIL="1" GRADE="'.(($istrue)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>'
+								.'<FEEDBACK BUTTON="2" DETAIL="1" GRADE="'.((!$istrue)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>';
+							break;
+						
+						case 'Quiz':
+						case 'quiz-mc':
+						case '':
+/*	Sample multiple choice question XML from CALI Lesson
  *<PAGE ID="Question 20.2" TYPE="Multiple Choice" STYLE="Choose List" NEXTPAGE="Question 21" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Question 20. 2">
 	<QUESTION ALIGN="AUTO">
 		<P>If parties do not agree on a place of delivery, the place of delivery is:</P>
@@ -82,34 +116,32 @@ function BuildXML($mysqli,$data)
 		<P>I'm glad you have a sense of humor, but I hope you get it right on the next try.</P>
 	</FEEDBACK>
 </PAGE>
-*/
-					$pageName = 'Question '.$pageNum;
-					$nextPage = ($pageNum < $numPages) ? ('Question '.($pageNum+1)) : ('Contents');
-					$pageText = $page['page-question'];
-					$choices=array(); // assemble feedbacks, which we will shuffle
-					$choices[] = array("DETAIL"=>$page['page-choice-correct-text'],"GRADE"=>"RIGHT");
-					for ($wrong=1;$wrong<=7;$wrong++)
-					{
-						$wrongText = $page['page-choice-wrong-'.$wrong.'-text'];
-						if ($wrongText!=''){							
-							$choices[] = array("DETAIL"=>$wrongText,"GRADE"=>"WRONG");
+*/							$choices=array(); // assemble feedbacks, which we will shuffle
+							$choices[] = array("DETAIL"=>$page['page-choice-correct-text'],"GRADE"=>"RIGHT");
+							for ($wrong=1;$wrong<=7;$wrong++)
+							{
+								$wrongText = $page['page-choice-wrong-'.$wrong.'-text'];
+								if ($wrongText!=''){							
+									$choices[] = array("DETAIL"=>$wrongText,"GRADE"=>"WRONG");
+									}
+							} 
+							shuffle($choices);							
+							$choicei=0;
+							$details='';
+							$feedbacks='';
+							foreach($choices as $choice)
+							{
+								$choicei++;
+								$details .= '<DETAIL>'.$choice['DETAIL'].'</DETAIL>';
+								$feedbacks.='<FEEDBACK BUTTON="1" DETAIL="'.$choicei.'" GRADE="'.$choice['GRADE'].'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>';
 							}
-					} 
-					shuffle($choices);
-					
-					$pageXML='<PAGE ID="'.$pageName.'" TYPE="Multiple Choice" STYLE="Choose List" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'
-						.'<QUESTION ALIGN="AUTO">'.$pageText.'</QUESTION>';
-					$choicei=0;
-					$details='';
-					$feedbacks='';
-					foreach($choices as $choice)
-					{
-						$choicei++;
-						$details .= '<DETAIL>'.$choice['DETAIL'].'</DETAIL>';
-						$feedbacks.='<FEEDBACK BUTTON="1" DETAIL="'.$choicei.'" GRADE="'.$choice['GRADE'].'"></FEEDBACK>';
+							$pageXML = $details.$feedbacks;
+							break;
+						default:
+							// Should not get here.
 					}
-					$pageXML .= $details.$feedbacks;
-					$pageXML.='</PAGE>';
+					$pageXML='<PAGE ID="'.$pageName.'" TYPE="Multiple Choice" STYLE="Choose List" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'
+						.'<QUESTION ALIGN="AUTO">'.$pageText.'</QUESTION>'.$pageXML.'</PAGE>';
 					$xml .= $pageXML;
 				}
 			}

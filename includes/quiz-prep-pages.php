@@ -1,4 +1,4 @@
-<!-- List unlinked pages for author to assign to quiz -->
+<!-- List unlinked (TODO, currently all) pages for author to assign to quiz -->
 <form class="form-horizontal" id="pages-add-form" method="post">
     <fieldset>
     <legend>Quiz Questions</legend>
