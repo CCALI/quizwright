@@ -1,7 +1,7 @@
 <!-- List user's quizzes  -->
 <form class="form-horizontal" method="post">
 	<fieldset>
-	<legend>Your Quizzes</legend>
+	<legend>My Quizzes</legend>
 	<p>  </p>
 	<div class="panel panel-default">
 
@@ -28,7 +28,7 @@ if ($result = $mysqli->query($sql))
 			<td> <?=$numPages?></td>
 			<td><a href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</td>
 			<td>Edit</td>
-			<td>Preview</td>
+			<td><a target=_blank href="./cav/web/preview/index.php?quiz=<?=$lid?>">Preview</a></td>
 			<td><a target=_blank href="./book-data-xml.php?lid=<?=$lid?>">XML</td>
 		</tr>
 		<?php 

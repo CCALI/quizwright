@@ -1,5 +1,7 @@
 <?php
 // 2/28/2017 Return CALI Author Viewer compatible Bookdata XML for this quiz.
+// 03/21/2017 Include author bio/description.
+
 require ("./includes/config.php");
 
 header('Content-Type: text/xml');
@@ -7,13 +9,18 @@ header('Content-Type: text/xml');
 
 // Note: user id is ignored since students will need this
 $lid = intval($_GET['lid']);
-$SQL="select data from info where lid = $lid";
+//$SQL="select data from info where lid = $lid";
+
+// Query to get lesson and author data
+$SQL="select info.data, people.profile from info,people where lid = $lid and info.uid = people.uid";
+
 if ($result = $mysqli->query($SQL))
 {
 	while ($row = $result->fetch_assoc())
 	{
 		$data = json_decode($row['data'], TRUE);
-		echo BuildXML($mysqli,$data);
+		$profile = json_decode($row['profile'], TRUE);
+		echo BuildXML($mysqli,$data,$profile);
 		return;
 	}
 }
@@ -22,22 +29,39 @@ echo '<xml>Need lesson id</xml>';
 	
 	
 	
-function BuildXML($mysqli,$data)
+function BuildXML($mysqli,$data,$author)
 {	// 3/2/2017 SJG $data is lesson $data block with meta info and page list.
 	$xml='';
+	
+	$description=
+		'<DIV>'.$data['calidescription'].'</DIV>'
+		.'<P>Approximate Completion Time: '. $data['completiontime']. '</P>'
+		.'<BR /><BR />'
+		.'<DIV style="font-size: .8em">'. $data['title']
+		.'<BR />by '
+		.'<BR />'.$author['authorfullname']
+		.'<BR />'.$author['authortitle']
+		.'<BR />'.$author['authorschool']
+		.'</DIV>';
+		
 	$info=array(
-		'TITLE'=>$data['title'],
-		'SUBJECTAREA'=>$data['subjectarea']);
+		'TITLE'=>htmlspecialchars($data['title']),
+		'SUBJECTAREA'=>htmlspecialchars($data['subjectarea']),
+		'DESCRIPTION'=> ( $description),
+		'COMPLETIONTIME'=>htmlspecialchars($data['completiontime']),
+		'NOTES'=>'Book automatically created by QuizWright'
+		
+		);
 	$xml.='<INFO>';
-	foreach ($info as $key=>$value) $xml.='<'.$key.'>'.htmlspecialchars( $value).'</'.$key.'>';
+	foreach ($info as $key=>$value) $xml.='<'.$key.'>'. $value .'</'.$key.'>';
 	$xml.='</INFO>';	
 	
+	$numPages = count($data['pages']);
 	$firstPage='Question 1';
-	$toc='<PAGE ID="Contents" TYPE="Topics" STYLE="0" NEXTPAGEDISABLED="True" SORTNAME="Contents"><TOC><UL><LI><A HREF="Question 1">Questions</A></LI>'
+	$toc='<PAGE ID="Contents" TYPE="Topics" STYLE="0" NEXTPAGEDISABLED="True" SORTNAME="Contents"><TOC><UL><LI><A HREF="Question 1">'.$numPages.' Questions</A></LI>'
 		//.'<LI><A HREF="Conclusion">Conclusion</A></LI>
 		.'</UL></TOC> </PAGE>';
 	$xml .= $toc;
-	$numPages = count($data['pages']);
 	$pageNum=0;
 	if ($numPages>0)
 	{ 
@@ -59,7 +83,8 @@ function BuildXML($mysqli,$data)
 					$pageXML='';
 					switch ($pagetype)
 					{
-						case 'quiz-tf':
+						
+						case 'quiz-tf': // This will be a CA Buttons-only thype.
 /* Sample True/False question XML from CALI Lesson
 <PAGE ID="Erie Origins 3" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Erie Origins: SWIFT FALSE" NEXTPAGEDISABLED="True">
 	<QUESTION ALIGN="AUTO">
@@ -81,6 +106,8 @@ function BuildXML($mysqli,$data)
 							$pageXML = '<BUTTON>True</BUTTON><BUTTON>False</BUTTON>'
 								.'<FEEDBACK BUTTON="1" DETAIL="1" GRADE="'.(($istrue)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>'
 								.'<FEEDBACK BUTTON="2" DETAIL="1" GRADE="'.((!$istrue)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>';
+						$pageXML='<PAGE ID="'.$pageName.'" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'
+							.'<QUESTION ALIGN="AUTO">'.$pageText.'</QUESTION>'.$pageXML.'</PAGE>';
 							break;
 						
 						case 'Quiz':
@@ -136,12 +163,12 @@ function BuildXML($mysqli,$data)
 								$feedbacks.='<FEEDBACK BUTTON="1" DETAIL="'.$choicei.'" GRADE="'.$choice['GRADE'].'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>';
 							}
 							$pageXML = $details.$feedbacks;
+						$pageXML='<PAGE ID="'.$pageName.'" TYPE="Multiple Choice" STYLE="Choose List" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'
+							.'<QUESTION ALIGN="AUTO">'.$pageText.'</QUESTION>'.$pageXML.'</PAGE>';
 							break;
 						default:
 							// Should not get here.
 					}
-					$pageXML='<PAGE ID="'.$pageName.'" TYPE="Multiple Choice" STYLE="Choose List" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'
-						.'<QUESTION ALIGN="AUTO">'.$pageText.'</QUESTION>'.$pageXML.'</PAGE>';
 					$xml .= $pageXML;
 				}
 			}

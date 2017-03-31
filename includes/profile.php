@@ -20,7 +20,7 @@ if ($result = $mysqli->query($sql)) {
 
 <div class="panel panel-default">
   <div class="panel-body">
-    This information will appear on the first screen for quiz takers. 
+    This information will appear to students on the first screen of your quizzes. 
   </div>
 </div>
 

@@ -38,8 +38,8 @@
                     <ul class="nav nav-stacked collapse in" id="userMenu">
 								
                         <li><a id="author-edit" href="#"> <i  class="glyphicon glyphicon-user"></i> My Profile</a></li>
-                        <li class="active"> <a id="quiz-list" href="#"><i class="glyphicon glyphicon-th-list"></i> Quiz List</a></li>
-                        <li class="active"> <a id="question-list" href="#"><i class="glyphicon glyphicon-th-list"></i> Question List</a></li>
+                        <li class="active"> <a id="quiz-list" href="#"><i class="glyphicon glyphicon-th-list"></i> My Quizzes</a></li>
+                        <li class="active"> <a id="question-list" href="#"><i class="glyphicon glyphicon-th-list"></i> My Questions</a></li>
                         <li><a id="new" href="#" data-toggle="collapse" data-target="#lessonMenu"><i class="glyphicon glyphicon-plus"></i> New</a></li>
 						<ul class="nav nav-stacked collapse" id="lessonMenu">
 							<!--<li><a id="lesson-info" href="#" ><i class="glyphicon glyphicon-plus"></i>Info</a></li>-->
