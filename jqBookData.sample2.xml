@@ -1,0 +1,519 @@
+<?xml version="1.0"?>
+<BOOK>
+	<INFO>
+		<TITLE>Plain Language School: Lesson 1</TITLE>
+		<LESSON>PLAIN LANGUAGE SCHOOL LESSON 1</LESSON>
+		<SUBJECTAREA>Legal Writing</SUBJECTAREA>
+		<EMAILCONTACT></EMAILCONTACT>
+		<VERSION>03/03/2011</VERSION>
+		<STATUS></STATUS>
+		<CAVERSIONREQUIRED>4.1.0</CAVERSIONREQUIRED>
+		<DISTRIBUTION>Personal</DISTRIBUTION>
+		<COMPLETIONTIME>40 minutes</COMPLETIONTIME>
+		<CREATEDATE>2010-12-20 15:27:53</CREATEDATE>
+		<MODIFYDATE>2011-03-08 17:37:06</MODIFYDATE>
+		<COPYRIGHTS>Copyright 2010</COPYRIGHTS>
+		<CREDITS>Jeff Hogue, John Mayer, and Transcend Translations</CREDITS>
+		<CALIDESCRIPTION>
+			<P>This is the first of three lessons that will help you learn to write using plain language.</P>
+		</CALIDESCRIPTION>
+		<AUTHORS>
+			<AUTHOR>
+				<NAME>Jeff Hogue</NAME>
+				<TITLE>Supervising Attorney</TITLE>
+				<SCHOOL>Legal Assistance of Western New York, Inc.</SCHOOL>
+				<EMAIL>jhogue@lawny.org</EMAIL>
+				<PHONE></PHONE>
+				<WEBADDRESS>http://www.lawny.org</WEBADDRESS>
+			</AUTHOR>
+			<AUTHOR>
+				<NAME>Maria Mindlin</NAME>
+				<TITLE>Principal</TITLE>
+				<SCHOOL>Transcend Translations</SCHOOL>
+				<EMAIL></EMAIL>
+				<PHONE></PHONE>
+				<WEBADDRESS>http://www.transcend.net</WEBADDRESS>
+			</AUTHOR>
+			<AUTHOR>
+				<NAME>Lindsay Madison</NAME>
+				<TITLE>Plain Language Editor</TITLE>
+				<SCHOOL>Transcend Translations</SCHOOL>
+				<EMAIL></EMAIL>
+				<PHONE></PHONE>
+				<WEBADDRESS>http://www.transcend.net</WEBADDRESS>
+			</AUTHOR>
+		</AUTHORS>
+		<NOTES>12/20/2010 15:27:53: Book was created&lt;BR /&gt;03/03/2011 SJG prep</NOTES>
+		<DESCRIPTION>
+			<P>This is the first of three lessons that will help you learn to write using plain language.</P>
+			<P></P>
+			<P>Approximate Completion Time: 40 minutes</P>
+			<BR />
+			<BR />
+			<BR />
+			<div style='font-size: .8em'>Plain Language School: Lesson 1
+			<BR />by 
+			<P>Jeff Hogue
+			<BR />Supervising Attorney
+			<BR />Legal Assistance of Western New York, Inc.
+			<BR />
+			<A HREF="mailto:jhogue@lawny.org">jhogue@lawny.org</A>
+			<A HREF="http://www.lawny.org">http://www.lawny.org</A></P>
+			<P>Maria Mindlin
+			<BR />Principal
+			<BR />Transcend Translations
+			<BR />
+			<A HREF="http://www.transcend.net">http://www.transcend.net</A></P>
+			<P>Lindsay Madison
+			<BR />Plain Language Editor
+			<BR />Transcend Translations
+			<BR />
+			<A HREF="http://www.transcend.net">http://www.transcend.net</A></P>
+			<P>Copyright 2010
+			<BR />CALI Author Copyright 1999-2012 Center for Computer-Assisted Legal Instruction.</P>
+			<P>Jeff Hogue, John Mayer, and Transcend Translations</P>
+			<P>Version 03/03/2011</P></div>
+		</DESCRIPTION>
+		<CBKLOCATION>D:\Source\AREAS\A2J\Plain Language School Lesson 1\Plain Language School Lesson 1.CBK</CBKLOCATION>
+		<APHASH></APHASH>
+	</INFO>
+	<PAGE ID="Contents" TYPE="Topics" STYLE="0" NEXTPAGEDISABLED="True" SORTNAME="Contents">
+		<TOC>
+			<UL>
+				<LI>
+					<A HREF="Introduction">Introduction</A>
+				</LI>
+				<LI>Questions</LI>
+				<UL>
+					<LI>
+						<A HREF="Determine RGL">Reading Grade Level</A>
+					</LI>
+					<LI>
+						<A HREF="Title Position">Title and Purpose</A>
+					</LI>
+					<LI>
+						<A HREF="Easy to Navigate">Document Layout</A>
+					</LI>
+					<LI>
+						<A HREF="Easy Words">Word Choice</A>
+					</LI>
+					<LI>
+						<A HREF="Text Enhancements">Fonts and Text Enhancement</A>
+					</LI>
+					<LI>
+						<A HREF="Align Concepts">Concept Review</A>
+					</LI>
+				</UL>
+				<LI>
+					<A HREF="Conclusion">Conclusion</A>
+				</LI>
+			</UL>
+		</TOC>
+	</PAGE>
+	<PAGE ID="Introduction" TYPE="Book Page" NEXTPAGE="Reading Grade Level" NEXTPAGEDISABLED="False" SORTNAME="Introduction">
+		<TEXT ALIGN="AUTO">
+			<P>Well, hello!</P>
+			<P>Lawyers, court clerks, and judges tend to write using jargon, complex sentence structures, and ancient document formatting. These lessons will teach you some methods you can use to write more clearly.</P>
+			<P>
+				<I>Before you continue, grab a piece of writing you have created. This can be a letter you have written, or a brochure you hand out to clients. For this exercise, you should be able to open it using Microsoft Word.</I>
+			</P>
+			<P>
+				<B>Plain Language School : Lesson 1 : Analyze a Document for Readability</B>
+			</P>
+			<P>Avoid bewildering your readers! Your document may look like this to readers if it isn't written in plain language.</P>
+		</TEXT>
+		<PICTURE SRC="DeclarationofIndependenceWingDings.jpg" LOCATION="D:\Source\AREAS\A2J\Plain Language School Lesson 1\DeclarationofIndependenceWingDings.jpg">Document with unreadable text</PICTURE>
+	</PAGE>
+	<PAGE ID="Determine RGL" TYPE="Book Page" NEXTPAGE="Title Conveys Purpose" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Determine RGL">
+		<TEXT ALIGN="AUTO">
+			<P>A readable document should be close to the 5th or 6th grade reading level, which is the average American's reading proficiency. To find the reading grade level (RGL), follow these steps:</P>
+			<P>1.&#160;&#160;&#160;&#160;Open your document in Microsoft Word.</P>
+			<P>2.&#160;&#160;&#160; Go to 
+			<B>Word Preferences,</B>and then to 
+			<B>Spelling and Grammar</B>.</P>
+			<P>3.&#160;&#160;&#160;&#160;Make sure the 
+			<B>Check Grammar</B>and 
+			<B>Show Readability Statistics</B>boxes are checked.</P>
+			<P>4.&#160; &#160;&#160;&#160;Run a 
+			<B>Spelling and Grammar</B>check on your document.</P>
+			<P>5.&#160;&#160;&#160;&#160; At the end of the check, a box showing your document's readability statistics will pop up. The 
+			<B>Flesch-Kincaid Grade Level</B>tells you your document's RGL.</P>
+			<P>This is just one of many tools that will help you think about the readability of the documents you create.</P>
+		</TEXT>
+	</PAGE>
+	<PAGE ID="Conclusion" TYPE="Book Page" STYLE="Choose Buttons" NEXTPAGE="Contents" NEXTPAGEDISABLED="False" SORTNAME="Conclusion">
+		<TEXT ALIGN="AUTO">
+			<P>Thanks! That's the end of Lesson One.</P>
+			<P>For free examples you can change and use in your office, check out LawNY's 
+			<A HREF="https://sites.google.com/a/lawny.org/plain-language-library/">Plain Language Library</A></P>
+			<P>Please give us one minute of your time to give us feedback on this lesson: 
+			<A HREF="https://spreadsheets0.google.com/viewform?formkey=dC1yaE1USXhzRDAtbm1GZ0xINmdBZEE6MA">Link</A></P>
+			<P>(c) Legal Assistance of Western New York, Inc. (R)</P>
+		</TEXT>
+	</PAGE>
+	<PAGE ID="Title Conveys Purpose" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Title Position" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Title Conveys Purpose">
+		<QUESTION ALIGN="AUTO">
+			<P>Look at the sample document you are using for this lesson.</P>
+			<P>Does the 
+			<B>title</B>of your document explain the purpose of your document in plain language?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK>
+			<UL>
+				<LI>It responds to the reader's 
+				<B>natural question</B>.</LI>
+				<LI>It uses simple, conversational words.</LI>
+				<LI>It avoids nouns when verbs can be used.</LI>
+				<LI>It is as short as possibe.</LI>
+			</UL>
+			<P>Here are some examples:</P>
+			<P></P>
+			<UL>
+				<LI>
+				<I>Prepayable Offenses Information Sheet</I>becomes: 
+				<I>Pay Fines by Mail</I></LI>
+			</UL>
+			<P></P>
+			<UL>
+				<LI>
+				<I>Summons</I>becomes: 
+				<I>Order to Go to Small Claims Trial</I></LI>
+			</UL>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="RIGHT">
+			<P>Great! A good title follows these rules:</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="WRONG">
+			<P>Try to follow these rules for the title:</P>
+		</FEEDBACK>
+	</PAGE>
+	<PAGE ID="Title Position" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Document Purpose" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Title Position">
+		<QUESTION ALIGN="AUTO">
+			<P>Is the 
+			<B>title position</B>in the top left-hand corner of the page?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="RIGHT">
+			<P>Great! The reader expects to find the title in the top left-hand corner of a document.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="WRONG">
+			<P>Move the title to its natural location. The reader expects to find the title in the top left-hand corner of a document.</P>
+		</FEEDBACK>
+	</PAGE>
+	<PAGE ID="Document Purpose" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Is Your Body Text Chunked?" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Document Purpose">
+		<QUESTION ALIGN="AUTO">
+			<P>Ask someone who knows nothing about the topic of your document to look at it for 30 seconds. Then ask him or her what the document is about.</P>
+			<P>Is the 
+			<B>purpose</B>of your document immediately obvious to the reader?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK>
+			<P>Your reader is more likely to use this document if she can quickly understand its purpose. Try this technique:</P>
+			<P>If the
+			<B>title alone</B>does not communicate what this document is about,
+			<B>add a short prompt</B>under the title that explains</P>
+			<UL>
+				<LI>Who the document is for</LI>
+				<LI>The purpose of the document</LI>
+			</UL>
+			<P>Here is an example:</P>
+			<P>
+			<B>Before:</B>URGENT COMMUNCATION: The Board has made regulatory changes that licensees should be aware of. The Board's Executive Officer or his/her selected official can now immediately suspend a license to protect the public's health and safety.</P>
+			<P>
+			<B>After:</B>The Board can suspend your license immediately if we believe it is necessary to protect public health and safety.</P>
+			<P>Many readers will not even try to read a document if the title doesn't inform them of the document's purpose.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="RIGHT">
+			<P>Great!</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="WRONG">
+			<P>Consider ways to fix this.</P>
+		</FEEDBACK>
+	</PAGE>
+	<PAGE ID="Is Your Body Text Chunked?" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Body Text Uses SubHeads" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Is Your Body Text Chunked?">
+		<QUESTION ALIGN="TOP">
+			<P>Does your document contain large blocks of text?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK>
+			<P>To make your document easier to read, follow these rules:</P>
+			<UL>
+				<LI>
+				<B>Chunk</B>text into small paragraphs to make the reading more manageable.</LI>
+				<LI>Use bulleted and numbered 
+				<B>lists</B>to break up text and help the reader quickly find the main messages.</LI>
+				<LI>If possible, present the text in 
+				<B>2-column format</B>. Readers capture more text when there are fewer than 70 characters per line.</LI>
+			</UL>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="RIGHT">
+			<P>Great! Text that is split into sections is easier on the eyes. Readers often skip text buried in the middle of a large block of text.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="WRONG">
+			<P>Text that is 
+			<B>not</B>split into sections is hard on the eyes and the text in the middle of a large block of test is typically 
+			<B>not</B>read.</P>
+		</FEEDBACK>
+		<PICTURE SRC="BLOCKS.jpg" LOCATION="D:\Source\AREAS\A2J\Plain Language School Lesson 1\BLOCKS.jpg">One long block of text, and then the same text broken into paragraphs.</PICTURE>
+	</PAGE>
+	<PAGE ID="Body Text Uses SubHeads" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Easy to Navigate" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Body Text Uses SubHeads">
+		<QUESTION ALIGN="AUTO">
+			<P>Does your document contain informative 
+			<B>subheadings</B>to guide the reader?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK>
+			<P>Subheads help the reader to:</P>
+			<UL>
+				<LI>Identify which parts of the document apply to him or her,</LI>
+				<LI>Navigate to certain topics easily, and</LI>
+				<LI>Quickly understand the topics covered.</LI>
+			</UL>
+			<P>Subheads are also easier on the reader's eyes because they:</P>
+			<UL>
+				<LI>Create more white space on the page, and</LI>
+				<LI>Split up large chunks of text.</LI>
+			</UL>
+			<P>
+			<I>Tip:</I>More than 50% of readers of brochures read 
+			<I>only</I>the headings and subheads. Put your important information there. Use bold font for subheads, and if space allows, make them 1 pt larger than the body text.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="RIGHT">
+			<P>Great!</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="WRONG">
+			<P>It may be a good idea to add subheads to your document.</P>
+		</FEEDBACK>
+	</PAGE>
+	<PAGE ID="Easy to Navigate" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Easy Words" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Easy to Navigate">
+		<QUESTION ALIGN="AUTO">
+			<P>Is the information in the order that makes sense to the reader?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<BUTTON>I'm not sure</BUTTON>
+		<FEEDBACK>
+			<UL>
+				<LI>Order intuitively &#8211; Put the information in the order your reader should read it.</LI>
+				<LI>Avoid cross-references &#8211;If you need to define a term or explain a concept, do so when you introduce the concept.</LI>
+				<LI>Use numbers for each question on a form.</LI>
+			</UL>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="RIGHT">
+			<P>Great! A readable document uses navigation tools and intuitive ordering to capture and keep the reader&#8217;s interest. Here are some techniques to improve your document&#8217;s navigation:</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="WRONG">
+			<P>A readable document uses navigation and intuitive ordering to capture and keep the reader&#8217;s interest.</P>
+			<P>Here are some techniques to improve your document&#8217;s navigation:</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="3" DETAIL="1" GRADE="INFO">
+			<P>Ask yourself what the reader will want know first. If your document starts with disclaimers or preambles, cross-references other pages or documents, and has no numbering, it is probably not intuitively ordered.</P>
+			<P>Here are some techniques to improve your document&#8217;s navigation:</P>
+		</FEEDBACK>
+	</PAGE>
+	<PAGE ID="Easy Words" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Register" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Easy Words">
+		<QUESTION ALIGN="BOTTOM">
+			<P>Does your document contain legal terms in Latin (for example: 
+			<I>ex parte</I>, 
+			<I>e.g.</I>, Roman numerals)?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK>
+			<UL>
+				<LI>Use a word or two of English, instead.</LI>
+				<LI>Clearly explain what the Latin word means, for example, with a phrase in parentheses.</LI>
+			</UL>
+			<P>Replace Roman numerals with Arabic numerals (1, 2, 3).</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="WRONG">
+			<P>The average reader may have trouble with Latin words. To make your document more readable, try these techniques:</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="RIGHT">
+			<P>Great. If you are tempted to use a Latin phrase, consider these alternatives:</P>
+		</FEEDBACK>
+		<PICTURE SRC="penny.jpg" LOCATION="D:\Source\AREAS\A2J\Plain Language School Lesson 1\penny.jpg">http://www.flickr.com/photos/80284579@N00/6455908</PICTURE>
+	</PAGE>
+	<PAGE ID="Register" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Surplus Words" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Register">
+		<QUESTION ALIGN="AUTO">
+			<P>
+			<B>Register</B>is a measure of the familiarity the average reader will have with the words in your document.</P>
+			<P>Are there any words that you think the average reader would have trouble understanding?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK>
+			<UL>
+				<LI>Replace difficult words with conversational ones. Write it how you would explain it, verbally, to an average reader.</LI>
+				<LI>Make a glossary to keep track of your easier language for consistency on future documents.</LI>
+			</UL>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="WRONG">
+			<P>Make your document easier to read by weeding out difficult words. Here are some tips:</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="RIGHT">
+			<P>Great!
+			<I></I>Make your document easier to read by weeding out difficult words. Here are some tips:</P>
+		</FEEDBACK>
+		<PICTURE SRC="obfuscate.jpg" LOCATION="D:\Source\AREAS\A2J\Plain Language School Lesson 1\obfuscate.jpg"></PICTURE>
+	</PAGE>
+	<PAGE ID="Surplus Words" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Text Enhancements" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Surplus Words">
+		<QUESTION ALIGN="AUTO">
+			<P>Here are some examples of surplus words and clearer, more efficient alternatives.</P>
+			<BLOCKQUOTE>At the present time --&gt; Now</BLOCKQUOTE>
+			<BLOCKQUOTE>With regard to --&gt; About</BLOCKQUOTE>
+			<BLOCKQUOTE>Effective date of termination of order --&gt; This order ends</BLOCKQUOTE>
+			<P>Do you see any phrases in your document that contain 
+			<B>surplus words</B>?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="WRONG">
+			<P>To make your document easier to read, eliminate surplus words. Write it how you would explain it to an average person.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="RIGHT">
+			<P>Great!
+			<I></I>To make your document easier to read, eliminate surplus words. Write it how you would explain it to an average person.</P>
+		</FEEDBACK>
+	</PAGE>
+	<PAGE ID="Text Enhancements" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="CAPS" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Text Enhancements">
+		<QUESTION ALIGN="RIGHT">
+			<P>We sometimes use 
+			<B>text enhancements</B>with the hope that readers will notice certain parts of our document.</P>
+			<P>Are there long phrases or sentences that are underlined, italicized, boldface, or in reverse text?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK>
+			<P>
+			<B>Bold:</B>Use sparingly: a word, phrase, a short sentence.</P>
+			<P>
+			<I>Italic:</I>Use for emphasis and foreign words.</P>
+			<P>
+			<U>Underline</U>, strike-out: Only as editing tools.</P>
+			<P>Reverse text: Pretty, but does not copy/fax well.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="WRONG">
+			<P>Over-use of text enhancement makes the reader's job more difficult. To emphasize a key point, follow these rules:</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="RIGHT">
+			<P>Great! Over-use of text enhancement makes the reader's job more difficult. To emphasize a key point, follow these rules:</P>
+		</FEEDBACK>
+		<PICTURE SRC="bold.jpg" LOCATION="D:\Source\AREAS\A2J\Plain Language School Lesson 1\bold.jpg"></PICTURE>
+	</PAGE>
+	<PAGE ID="CAPS" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Fonts" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="CAPS">
+		<QUESTION ALIGN="AUTO">
+			<P>Does your document contain phrases or sentences that are written in ALL CAPS?</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK>
+			<P>When overused, writing with CAPS makes it harder for the reader to identify where the key information is. Instead, use limited bold or italic for the key words.</P>
+			<P>If you aren't convinced, make any paragraph in your document all caps, and paste your all-caps paragraph right above the same paragraph with normal formatting. Which paragraph is easier to read?</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="WRONG">
+			<P>CAPS are difficult to read, and should be avoided.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="RIGHT">
+			<P>Great! CAPS are difficult to read, and should be avoided.</P>
+		</FEEDBACK>
+	</PAGE>
+	<PAGE ID="Check Grade Level Again" TYPE="Book Page" NEXTPAGE="Align Concepts" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Check Grade Level Again">
+		<TEXT ALIGN="AUTO">
+			<P>Let&#8217;s recheck the reading grade level (RGL) of your document. Is the new RGL close to the 5th &#8211; 6th grade level?</P>
+			<P>Follow these steps to find out:</P>
+			<P>1. Open your document in Microsoft Word.</P>
+			<P>2. Go to Word Preferences and then to Spelling and Grammar.</P>
+			<P>3. Make sure the Check grammar and Show Readability Statistics boxes are checked.</P>
+			<P>4. Run a spelling and grammar check on your document.</P>
+			<P>5. At the end of the check, a box showing your document&#8217;s readability statistics will pop up. The Flesch-Kincaid Grade Level tells you your document&#8217;s reading grade level.</P>
+		</TEXT>
+	</PAGE>
+	<PAGE ID="Fonts" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Check Grade Level Again" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Fonts">
+		<QUESTION ALIGN="AUTO">
+			<P>Does your document use 
+			<I>serif</I>or fancy 
+			<I>display</I>fonts? (
+			<B>Serif</B>letters have fine cross strokes at the end of the lines.)</P>
+		</QUESTION>
+		<BUTTON>Yes</BUTTON>
+		<BUTTON>No</BUTTON>
+		<FEEDBACK>
+			<P>To optimize readability, replace unusual and 
+			<I>serif</I>fonts (like Times New Roman) with a common 
+			<I>sans serif</I>fonts, such as Arial. 
+			<BR />
+			<B>Sans serif</B>fonts:</P>
+			<UL>
+				<LI>Are easier to read than serif fonts</LI>
+				<LI>Scan, fax, and print more legibly</LI>
+			</UL>
+			<P>Tip: Some older readers, who learned to read using 
+			<I>serif</I>fonts, might prefer 
+			<I>serif</I>fonts.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="WRONG">
+			<P>These may fatigue some readers more quickly than other fonts.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="RIGHT">
+			<P>Great!</P>
+		</FEEDBACK>
+		<PICTURE SRC="fonts.jpg" LOCATION="D:\Source\AREAS\A2J\Plain Language School Lesson 1\fonts.jpg">Serif, Sans Serif, Special</PICTURE>
+	</PAGE>
+	<PAGE ID="Align Concepts" TYPE="Prioritize" STYLE="PDrag" NEXTPAGE="Conclusion" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Align Concepts">
+		<QUESTION ALIGN="AUTO">
+			<P>Slide the items on the left to the columns on the right based on whether you think those items increase or decrease the readability of your document.</P>
+			<P>Then click Grade to see if you picked correctly.</P>
+		</QUESTION>
+		<ITEM CATEGORY="1">Chunking</ITEM>
+		<ITEM CATEGORY="1">Subheads</ITEM>
+		<ITEM CATEGORY="2">ALL CAPS</ITEM>
+		<ITEM CATEGORY="2">Times New Roman</ITEM>
+		<ITEM CATEGORY="2">Latin Words</ITEM>
+		<ITEMS>Items</ITEMS>
+		<CATEGORY>More Readable</CATEGORY>
+		<CATEGORY>Less Readable</CATEGORY>
+		<RIGHT>
+			<P>Nicely done.</P>
+		</RIGHT>
+		<WRONG>
+			<P>Check your answers again.</P>
+		</WRONG>
+		<ORDERED>False</ORDERED>
+		<SHUFFLE>False</SHUFFLE>
+	</PAGE>
+	<PAGE ID="Reading Grade Level" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Determine RGL" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="Reading Grade Level">
+		<QUESTION ALIGN="AUTO">
+			<P>First, let's think about the reading skills of people who must read the forms, orders, and affidavits that we create.</P>
+			<P>What is the reading grade level of the average native English speaker in America?</P>
+		</QUESTION>
+		<BUTTON>5th or 6th Grade</BUTTON>
+		<BUTTON>7th or 8th Grade</BUTTON>
+		<BUTTON>Grade Levels are Irrelevant</BUTTON>
+		<FEEDBACK>
+			<P>Popular tools and instruments such as the Flesch-Kincaid(tm) scale and the Gunning Fog Index use grade level as the method to express document reading ease. The average reading grade level in the United States is about the 5th or 6th grade level.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="1" DETAIL="1" GRADE="RIGHT">
+			<P>Correct.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="2" DETAIL="1" GRADE="WRONG">
+			<P>That is incorrect.</P>
+		</FEEDBACK>
+		<FEEDBACK BUTTON="3" DETAIL="1" GRADE="WRONG">
+			<P>It seems that many variables might affect what should be considered "grade level" reading, including fluctuations in the effectiveness of teaching and the skill levels of students nationwide. But grade level assessment has more quantitative, industry-wide meaning than you might have guessed.</P>
+		</FEEDBACK>
+	</PAGE>
+	<PAGE ID="Contents #1 Questions" TYPE="Topics" STYLE="0" NEXTPAGEDISABLED="True" SORTNAME="Contents # 1 Questions">
+		<SUBTOPIC HREF="Determine RGL">Reading Grade Level</SUBTOPIC>
+		<SUBTOPIC HREF="Title Position">Title and Purpose</SUBTOPIC>
+		<SUBTOPIC HREF="Easy to Navigate">Document Layout</SUBTOPIC>
+		<SUBTOPIC HREF="Easy Words">Word Choice</SUBTOPIC>
+		<SUBTOPIC HREF="Text Enhancements">Fonts and Text Enhancement</SUBTOPIC>
+		<SUBTOPIC HREF="Align Concepts">Concept Review</SUBTOPIC>
+	</PAGE>
+</BOOK>
