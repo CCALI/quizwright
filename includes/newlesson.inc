@@ -97,7 +97,7 @@
 <div class="form-group">
   <label class="col-sm-2 control-label" for="submit">All done?</label>
   <div class="col-sm-8">
-    <button id="submit" name="submit" class="btn btn-primary">Next</button>
+    <button id="lesson-submit" name="lesson-submit" class="btn btn-primary">Next!</button>
   </div>
 </div>
 
