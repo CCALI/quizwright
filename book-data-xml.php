@@ -12,7 +12,7 @@ $lid = intval($_GET['lid']);
 //$SQL="select data from info where lid = $lid";
 
 // Query to get lesson and author data
-$SQL="select info.data, people.profile from info,people where lid = $lid and info.uid = people.uid";
+$SQL="select info.data as data, people.data as profile from info,people where lid = $lid and info.uid = people.uid";
 
 if ($result = $mysqli->query($SQL))
 {
