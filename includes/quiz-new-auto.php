@@ -85,7 +85,6 @@ if ($result = $mysqli->query($sql))
   <label class="col-sm-2 control-label" for="submit">All done?</label>
   <div class="col-sm-8">
     <button id="quiz-update-submit"   class="btn btn-primary">Save Quiz</button>
-	<button id="quiz-publish-submit"   class="btn btn-primary">Publish Quiz</button>
   </div>
 </div>
 
@@ -105,12 +104,7 @@ $("#quiz-update-submit").click(function(){ // Save quiz.
 	},'json');
 	return false;
 });
-$("#quiz-publish-submit").click(function(){ // Save quiz. 
-	$.post( "./includes/quiz-publish.php", $( "#quiz-info-form" ).serialize() ,function( data ) {
-		$("#main-panel").load("./includes/quiz-drupal.php?lid="+data.lid); 
-	},'json');
-	return false;
-});
+
 </script>
 
 
