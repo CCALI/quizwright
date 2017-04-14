@@ -1,3 +1,4 @@
+<h3>Hi there!</h3>
 <?php
 
 $_POST['pages'] = explode(",",$_POST['pages']);// ensure pages are a JS array, not string.
@@ -8,3 +9,4 @@ echo $data."<br />";
 var_dump($_SESSION);
 
 ?>
+<div id="error"></div>

@@ -81,3 +81,4 @@ if ($result = $mysqli->query($sql))
  
 </div>
 </div>
+<div id="error"></div>
