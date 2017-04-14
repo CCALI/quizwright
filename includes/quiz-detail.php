@@ -49,11 +49,11 @@ if ($result = $mysqli->query($sql))
 								case 'quiz-mc':
 								case '':
 									echo '<ul>';
-									echo '<li>'.$page['page-choice-correct-text'];
+									echo '<li class="correct">'.$page['page-choice-correct-text'];
 									for ($wrong=1;$wrong<=7;$wrong++)
 									{
 										$wrongText = $page['page-choice-wrong-'.$wrong.'-text'];
-										if ($wrongText!='') echo '<li>'.$wrongText;
+										if ($wrongText!='') echo '<li class="wrong">'.$wrongText;
 									}
 									echo '</ul>';
 									break;
@@ -68,7 +68,16 @@ if ($result = $mysqli->query($sql))
 	}
 }
 ?>
+<!-- Button -->
+<div class="form-group">
+  <label class="col-sm-3 control-label" for="submit">Ready to give the quiz?</label>
+  <div class="col-sm-8">
+    <button id="quiz-publish-submit"   class="btn btn-primary">Publish Quiz</button>
+  </div>
+</div>
 
+</fieldset>
+</form>
  
 </div>
 </div>
