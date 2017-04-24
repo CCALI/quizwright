@@ -1,12 +1,8 @@
 <!-- List one quiz's details  -->
-<form class="form-horizontal" method="post">
-    <fieldset>
-    <legend>Quiz Details</legend>
-	 <p>  </p>
-<div class="panel panel-default">
-	 
 
-	 
+    <H3>Quiz Details</H3>
+<div class="panel panel-default">
+	 	 
 <?php
 require ("user-session.php");
 $lid = intval($_REQUEST['lid']);
@@ -69,16 +65,17 @@ if ($result = $mysqli->query($sql))
 }
 ?>
 <!-- Button -->
-<div class="form-group">
+<div class="panel panel-default">
   <label class="col-sm-3 control-label" for="submit">Ready to give the quiz?</label>
   <div class="col-sm-8">
-    <button id="quiz-publish-submit"   class="btn btn-primary">Publish Quiz</button>
+    <li id="quiz-publish"   class="btn btn-primary">Publish Quiz</li>
   </div>
 </div>
 
-</fieldset>
-</form>
- 
 </div>
-</div>
-<div id="error"></div>
+
+<script>
+	$("#quiz-publish").click(function(){
+	$("#main-panel").load("./includes/quiz-drupal.php");
+});
+</script>

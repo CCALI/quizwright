@@ -8,6 +8,7 @@
 
 	 
 <?php
+	require ("user-session.php");
 	echo "some Druapl stuff will appear here";
 			?>
 		</ul>
