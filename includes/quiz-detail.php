@@ -65,17 +65,17 @@ if ($result = $mysqli->query($sql))
 }
 ?>
 <!-- Button -->
-<div class="panel panel-default">
-  <label class="col-sm-3 control-label" for="submit">Ready to give the quiz?</label>
+
+  <div class="col-sm-3 control-label" for="submit">Ready to give the quiz?</div>
   <div class="col-sm-8">
     <li id="quiz-publish"   class="btn btn-primary">Publish Quiz</li>
   </div>
 </div>
 
-</div>
+
 
 <script>
 	$("#quiz-publish").click(function(){
-	$("#main-panel").load("./includes/quiz-drupal.php");
+	$("#main-panel").load("./includes/quiz-publish.php");
 });
 </script>

@@ -9,5 +9,3 @@ echo $data."<br />";
 var_dump($_SESSION);
 
 ?>
-
-
