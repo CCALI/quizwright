@@ -76,6 +76,6 @@ if ($result = $mysqli->query($sql))
 
 <script>
 	$("#quiz-publish").click(function(){
-	$("#main-panel").load("./includes/quiz-publish.php");
+	$("#main-panel").load("./includes/quiz-publish.php?lid=<?php echo $lid;?>");
 });
 </script>
