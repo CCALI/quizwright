@@ -48,14 +48,16 @@ if ($result = $mysqli->query($SQL))
 		 $xml = new SimpleXMLElement($response);
 		// var_dump($xml);
 		 $apURL = $xml->URL[0];
-		 header("Location: $apURL");
+		 //header("Location: $apURL");
+		 echo "<script type='text/javascript'>window.open('$apURL', '_blank')</script>";
+	} 
          curl_close($ch);
 		 
     }
 		
 		return;
 	}
-}
+
 
 echo '<xml>Need lesson id</xml>';
 	
