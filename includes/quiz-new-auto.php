@@ -84,7 +84,7 @@ if ($result = $mysqli->query($sql))
 <div class="form-group">
   <label class="col-sm-2 control-label" for="submit">All done?</label>
   <div class="col-sm-8">
-    <button id="quiz-update-submit"   class="btn btn-primary">Publish Quiz</button>
+    <button id="quiz-update-submit"   class="btn btn-primary">Save Quiz</button>
   </div>
 </div>
 
@@ -98,7 +98,7 @@ if ($result = $mysqli->query($sql))
 
 
 <script> 
-$('#quiz-update-submit').click(function(){ // Save quiz, publish. 
+$("#quiz-update-submit").click(function(){ // Save quiz. 
 	$.post( "./includes/quiz-create.php", $( "#quiz-info-form" ).serialize() ,function( data ) {
 		$("#main-panel").load("./includes/quiz-detail.php?lid="+data.lid); 
 	},'json');

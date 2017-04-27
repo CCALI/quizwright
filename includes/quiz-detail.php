@@ -1,12 +1,8 @@
 <!-- List one quiz's details  -->
-<form class="form-horizontal" method="post">
-    <fieldset>
-    <legend>Quiz Details</legend>
-	 <p>  </p>
-<div class="panel panel-default">
-	 
 
-	 
+    <H3>Quiz Details</H3>
+<div class="panel panel-default">
+	 	 
 <?php
 require ("user-session.php");
 $lid = intval($_REQUEST['lid']);
@@ -49,11 +45,11 @@ if ($result = $mysqli->query($sql))
 								case 'quiz-mc':
 								case '':
 									echo '<ul>';
-									echo '<li>'.$page['page-choice-correct-text'];
+									echo '<li class="correct">'.$page['page-choice-correct-text'];
 									for ($wrong=1;$wrong<=7;$wrong++)
 									{
 										$wrongText = $page['page-choice-wrong-'.$wrong.'-text'];
-										if ($wrongText!='') echo '<li>'.$wrongText;
+										if ($wrongText!='') echo '<li class="wrong">'.$wrongText;
 									}
 									echo '</ul>';
 									break;
@@ -68,7 +64,18 @@ if ($result = $mysqli->query($sql))
 	}
 }
 ?>
+<!-- Button -->
 
- 
+  <div class="col-sm-3 control-label" for="submit">Ready to give the quiz?</div>
+  <div class="col-sm-8">
+    <li id="quiz-publish"   class="btn btn-primary">Publish Quiz</li>
+  </div>
 </div>
-</div>
+
+
+
+<script>
+	$("#quiz-publish").click(function(){
+	$("#main-panel").load("./includes/quiz-publish.php?lid=<?php echo $lid;?>");
+});
+</script>

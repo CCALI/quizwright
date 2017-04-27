@@ -35,4 +35,5 @@ $("#profile-edit, #author-edit").click(function(){
 	$("#main-panel").load("./includes/profile.php"); 
 });
 
+
 });
