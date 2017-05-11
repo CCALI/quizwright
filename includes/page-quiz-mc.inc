@@ -59,6 +59,28 @@
                 <textarea name="page-feedback"  class="form-control"></textarea>
             </div>
         </div>
+		  
+		  
+		  
+		  
+		  
+		   <div class="form-group">
+            <label class="col-sm-2 control-label" for="page-topic">Topic Area</label>
+ 
+            <div class="col-sm-8">
+					<select name="page-topic" id="page-topic" class="form-control"></select>
+            </div>
+        </div>
+		   <div class="form-group">
+            <label class="col-sm-2 control-label" for="page-topic">Attribution (optional)</label>
+ 
+            <div class="col-sm-8">
+		      <input id="page-attribution" name="page-attribution" placeholder="" class="form-control" type="text" value="">
+            </div>
+        </div>
+
+					  
+		  
         <!-- Button -->
 
         <div class="form-group">
@@ -82,6 +104,7 @@
 
 
 <script>
+loadCALITopics($('#page-topic'));
 $('#page-submit').click(function(){ // Save page let author add new page
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
 		console.log(data);

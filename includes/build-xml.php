@@ -10,12 +10,17 @@
 	05/11/2017
 		Added: Optional custom Introduction/Conclusion page.
 		Added: Incorporate optional feedback.
-	
+		Added: Topic and attribution added to a page's NOTES section.
+		
 	TODO: questions arranged in author specified order
 */
 function makeQuestionTextXML($text)
 {	// 05/11/2017 SJG Helper function
 	return '<QUESTION ALIGN="AUTO">'.$text.'</QUESTION>';
+}
+function makeNotesXML($notes)
+{	// 05/11/2017 SJG Helper function
+	return '<NOTES>'.$notes.'</NOTES>';
 }
 function makePageXML($pageName,$pageType,$pageStyle,$nextPage,$innerXML)
 {	// 05/11/2017 SJG Helper function to ensure markup is always right.
@@ -99,6 +104,7 @@ function BuildXML($mysqli,$data,$author)
 					$nextPage = ($pageNum < $numPages) ? ('Question '.($pageNum+1)) : ( $hasConclusion ? 'Conclusion' : 'Contents');
 					$pageText = $page['page-question'];
 					$pageFeedback =  $page['page-feedback'] ;
+					$pageNotes ='Topic: '. $page['page-topic'].' - Attribution: '.$page['page-attribution'];
 					$pageXML=''; 
 					switch ($pagetype)
 					{
@@ -124,7 +130,7 @@ function BuildXML($mysqli,$data,$author)
 </PAGE>
 */							
 							$istrue = $page['true-is-correct']=='true';
-							$innerXML = makeQuestionTextXML($pageText)
+							$innerXML = makeQuestionTextXML($pageText). makeNotesXML($pageNotes)
 								.'<BUTTON>True</BUTTON><BUTTON>False</BUTTON>'
 								.'<FEEDBACK BUTTON="1" DETAIL="1" GRADE="'.(($istrue)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>'
 								.'<FEEDBACK BUTTON="2" DETAIL="1" GRADE="'.((!$istrue)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>'
@@ -186,7 +192,7 @@ function BuildXML($mysqli,$data,$author)
 								$details .= '<DETAIL>'.$choice['DETAIL'].'</DETAIL>';
 								$feedbacks.='<FEEDBACK BUTTON="1" DETAIL="'.$choicei.'" GRADE="'.$choice['GRADE'].'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>';
 							}
-							$innerXML = makeQuestionTextXML($pageText)
+							$innerXML = makeQuestionTextXML($pageText). makeNotesXML($pageNotes)
 								. $details.$feedbacks
 								.( ($pageFeedback != "") ? ('<FEEDBACK>'.$pageFeedback.'</FEEDBACK>') : '');
 							$pageXML=makePageXML($pageName,"Multiple Choice","Choose List",$nextPage,$innerXML);
