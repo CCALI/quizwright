@@ -5,7 +5,7 @@ require ("user-session.php");
 
 // 3/2/2017 Given list of checked pages, add them to a new quiz.
 $_POST['pages'] = explode(",",$_POST['pages']);// ensure pages are a JS array, not string.
-$data= json_encode($_POST);
+$data =  str_replace ('\'','\\u0027',json_encode($_POST)); // Encode ' to avoid MySQl escape mess. 
 $mysqli->query("INSERT INTO info (lid,uid,data) VALUES ('',$uid,'$data')");
 
 //$data = json_encode(mergeObjects($data,$_POST)); 

@@ -1,14 +1,30 @@
 <?php
 /*
- 05/10/2017 SJG Moved this function to a shared library since it's shared by AutoPublish, Previewer and XML Downloader (for use by other tools)
- Restored sample code since I find it handy reference to what XML looks like and efficiency is of little concern in infrequently called code like this.
- TODO: Incorporate optional feedbacks.
- TODO: Custom Conclusion page? 
+	SJG Library function to construct CALI Viewer compatible XML (the jqBookData.xml file).
+	Currently returns multiple choices in random order so every call with same arguments could have different XML.
+	Question are in autonumber order.
+	
+	05/10/2017
+		Moved this function to this shared library since it's shared by AutoPublish, Previewer and XML Downloader (for use by other tools)
+		Restored sample code since I find it handy reference to what XML looks like and efficiency is of little concern in infrequently called code like this.
+	05/11/2017
+		Added: Optional custom Introduction/Conclusion page.
+		Added: Incorporate optional feedback.
+	
+	TODO: questions arranged in author specified order
 */
+function makeQuestionTextXML($text)
+{	// 05/11/2017 SJG Helper function
+	return '<QUESTION ALIGN="AUTO">'.$text.'</QUESTION>';
+}
+function makePageXML($pageName,$pageType,$pageStyle,$nextPage,$innerXML)
+{	// 05/11/2017 SJG Helper function to ensure markup is always right.
+	return '<PAGE ID="'.$pageName.'" TYPE="'.$pageType.'" STYLE="'.$pageStyle.'" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'.$innerXML.'</PAGE>';
+}
 
 
 function BuildXML($mysqli,$data,$author)
-{	// 3/2/2017 SJG $data is lesson $data block with meta info and page list.
+{	// 03/02/2017 SJG $data is lesson $data block with meta info and page list.
 	$xml='';
 	
 	$description=
@@ -33,13 +49,36 @@ function BuildXML($mysqli,$data,$author)
 	$xml.='<INFO>';
 	foreach ($info as $key=>$value) $xml.='<'.$key.'>'. $value .'</'.$key.'>';
 	$xml.='</INFO>';	
+	// 05/11/2017 SJG Introduction and conclusion are optional, grab them and incorporate at the right spots.
+	$pageIntroText = $data['quiz-intro'];
+	$pageConclusionText = $data['quiz-conclusion'];
+	$hasIntro = $pageIntroText != "";
+	$hasConclusion = $pageConclusionText != "";
 	
 	$numPages = count($data['pages']);
 	$firstPage='Question 1';
-	$toc='<PAGE ID="Contents" TYPE="Topics" STYLE="0" NEXTPAGEDISABLED="True" SORTNAME="Contents"><TOC><UL><LI><A HREF="Question 1">'.$numPages.' Questions</A></LI>'
-		//.'<LI><A HREF="Conclusion">Conclusion</A></LI>
-		.'</UL></TOC> </PAGE>';
+
+	// Build the Table of Contents
+	$toc='<PAGE ID="Contents" TYPE="Topics" STYLE="0" NEXTPAGEDISABLED="True" SORTNAME="Contents"><TOC><UL>';
+	if($hasIntro)
+	{
+		$toc .= '<LI><A HREF="Introduction">Introduction</A></LI>';
+	}
+	$toc .= '<LI><A HREF="Question 1">'.$numPages.' Questions</A></LI>';
+	if($hasConclusion)
+	{
+		$toc .= '<LI><A HREF="Conclusion">Conclusion</A></LI>';
+	}
+	$toc .= '</UL></TOC> </PAGE>';
 	$xml .= $toc;
+	
+	if ($hasIntro){
+		$xml .= makePageXML('Introduction','Book Page','','Question 1',makeQuestionTextXML($pageIntroText));
+	}
+		
+		
+
+	
 	$pageNum=0;
 	if ($numPages>0)
 	{ 
@@ -51,18 +90,20 @@ function BuildXML($mysqli,$data,$author)
 			{
 				if ($row = $result->fetch_assoc())
 				{
-					// check page type so we get accurate detail (but as of 3/2017 there are all quiz type) which translates to Multiple Choice type.
+					// Check page type so we get accurate detail (but as of 3/2017 there are all quiz type) which translates to Multiple Choice type.
 					$page = json_decode($row['data'], TRUE);
 					$pagetype = $page['page-type'];
-					$pageNum++;
+					$pageNum += 1;
 					$pageName = 'Question '.$pageNum;
-					$nextPage = ($pageNum < $numPages) ? ('Question '.($pageNum+1)) : ('Contents');
+					$nextPage = ($pageNum < $numPages) ? ('Question '.($pageNum+1)) : ( $hasConclusion ? 'Conclusion' : 'Contents');
 					$pageText = $page['page-question'];
 					$pageFeedback =  $page['page-feedback'] ;
 					$pageXML=''; 
 					switch ($pagetype)
 					{
 						
+
+// ### True/False style of quiz question
 						case 'quiz-tf': // This will be a CA Buttons-only thype.
 /* Sample True/False question XML from CALI Lesson
 <PAGE ID="Erie Origins 3" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="Erie Origins: SWIFT FALSE" NEXTPAGEDISABLED="True">
@@ -82,14 +123,16 @@ function BuildXML($mysqli,$data,$author)
 </PAGE>
 */							
 							$istrue = $page['true-is-correct']=='true';
-							$pageXML = '<BUTTON>True</BUTTON><BUTTON>False</BUTTON>'
+							$innerXML = makeQuestionTextXML($pageText)
+								.'<BUTTON>True</BUTTON><BUTTON>False</BUTTON>'
 								.'<FEEDBACK BUTTON="1" DETAIL="1" GRADE="'.(($istrue)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>'
 								.'<FEEDBACK BUTTON="2" DETAIL="1" GRADE="'.((!$istrue)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>'
 								.($pageFeedback!='' ? '<FEEDBACK>'.$pageFeedback.'</FEEDBACK>' : '');
-							$pageXML='<PAGE ID="'.$pageName.'" TYPE="Multiple Choice" STYLE="Choose Buttons" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'
-							.'<QUESTION ALIGN="AUTO">'.$pageText.'</QUESTION>'.$pageXML.'</PAGE>';
+							$pageXML=makePageXML($pageName, "Multiple Choice", "Choose Buttons",$nextPage, $innerXML);
 							break;
 						
+
+// ### Standard quiz question which is multiple choice:
 						case 'Quiz':
 						case 'quiz-mc':
 						case '':
@@ -142,11 +185,13 @@ function BuildXML($mysqli,$data,$author)
 								$details .= '<DETAIL>'.$choice['DETAIL'].'</DETAIL>';
 								$feedbacks.='<FEEDBACK BUTTON="1" DETAIL="'.$choicei.'" GRADE="'.$choice['GRADE'].'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>';
 							}
-							$pageXML = $details.$feedbacks
+							$innerXML = makeQuestionTextXML($pageText)
+								. $details.$feedbacks
 								.( ($pageFeedback != "") ? ('<FEEDBACK>'.$pageFeedback.'</FEEDBACK>') : '');
-							$pageXML='<PAGE ID="'.$pageName.'" TYPE="Multiple Choice" STYLE="Choose List" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'
-							.'<QUESTION ALIGN="AUTO">'.$pageText.'</QUESTION>'.$pageXML.'</PAGE>';
+							$pageXML=makePageXML($pageName,"Multiple Choice","Choose List",$nextPage,$innerXML);
 							break;
+						
+						
 						default:
 							// Should not get here.
 					}
@@ -154,6 +199,9 @@ function BuildXML($mysqli,$data,$author)
 				}
 			}
 		}				
+	}
+	if ($hasConclusion){
+		$xml .= makePageXML('Conclusion','Book Page','','Contents',makeQuestionTextXML($pageConclusionText));
 	}
 
 	$xml = '<?xml version="1.0" ?><BOOK>'.$xml.'</BOOK>';
