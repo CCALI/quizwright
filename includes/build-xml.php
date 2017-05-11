@@ -40,11 +40,12 @@ function BuildXML($mysqli,$data,$author)
 		
 	$info=array(
 		'TITLE'=>htmlspecialchars($data['title']),
+		'VERSION'=> date("Y-m-d H:i:s"),
+		'GENERATOR'=>'QW', // QuizWright
 		'SUBJECTAREA'=>htmlspecialchars($data['subjectarea']),
-		'DESCRIPTION'=> ( $description),
 		'COMPLETIONTIME'=>htmlspecialchars($data['completiontime']),
-		'NOTES'=>'Book automatically created by QuizWright'
-		
+		'NOTES'=>'Book automatically created by QuizWright',
+		'DESCRIPTION'=> ( $description)
 		);
 	$xml.='<INFO>';
 	foreach ($info as $key=>$value) $xml.='<'.$key.'>'. $value .'</'.$key.'>';
