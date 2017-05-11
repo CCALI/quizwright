@@ -52,6 +52,13 @@
             </div>
         </div>
         
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="page">Feedback (Optional)</label>
+
+            <div class="col-sm-8">
+                <textarea name="page-feedback"  class="form-control"></textarea>
+            </div>
+        </div>
         <!-- Button -->
 
         <div class="form-group">
