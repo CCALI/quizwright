@@ -41,6 +41,14 @@
                 <textarea name="page-feedback"  class="form-control"></textarea>
             </div>
         </div>
+		  
+		   
+        <!-- Optional extra page information -->
+ <div class="nav-stacked form-group">
+                <div class="nav-header ">
+						<a href="#" data-toggle="collapse" data-target="#page-extra">More <i class="glyphicon glyphicon-chevron-right"></i></a>
+                    <div class="nav nav-stacked collapse " id="page-extra">
+							
 		   <div class="form-group">
             <label class="col-sm-2 control-label" for="page-topic">Topic Area</label>
  
@@ -55,7 +63,16 @@
 		      <input id="page-attribution" name="page-attribution" placeholder="" class="form-control" type="text" value="">
             </div>
         </div>
-			        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="page">Teacher Notes (Optional)</label>
+
+            <div class="col-sm-8">
+                <textarea name="page-notes"  class="form-control"></textarea>
+            </div>
+        </div>
+		  
+						  </div></div> </div></div> 
+						  
         <!-- Button -->
 
         <div class="form-group">
@@ -79,6 +96,11 @@
 
 
 <script>
+$('[data-toggle=collapse]').unbind().click(function(){
+	// toggle icon
+	$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
+});
+
 loadCALITopics($('#page-topic'));
 $('#page-submit').click(function(){ // Save page let author add new page
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {

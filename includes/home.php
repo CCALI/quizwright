@@ -77,8 +77,9 @@
 
             <ul class="nav nav-pills nav-stacked">
                 <li class="nav-header"></li>
-                <li><a href="#"><i class="glyphicon glyphicon-list"></i> This is a list</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> of things </a></li>
+					 <li  > <a id="question-list-public" href="#"><i class="glyphicon glyphicon-list"></i> Question Library</a></li>
+					<li><a href="#"><i class="glyphicon glyphicon-list"></i> This is a list</a></li>
+					<li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> of things </a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-link"></i>to assist</a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> teachers</a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-book"></i> creating</a></li>

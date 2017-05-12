@@ -31,6 +31,12 @@ $("#quiz-list").click(function(){
 	$("#main-panel").load("./includes/quiz-list.php"); 
 });
 
+$("#question-list").click(function(){
+	$("#main-panel").load("./includes/question-list.php"); 
+});
+$("#question-list-public").click(function(){
+	$("#main-panel").load("./includes/question-list-public.php"); 
+});
 $("#profile-edit, #author-edit").click(function(){
 	$("#main-panel").load("./includes/profile.php"); 
 });
