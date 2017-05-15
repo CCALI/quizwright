@@ -1,34 +1,36 @@
 <!-- List quiz questions written by author -->
 <form class="form-horizontal" id="pages-add-form" method="post">
     <fieldset>
-    <legend>My Questions</legend> 
+    <legend>Shared Questions</legend> 
 
 	<div class="panel panel-default">
 
 	<!-- Default panel contents -->
-	<div class="panel-heading">These are all of my questions</div>
+	<div class="panel-heading">These are questions publicly shared by the QuizWright community. </div>
 	<!-- Table -->
 	<table class="table table-striped table-condensed">
-		<tr><th>Question</th><th>Edit</th><th>Topic</th><th>Author</th><th>Quizzes</th><th>Shares</th><th>ID#</th></tr>
+		<tr><th>Question</th><th>Copy</th><th>Topic</th><th>Author</th><th>Quizzes</th><th>Shares</th><th>ID#</th></tr>
 <?php
 require ("user-session.php");
 
-// List author's pages that are not assigned to a lesson
-$sql = "SELECT * FROM `page` WHERE uid = '$uid' ";
+// TODO List all publicly shared pages 
+$sql = "select page.pid,people.uid,page.data, people.profile from page, people where page.uid = people.uid and   1=1";
 if ($result = $mysqli->query($sql)) {
 	while ($row = $result->fetch_assoc())
 	{
 		$page = json_decode($row['data'], TRUE);
+		$author = json_decode($row['profile'], TRUE);
 		$pid = $row['pid'];
 		$pageText = $page['page-question'];
-		$pageTopic = $page['page-topic'];		
+		$pageTopic = $page['page-topic'];
+		$pageAuthor = $author['authorfullname'];
 		?> 
 			
 		<tr  >
 			<td ><a  class="ellipsis page-detail" href="./includes/page-detail.php?pid=<?=$pid?>"> <?=$pageText?></a><div class="details"></div></td>
-			<td><a title="TODO" xhref="./includes/todo-detail.php?pid=<?=$pid?>">[Edit]</td>
+			<td><a title="TODO" xhref="./includes/todo-detail.php?pid=<?=$pid?>">[Copy]</td>
 			<td nowrap> <?=$pageTopic?></td>
-			<td> Me </td>
+			<td nowrap> <?=$pageAuthor?> </td>
 			<td> - </td>
 			<td> - </td>
 			<td><?=$pid?></td>

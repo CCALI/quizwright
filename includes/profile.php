@@ -4,10 +4,10 @@
 
 require ("user-session.php");
 
-$sql = "SELECT data FROM `people` WHERE uid = '$uid'";
+$sql = "SELECT profile FROM `people` WHERE uid = '$uid'";
 if ($result = $mysqli->query($sql)) {
 	 while ($row = $result->fetch_assoc()) {
-        $data = json_decode($row['data'], TRUE); 
+        $data = json_decode($row['profile'], TRUE); 
 		  ?> 
  
 

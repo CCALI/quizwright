@@ -23,7 +23,7 @@ $data['subjectarea']='';
 $data['calidescription']='';
 $data['completiontime']='20 minutes';
 
-// Grab author's most recent lesson info for this new lesson.
+// Grab author's most recent lesson info for this new lesson to act as defaults to avoid repeated typing.
 $sql = "SELECT * FROM `info` WHERE uid = '$uid' order by lid desc limit 1";
 if ($result = $mysqli->query($sql))
 {
@@ -78,6 +78,20 @@ if ($result = $mysqli->query($sql))
   </div>
 </div>
 
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="calidescription">Introduction page (optional)</label>
+  <div class="col-sm-8">                     
+    <textarea id="quiz-intro" name="quiz-intro" class="form-control"><?=$data['quiz-intro']?></textarea>
+  </div>
+</div>
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-sm-2 control-label" for="calidescription">Conclusion page (optional)</label>
+  <div class="col-sm-8">                     
+    <textarea id="quiz-conclusion" name="quiz-conclusion" class="form-control"><?=$data['quiz-conclusion']?></textarea>
+  </div>
+</div>
 
 
 <!-- Button -->
