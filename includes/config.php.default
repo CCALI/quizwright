@@ -26,4 +26,7 @@ $umysqli = new mysqli(UDB_HOST,UDB_USER,UDB_PASSWORD,UDB_NAME);
 
 //full URL of your site
 define('SITE_URL', 'http://where.is.my.site/')
+
+//where to publish quizzes
+define('PUBLISH_URL','http://where.is.my.publish.endpoint/')
 ?>
