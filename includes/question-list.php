@@ -26,7 +26,7 @@ if ($result = $mysqli->query($sql)) {
 			
 		<tr  >
 			<td ><a  class="ellipsis page-detail" href="./includes/page-detail.php?pid=<?=$pid?>"> <?=$pageText?></a><div class="details"></div></td>
-			<td><a title="TODO" xhref="./includes/todo-detail.php?pid=<?=$pid?>">[Edit]</td>
+			<td><a class="page-edit glyphicon glyphicon-pencil" href="./includes/page-quiz-edit.php?pid=<?=$pid?>">Edit</td>
 			<td nowrap> <?=$pageTopic?></td>
 			<td> Me </td>
 			<td> - </td>
@@ -47,8 +47,14 @@ if ($result = $mysqli->query($sql)) {
 
 
 <script> 
+$('.page-edit').click(function(){ // Edit inline 
+	var details=$(this).closest('tr').find('.details');
+	$(details).load($(this).attr('href'));
+	//$("#main-panel").load('./includes/question-list.php');//$(this).attr('href'));
+	return false;
+});
 $('.page-detail').click(function(){ // Load details of question into row
-	var details=$(this).closest('td').find('.details');
+	var details=$(this).closest('tr').find('.details');
 	$.post($(this).attr('href'),'' ,function( html ) {
 		$(details).html(html); 
 	});

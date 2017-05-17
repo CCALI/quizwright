@@ -8,7 +8,7 @@ $data =  str_replace ('\'','\\u0027',json_encode($_POST)); // Encode ' to avoid 
 $pid = $_POST['pid'];
 if (!isset($pid))
 {	// No ID? Must be a brand new page.
-	if ($_POST['page-question'] != '')
+	if ($_POST['page-type'] != '')
 	{
 		//$stmt = mysqli_prepare($mysqli, "INSERT INTO page (uid,data) VALUES (?,?)"); 
 		//mysqli_stmt_bind_param($stmt, "is", $uid, $data);

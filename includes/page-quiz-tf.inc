@@ -101,17 +101,17 @@ $('[data-toggle=collapse]').unbind().click(function(){
 	$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
 });
 
-loadCALITopics($('#page-topic'));
+cawLoadCALITopics($('#page-topic'));
 $('#page-submit').click(function(){ // Save page let author add new page
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
-		console.log(data);
+		//console.log(data);
 		$("#main-panel").load("./includes/page-quiz.inc"); 
 	});
 	return false;
 });
 $('#page-submit-prepare').click(function(){ // Save page let author prepare quiz
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
-		console.log(data);
+		//console.log(data);
 		$("#main-panel").load("./includes/quiz-prep-pages.php"); 
 	});
 	return false;

@@ -27,7 +27,10 @@ function pageDetailHTML($page)
 		
 		case 'quiz-tf':	// True/false 
 			$istrue = $page['true-is-correct']=='true';
-			$html.='<tr><td>Type</td><td>True/False : '.$istrue.'</td></tr>';
+			
+			$html.='<tr><td>Type</td><td>'
+				. ($istrue ?  '<span class="correct">True</span>/False' : 'True/<span class="correct">False</span>')
+				.'</td></tr>';
 			break;
 		
 		case 'Quiz':	// Multiple choice: 1 correct, 1-N wrong.
