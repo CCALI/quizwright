@@ -16,6 +16,7 @@ if ($result = $mysqli->query($sql))
 		?>
 		<ul>
 			<li>Title: <?=$data['title']?></li>
+			<li>Description: <?=$data['calidescription']?></li>
 			<li><?=$numPages?> Questions</li>
 			
 			<?php
@@ -29,8 +30,7 @@ if ($result = $mysqli->query($sql))
 						if ($row = $result->fetch_assoc())
 						{
 							// Check page type so we get accurate detail (but as of 3/2017 there are all quiz type)
-							$page = json_decode($row['data'], TRUE);
-							//var_dump($page);
+							$page = json_decode($row['data'] , TRUE);
 							$pagetype = $page['page-type'];
 							echo '<li>#'.$pid.': '.$page['page-question'];
 							switch ($pagetype)
@@ -69,13 +69,15 @@ if ($result = $mysqli->query($sql))
   <div class="col-sm-3 control-label" for="submit">Ready to give the quiz?</div>
   <div class="col-sm-8">
     <li id="quiz-publish"   class="btn btn-primary">Publish Quiz</li>
+    <li id="quiz-page-order"   class="btn btn-primary">Change Questions</li>
+    <li id="quiz-info-edit"   class="btn btn-primary">Edit Description</li>
   </div>
 </div>
 
 
 
 <script>
-	$("#quiz-publish").click(function(){
-	$("#main-panel").load("./includes/quiz-publish.php?lid=<?php echo $lid;?>");
-});
+	$("#quiz-page-order").click(function(){$("#main-panel").load("./includes/quiz-page-order.php?lid=<?php echo $lid;?>");});
+	$("#quiz-info-edit").click(function(){$("#main-panel").load("./includes/quiz-info-edit.php?lid=<?php echo $lid;?>");});
+	$("#quiz-publish").click(function(){$("#main-panel").load("./includes/quiz-publish.php?lid=<?php echo $lid;?>");});
 </script>

@@ -43,11 +43,19 @@ $("#profile-edit, #author-edit").click(function(){
 
 
 });
+function cawSetRB(name,val){
+	val = val || false;
+	console.log('Set '+name+' to '+val+' from '+$('[name='+name+']').val());
+	$('[name='+name+'][value='+val+']').click();//("checked", true);
+	//console.log($('[name='+name+']').val());
+}
+function cawLoadCALITopics(selobj, defval)
+{	// Load's a SELECT with CALI Topics. to be later replaced with 3 column selector.
 
 // 05/11/2017 SJG List of CALI Topics for tagging questions. This is shared by all question forms so listed once here.
 // An option exists to load this list dynamically from database instead of hard coded.
 // Listed as 1L then 2L/3L. 
-var CALITopics = [
+var cawCALITopics = [
 "Not specified",
 "Civil Procedure",
 "Constitutional Law",
@@ -90,10 +98,12 @@ var CALITopics = [
 "Wills and Trusts"
 ];
 
-function loadCALITopics(selobj)
-{	// Load's a SELECT with CALI Topics. to be later replaced with 3 column selector.
 	$(selobj).empty();
-	$.each(CALITopics, function(i,obj) {$(selobj).append( $('<option></option>') .val(obj ) .html(obj ));});
+	$.each(cawCALITopics, function(i,obj) {$(selobj).append( $('<option></option>') .val(obj ) .html(obj ));});
+	if (defval) {
+		$(selobj).val(defval);
+	}
 }
+
 // Load JSON file into a SELECT list
 //function loadlist(selobj,url,nameattr){ $(selobj).empty(); $.getJSON(url,{},function(data) { $.each(data, function(i,obj) { $(selobj).append( $('<option></option>') .val(obj[nameattr]) .html(obj[nameattr])); }); }); }

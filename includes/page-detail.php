@@ -10,7 +10,8 @@ if ($result = $mysqli->query($sql))
 	if ($row = $result->fetch_assoc())
 	{
 		// Check page type so we get accurate detail (but as of 3/2017 there are all quiz type)
-		$page = json_decode($row['data'], TRUE);
+		$page = json_decode($row['data'] , TRUE );
+//		var_dump($page);
 		echo pageDetailHTML($page);
 	}
 }

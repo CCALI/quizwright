@@ -1,6 +1,5 @@
 <?php
 // 5/12/2017 Load quiz page for editing. Use page type to decide which editing template to use.
-error_reporting(E_ALL); 
 
 require ("user-session.php");
 $pid=intval($_GET["pid"]);

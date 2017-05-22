@@ -1,4 +1,4 @@
-<!-- List quiz questions written by author -->
+<!-- List quiz questions written by author independant of quiz -->
 <form class="form-horizontal" id="pages-add-form" method="post">
     <fieldset>
     <legend>My Questions</legend> 
