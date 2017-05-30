@@ -26,7 +26,7 @@ if ($result = $mysqli->query($sql))
 <div class="form-group">
   <label class="col-sm-2 control-label" for="title">Title</label>
   <div class="col-sm-8">
-    <input id="title" name="title" placeholder="My Quiz" class="form-control" type="text" value="<?=$data['title']?>">
+    <input id="title" name="title" placeholder="My Quiz" class="form-control" type="text" value="<?=htmlspecialchars($data['title'])?>">
     
   </div>
 </div>
