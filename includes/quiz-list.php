@@ -26,9 +26,9 @@ if ($result = $mysqli->query($sql))
 			<td><?=$lid?></td>
 			<td> <?=$data['title']?></td>
 			<td> <?=$data['calidescription']?></td>
-			<td> <?=$numPages?></td>
+			<td><a href="./includes/quiz-page-order.php?lid=<?=$lid?>"><?=$numPages?> +/-</td>
 			<td><a href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</td>
-			<td><a href="./includes/quiz-info-edit.php?lid=<?=$lid?>">Edit</td>
+			<td><a href="./includes/quiz-info-edit.php?lid=<?=$lid?>">Desc</td>
 			<td><a target=_blank href="./cav/web/preview/index.php?quiz=<?=$lid?>">Preview</a></td>
 			<td><a target=_blank href="./book-data-xml.php?lid=<?=$lid?>">XML</td>
 		</tr>
