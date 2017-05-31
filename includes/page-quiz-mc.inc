@@ -118,16 +118,18 @@
 
 <script>
 cawLoadCALITopics($('#page-topic'));
+cawCKEditor('page-question,page-feedback,page-notes');
+cawCKEditor('page-choice-correct-text,page-choice-wrong-1-text,page-choice-wrong-2-text,page-choice-wrong-3-text');
 $('#page-submit').click(function(){ // Save page let author add new page
+	cawCKEditorUpdates();
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
-		//console.log(data);
 		$("#main-panel").load("./includes/page-quiz.inc"); 
 	});
 	return false;
 });
 $('#page-submit-prepare').click(function(){ // Save page let author prepare quiz
+	cawCKEditorUpdates();
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
-		//console.log(data);
 		$("#main-panel").load("./includes/quiz-prep-pages.php"); 
 	});
 	return false;

@@ -12,7 +12,10 @@
 		Added: Incorporate optional feedback.
 		Added: Topic and attribution added to a page's NOTES section.
 		
-	TODO: questions arranged in author specified order
+	05/20/2017
+		Added: questions arranged in author specified order
+	05/31/2017
+		Fixed: CKEditor full HTML markup encoding
 */
 function makeQuestionTextXML($text)
 {	// 05/11/2017 SJG Helper function
@@ -27,16 +30,22 @@ function makePageXML($pageName,$pageType,$pageStyle,$nextPage,$innerXML)
 	return '<PAGE ID="'.$pageName.'" TYPE="'.$pageType.'" STYLE="'.$pageStyle.'" NEXTPAGE="'.$nextPage.'" NEXTPAGEDISABLED="False" SCORING="Totals" SORTNAME="'.$pageName.'">'.$innerXML.'</PAGE>';
 }
 
-
+function HTML2XML($str)
+{	// Convert HTML encoding (clean CKEditor HTML markup) into XML encodings.
+	$str = str_replace( array('&lt;','&gt;','&amp;'),array(chr(1),chr(2),chr(3)),$str); 
+	$str= html_entity_decode($str,0,'UTF-8');
+	$str = str_replace(array(chr(1),chr(2),chr(3)),array('&lt;','&gt;','&amp;'),$str); 
+	//$str = '<![CDATA['.$str.']]>'; Would be best but Viewer doesn't understand it.??
+	return $str;
+}
 function BuildXML($mysqli,$data,$author)
 {	// 03/02/2017 SJG $data is lesson $data block with meta info and page list.
 	$xml='';
-	
 	$description=
-		'<DIV>'.$data['calidescription'].'</DIV>'
-		.'<P>Approximate Completion Time: '. $data['completiontime']. '</P>'
+		'<DIV>'. HTML2XML($data['calidescription'] ).'</DIV>'
+		.'<P>Approximate Completion Time: '. htmlspecialchars($data['completiontime']). '</P>'
 		.'<BR /><BR />'
-		.'<DIV style="font-size: .8em">'. $data['title']
+		.'<DIV style="font-size: .8em">'.htmlspecialchars( $data['title'])
 		.'<BR />by '
 		.'<BR />'.$author['authorfullname']
 		.'<BR />'.$author['authortitle']
@@ -56,8 +65,8 @@ function BuildXML($mysqli,$data,$author)
 	foreach ($info as $key=>$value) $xml.='<'.$key.'>'. $value .'</'.$key.'>';
 	$xml.='</INFO>';	
 	// 05/11/2017 SJG Introduction and conclusion are optional, grab them and incorporate at the right spots.
-	$pageIntroText = $data['quiz-intro'];
-	$pageConclusionText = $data['quiz-conclusion'];
+	$pageIntroText = HTML2XML($data['quiz-intro']);
+	$pageConclusionText = HTML2XML($data['quiz-conclusion']);
 	$hasIntro = $pageIntroText != "";
 	$hasConclusion = $pageConclusionText != "";
 	
@@ -102,9 +111,9 @@ function BuildXML($mysqli,$data,$author)
 					$pageNum += 1;
 					$pageName = 'Question '.$pageNum;
 					$nextPage = ($pageNum < $numPages) ? ('Question '.($pageNum+1)) : ( $hasConclusion ? 'Conclusion' : 'Contents');
-					$pageText = $page['page-question'];
-					$pageFeedback =  $page['page-feedback'] ;
-					$pageNotes ='Topic: '. $page['page-topic'].' - Attribution: '.$page['page-attribution'];
+					$pageText = HTML2XML($page['page-question']);
+					$pageFeedback =  HTML2XML($page['page-feedback']);
+					$pageNotes =htmlspecialchars('Topic: '. $page['page-topic'].' - Attribution: '.$page['page-attribution']);
 					$pageXML=''; 
 					switch ($pagetype)
 					{
@@ -174,10 +183,10 @@ function BuildXML($mysqli,$data,$author)
 	</FEEDBACK>
 </PAGE>
 */							$choices=array(); // assemble feedbacks, which we will shuffle
-							$choices[] = array("DETAIL"=>$page['page-choice-correct-text'],"GRADE"=>"RIGHT");
+							$choices[] = array("DETAIL"=>HTML2XML($page['page-choice-correct-text']),"GRADE"=>"RIGHT");
 							for ($wrong=1;$wrong<=7;$wrong++)
 							{
-								$wrongText = $page['page-choice-wrong-'.$wrong.'-text'];
+								$wrongText = HTML2XML($page['page-choice-wrong-'.$wrong.'-text']);
 								if ($wrongText!=''){							
 									$choices[] = array("DETAIL"=>$wrongText,"GRADE"=>"WRONG");
 									}

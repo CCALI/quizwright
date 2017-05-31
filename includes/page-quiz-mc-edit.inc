@@ -38,4 +38,5 @@ $('[name=page-choice-correct-text]').text(data['page-choice-correct-text']);
 $('[name=page-choice-wrong-1-text]').text(data['page-choice-wrong-1-text']);
 $('[name=page-choice-wrong-2-text]').text(data['page-choice-wrong-2-text']);
 $('[name=page-choice-wrong-3-text]').text(data['page-choice-wrong-3-text']);
+cawCKEditor('page-choice-correct-text,page-choice-wrong-1-text,page-choice-wrong-2-text,page-choice-wrong-3-text');
 </script>

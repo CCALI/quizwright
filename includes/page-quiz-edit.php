@@ -112,14 +112,14 @@ $('[name=page-attribution]').val(data['page-attribution']);
 $('[name=page-notes]').text(data['page-notes']);
 cawLoadCALITopics($('#page-topic'),data['page-topic']);
 
+cawCKEditor('page-question,page-feedback,page-notes');
 $('[data-toggle=collapse]').unbind().click(function(){
 	// toggle icon
 	$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
 });
 $('#page-submit').click(function(){ // Save page let author add new page
+	cawCKEditorUpdates();
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
-		//console.log(data);
-		//$("#main-panel").load("./includes/page-quiz.inc");
 		$("#main-panel").load('./includes/question-list.php');//$(this).attr('href'));
 	});
 	return false;

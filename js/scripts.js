@@ -40,14 +40,30 @@ $("#question-list-public").click(function(){
 $("#profile-edit, #author-edit").click(function(){
 	$("#main-panel").load("./includes/profile.php"); 
 });
-
-
 });
-function cawSetRB(name,val){
+
+function cawCKEditor(names)
+{	// Convert QW TextAreas (comma separated form names) into CKEditor and use our special config.
+	names = names.split(",");
+	for (var i in names) {
+		name=names[i];
+		console.log(name);
+		CKEDITOR.replace( name, {
+			customConfig: '/caw/js/ckeditor_config.js'
+		} );
+	}
+}
+function cawCKEditorUpdates()
+{	// Ensure CK fields are AJAX/POST ready.
+	for ( instance in CKEDITOR.instances ){
+	    CKEDITOR.instances[instance].updateElement();
+	}
+}
+function cawSetRB(name,val)
+{	// Set radio button name to value val.
 	val = val || false;
-	console.log('Set '+name+' to '+val+' from '+$('[name='+name+']').val());
+	//console.log('Set '+name+' to '+val+' from '+$('[name='+name+']').val());
 	$('[name='+name+'][value='+val+']').click();//("checked", true);
-	//console.log($('[name='+name+']').val());
 }
 function cawLoadCALITopics(selobj, defval)
 {	// Load's a SELECT with CALI Topics. to be later replaced with 3 column selector.

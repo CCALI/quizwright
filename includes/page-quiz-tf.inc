@@ -14,7 +14,7 @@
             <label class="col-sm-2 control-label" for="page">Text of your question</label>
 
             <div class="col-sm-8">
-                <textarea name="page-question"  class="form-control"></textarea>
+                <textarea name="page-question" id="page-question" class="form-control"></textarea>
             </div>
         </div>
         
@@ -38,7 +38,7 @@
             <label class="col-sm-2 control-label" for="page">Feedback (Optional)</label>
 
             <div class="col-sm-8">
-                <textarea name="page-feedback"  class="form-control"></textarea>
+                <textarea name="page-feedback"  id="page-feedback" class="form-control"></textarea>
             </div>
         </div>
 		  
@@ -102,16 +102,17 @@ $('[data-toggle=collapse]').unbind().click(function(){
 });
 
 cawLoadCALITopics($('#page-topic'));
+cawCKEditor('page-question,page-feedback,page-notes');
 $('#page-submit').click(function(){ // Save page let author add new page
+	cawCKEditorUpdates();
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
-		//console.log(data);
 		$("#main-panel").load("./includes/page-quiz.inc"); 
 	});
 	return false;
 });
 $('#page-submit-prepare').click(function(){ // Save page let author prepare quiz
+	cawCKEditorUpdates();
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
-		//console.log(data);
 		$("#main-panel").load("./includes/quiz-prep-pages.php"); 
 	});
 	return false;
