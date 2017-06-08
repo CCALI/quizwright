@@ -80,14 +80,14 @@ if ($result = $mysqli->query($sql))
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-sm-2 control-label" for="calidescription">Introduction page (optional)</label>
+  <label class="col-sm-2 control-label" for="quiz-intro">Introduction page (optional)</label>
   <div class="col-sm-8">                     
     <textarea id="quiz-intro" name="quiz-intro" class="form-control"><?=$data['quiz-intro']?></textarea>
   </div>
 </div>
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-sm-2 control-label" for="calidescription">Conclusion page (optional)</label>
+  <label class="col-sm-2 control-label" for="quiz-conclusion">Conclusion page (optional)</label>
   <div class="col-sm-8">                     
     <textarea id="quiz-conclusion" name="quiz-conclusion" class="form-control"><?=$data['quiz-conclusion']?></textarea>
   </div>
@@ -112,7 +112,9 @@ if ($result = $mysqli->query($sql))
 
 
 <script> 
+cawCKEditor('calidescription,quiz-intro,quiz-conclusion');
 $("#quiz-update-submit").click(function(){ // Save quiz. 
+	cawCKEditorUpdates();
 	$.post( "./includes/quiz-create.php", $( "#quiz-info-form" ).serialize() ,function( data ) {
 		$("#main-panel").load("./includes/quiz-detail.php?lid="+data.lid); 
 	},'json');
