@@ -1,0 +1,6 @@
+version: 0.1
+os: linux
+files:
+  - source: /caw-quiz-wright
+    destination: /vol/data/drupal7-cali/quizwright
+    
