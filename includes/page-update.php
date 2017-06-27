@@ -14,6 +14,7 @@ if (!isset($pid))
 		$stmt = mysqli_prepare($mysqli, "INSERT INTO page (uid,data) VALUES (?,?)"); 
 		mysqli_stmt_bind_param($stmt, "is", $uid, $data);
 		mysqli_stmt_execute($stmt);
+		printf("Error: %s.\n", mysqli_stmt_error($stmt));
 		$result=mysqli_connect_error();
 		//$SQL="INSERT INTO page (uid,data) VALUES ( $uid,'$data')";
 		//$mysqli->query($SQL);
