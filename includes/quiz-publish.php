@@ -20,12 +20,12 @@ if ($result = $mysqli->query($SQL))
 		$jqbookdata = BuildXML($mysqli,$data,$profile);
 		
 		//some CURL stuff
-		$URL = "https://d7.calidev.org/autopublish/upload";
+		//$URL = "https://d7.calidev.org/autopublish/upload";
 
     //setting the curl parameters.
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL,$URL);
+    curl_setopt($ch, CURLOPT_URL,PUBLISH_URL);
     curl_setopt($ch, CURLOPT_VERBOSE, 1);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
