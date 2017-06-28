@@ -1,6 +1,7 @@
 <?php
 	// TODO return JSON package and let client do filtering. echo '<script>var pages='.json_encode($pages).'</script>';
 	require ("user-session.php");
+	require ("utility.php");
 ?>
 <!-- List all pages for author to assign to quiz, option to filter -->
 <form class="form-horizontal" id="pages-add-form" method="post">
@@ -44,7 +45,7 @@ if ($result = $mysqli->query($sql))
 	{
 		$pid =intval($row['pid']);
 		$page = json_decode($row['data'], TRUE);
-		$pages[$pid]=array('text'=>$page['page-question'],'lessons'=>array());
+		$pages[$pid]=array('text'=>compactQuestionDescription($page) ,'lessons'=>array());
 	}
 }
 
@@ -77,7 +78,7 @@ foreach ($pages as $pid => &$page)
 ?>
 	 <li class="<?=$assigned?>">
 		 <label class="btn btn-primary active">
-			 <input type="checkbox" autocomplete="off" name="<?=$pid?>"  > <?=$page['text']?> (<?=$page['lessons']?>)
+			 <input type="checkbox" autocomplete="off" name="<?=$pid?>"  > <?=$page['text']?> (Used by <?=$page['lessons']?> quizzes)
 		 </label>
 	 </li>			 
  <?php 

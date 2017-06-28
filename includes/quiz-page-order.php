@@ -8,6 +8,7 @@
 	 	 <ul id="sortable"> 
 <?php
 require ("user-session.php");
+require ("utility.php");
 $lid = intval($_REQUEST['lid']);
 $sql = "SELECT * FROM `info` WHERE uid = '$uid' and lid = $lid";
 if ($result = $mysqli->query($sql))
@@ -27,12 +28,10 @@ if ($result = $mysqli->query($sql))
 					{
 						// Check page type so we get accurate detail (but as of 3/2017 there are all quiz type)
 						$page = json_decode($row['data'], TRUE);
-						//var_dump($page);
-						$pagetype = $page['page-type'];
 						?>
 						<li>
 							<label class="btn btn-primary active">
-								<input type="checkbox" autocomplete="off" name="<?=$pid?>" checked > <?=$page['page-question']?>  
+								<input type="checkbox" autocomplete="off" name="<?=$pid?>" checked > <?=compactQuestionDescription($page)?>
 							</label>
 						</li>
 						<?php

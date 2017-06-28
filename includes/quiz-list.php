@@ -13,6 +13,8 @@
 <?php
 //error_reporting(E_ALL); 
 require ("user-session.php");
+require ("utility.php");
+
 $sql = "SELECT * FROM `info` WHERE uid = '$uid'";
 if ($result = $mysqli->query($sql))
 {
@@ -25,7 +27,7 @@ if ($result = $mysqli->query($sql))
 		<tr>
 			<td><?=$lid?></td>
 			<td> <?=$data['title']?></td>
-			<td> <?=$data['calidescription']?></td>
+			<td> <?=oneLinerHTML($data['calidescription'])?></td>
 			<td><a href="./includes/quiz-page-order.php?lid=<?=$lid?>"><?=$numPages?> +/-</td>
 			<td><a href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</td>
 			<td><a href="./includes/quiz-info-edit.php?lid=<?=$lid?>">Desc</td>

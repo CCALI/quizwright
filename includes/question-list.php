@@ -12,6 +12,7 @@
 		<tr><th>Question</th><th>Edit</th><th>Topic</th><th>Author</th><th>Quizzes</th><th>Shares</th><th>ID#</th></tr>
 <?php
 require ("user-session.php");
+require ("utility.php");
 
 // List author's pages that are not assigned to a lesson
 $sql = "SELECT * FROM `page` WHERE uid = '$uid' ";
@@ -20,12 +21,12 @@ if ($result = $mysqli->query($sql)) {
 	{
 		$page = json_decode($row['data'], TRUE);
 		$pid = $row['pid'];
-		$pageText = $page['page-question'];
+		//$pageText = $page['page-question'];
 		$pageTopic = $page['page-topic'];		
 		?> 
 			
 		<tr  >
-			<td ><a  class="ellipsis page-detail" href="./includes/page-detail.php?pid=<?=$pid?>"> <?=$pageText?></a><div class="details"></div></td>
+			<td ><a  class=" page-detail" href="./includes/page-detail.php?pid=<?=$pid?>"> <?=compactQuestionDescription($page) ?></a><div class="details"></div></td>
 			<td><a class="page-edit glyphicon glyphicon-pencil" href="./includes/page-quiz-edit.php?pid=<?=$pid?>">Edit</td>
 			<td nowrap> <?=$pageTopic?></td>
 			<td> Me </td>
