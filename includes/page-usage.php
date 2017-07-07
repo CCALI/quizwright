@@ -1,6 +1,6 @@
 <h1>Page Usage Stats</h1>
 <?php
-// 05/19/2017 Gather usage info for all pages
+// 05/19/2017 Gather usage info for all pages as debugging aid
 //	This page is mainly a dev tool to understand how data structures link. 
 // For each topic: Pages assigned to the topic, authors using that topic
 // For each quiz: Pages assigned to it, authors using it
@@ -41,14 +41,17 @@ if ($result = $mysqli->query($sql))
 		$aid = $row['uid'];
 		$lesson = json_decode($row['data'], TRUE);
 		$lessons[$lid]=array('public'=>'','aid'=>$aid,'pages'=>array());
-		foreach ($lesson['pages'] as $pid)
-		{	// It's possible for quiz to refer to deleted page. 
-			if (isset($pages[$pid]))
-			{
-				//$pages[$pid]['public']='deleted';
-				$pages[$pid]['lesson'][$lid]=1;
-				$pages[$pid]['users'][$aid]=1;
-				$lessons[$lid]['pages'][] = $pid;
+		if (isset($lesson['pages']))
+		{
+			foreach ($lesson['pages'] as $pid)
+			{	// It's possible for quiz to refer to deleted page. 
+				if (isset($pages[$pid]))
+				{
+					//$pages[$pid]['public']='deleted';
+					$pages[$pid]['lesson'][$lid]=1;
+					$pages[$pid]['users'][$aid]=1;
+					$lessons[$lid]['pages'][] = $pid;
+				}
 			}
 		}
 	}
