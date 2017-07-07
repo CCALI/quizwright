@@ -9,7 +9,7 @@
 	<div class="panel-heading">These are all of my questions</div>
 	<!-- Table -->
 	<table class="table table-striped table-condensed">
-		<tr><th>Question</th><th>Edit</th><th>Topic</th><th>Author</th><th>Quizzes</th><th>Shares</th><th>ID#</th></tr>
+		<tr><th>Question</th><th>Edit</th><th>Topic</th><th>Author</th><th>Quizzes</th><!--<th>Shares</th>--><th>ID#</th></tr>
 <?php
 require ("user-session.php");
 require ("utility.php");
@@ -82,7 +82,7 @@ foreach ($pages as $pid => $page)
 		  <td> <button type="button" class="btn" data-toggle="popover" title="Quizzes using this question"  data-placement="left"
 							data-trigger="hover" data-html="true" data-content="<?=$lesson_info?>">
 		  <?=$lesson_count?></button> </td>
-		  <td> - </td>
+		  <!-- <td> - </td> -->
 		  <td><?=$pid?></td>
 	  </tr>
 			
