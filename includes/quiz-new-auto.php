@@ -21,20 +21,9 @@ $pages=join(',',$pages);
 $data['title']='My Quiz';
 $data['subjectarea']='';
 $data['calidescription']='';
-$data['completiontime']='20 minutes';
+$data['completiontime']='';	//'20 minutes';
 
-// Grab author's most recent lesson info for this new lesson to act as defaults to avoid repeated typing.
-$sql = "SELECT * FROM `info` WHERE uid = '$uid' order by lid desc limit 1";
-if ($result = $mysqli->query($sql))
-{
-	while ($row = $result->fetch_assoc())
-	{
-		$data = json_decode($row['data'], TRUE);
-	}
-}
-?> 
- 
-
+?>
 
 <form class="form-horizontal" id="quiz-info-form" method="post">
 <fieldset>
@@ -47,7 +36,7 @@ if ($result = $mysqli->query($sql))
 <div class="form-group">
   <label class="col-sm-2 control-label" for="title">Title</label>
   <div class="col-sm-8">
-    <input id="title" name="title" placeholder="My Quiz" class="form-control" type="text" value="<?=$data['title']?>">
+    <input id="title" name="title" placeholder="My Quiz" class="form-control" type="text" value="My Quiz" >
     
   </div>
 </div>
@@ -56,7 +45,7 @@ if ($result = $mysqli->query($sql))
 <div class="form-group">
   <label class="col-sm-2 control-label" for="subjectarea">Subject Area</label>
   <div class="col-sm-8">
-    <input id="subjectarea" name="subjectarea" placeholder="Contracts" class="form-control" type="text" value="<?=$data['subjectarea']?>">
+    <input id="subjectarea" name="subjectarea" placeholder="" class="form-control" type="text" value="<?=$data['subjectarea']?>">
     
   </div>
 </div>
@@ -65,7 +54,7 @@ if ($result = $mysqli->query($sql))
 <div class="form-group">
   <label class="col-sm-2 control-label" for="calidescription">Brief Description</label>
   <div class="col-sm-8">                     
-    <textarea id="calidescription" name="calidescription" class="form-control"><?=$data['calidescription']?></textarea>
+    <textarea id="calidescription" name="calidescription" class="form-control">  </textarea>
   </div>
 </div>
 
@@ -73,7 +62,7 @@ if ($result = $mysqli->query($sql))
 <div class="form-group">
   <label class="col-sm-2 control-label" for="completiontime">Est. Completion Time</label>
   <div class="col-sm-8">
-    <input id="completiontime" name="completiontime" placeholder="20 minutes" class="form-control" type="text" value="<?=$data['completiontime']?>">
+    <input id="completiontime" name="completiontime" placeholder="20 minutes" class="form-control" type="text" value="20 Minutes">
     
   </div>
 </div>
@@ -82,14 +71,14 @@ if ($result = $mysqli->query($sql))
 <div class="form-group">
   <label class="col-sm-2 control-label" for="quiz-intro">Introduction page (optional)</label>
   <div class="col-sm-8">                     
-    <textarea id="quiz-intro" name="quiz-intro" class="form-control"><?=$data['quiz-intro']?></textarea>
+    <textarea id="quiz-intro" name="quiz-intro" class="form-control"> </textarea>
   </div>
 </div>
 <!-- Textarea -->
 <div class="form-group">
   <label class="col-sm-2 control-label" for="quiz-conclusion">Conclusion page (optional)</label>
   <div class="col-sm-8">                     
-    <textarea id="quiz-conclusion" name="quiz-conclusion" class="form-control"><?=$data['quiz-conclusion']?></textarea>
+    <textarea id="quiz-conclusion" name="quiz-conclusion" class="form-control"> </textarea>
   </div>
 </div>
 
@@ -116,7 +105,8 @@ cawCKEditor('calidescription,quiz-intro,quiz-conclusion');
 $("#quiz-update-submit").click(function(){ // Save quiz. 
 	cawCKEditorUpdates();
 	$.post( "./includes/quiz-create.php", $( "#quiz-info-form" ).serialize() ,function( data ) {
-		$("#main-panel").load("./includes/quiz-detail.php?lid="+data.lid); 
+		$("#main-panel").load("./includes/quiz-detail.php?lid="+data.lid);
+		window.scrollTo(0, 0);
 	},'json');
 	return false;
 });

@@ -91,7 +91,8 @@ cawCKEditor('calidescription,quiz-intro,quiz-conclusion');
 $("#quiz-update-submit").click(function(){ // Save quiz. 
 	cawCKEditorUpdates();
 	$.post( "./includes/quiz-info-update.php", $( "#quiz-info-form" ).serialize() ,function( data ) {
-		$("#main-panel").load("./includes/quiz-detail.php?lid="+data.lid); 
+		$("#main-panel").load("./includes/quiz-detail.php?lid="+data.lid);
+		window.scrollTo(0, 0);
 	},'json');
 	return false;
 });
