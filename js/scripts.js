@@ -49,7 +49,7 @@ function cawCKEditor(names)
 		name=names[i];
 		console.log(name);
 		CKEDITOR.replace( name, {
-			customConfig: '/caw/js/ckeditor_config.js'
+			customConfig: '/quizwright/js/ckeditor_config.js'
 		} );
 	}
 }
