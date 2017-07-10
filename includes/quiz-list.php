@@ -9,25 +9,28 @@
 	<div class="panel-heading">Quizzes</div>
 	<!-- Table -->
 	<table class="table">
-		<tr><th>ID#</th><th>Title</th><th>Description</th><th>Questions</th></tr>
+		<tr><th>ID#</th><th>Title</th><th>Description</th><th>Questions</th><th>Publish</th><th>Description</th><th></th><th></th></tr>
 <?php
+//error_reporting(E_ALL); 
 require ("user-session.php");
+require ("utility.php");
+
 $sql = "SELECT * FROM `info` WHERE uid = '$uid'";
 if ($result = $mysqli->query($sql))
 {
 	while ($row = $result->fetch_assoc())
 	{
-		$data = json_decode($row['data'], TRUE);
 		$lid=$row['lid'];
-		$numPages = count($data['pages']); // .pages is array of pid's, order matches lesson order.
+		$data = json_decode($row['data'], TRUE);
+		$numPages=count($data['pages']); 
 		?>
 		<tr>
 			<td><?=$lid?></td>
 			<td> <?=$data['title']?></td>
-			<td> <?=$data['calidescription']?></td>
-			<td> <?=$numPages?></td>
+			<td> <?=oneLinerHTML($data['calidescription'])?></td>
+			<td><a href="./includes/quiz-page-order.php?lid=<?=$lid?>"><?=$numPages?> +/-</td>
 			<td><a href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</td>
-			<td>Edit</td>
+			<td><a href="./includes/quiz-info-edit.php?lid=<?=$lid?>">Desc</td>
 			<td><a target=_blank href="./cav/web/preview/index.php?quiz=<?=$lid?>">Preview</a></td>
 			<td><a target=_blank href="./book-data-xml.php?lid=<?=$lid?>">XML</td>
 		</tr>

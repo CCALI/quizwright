@@ -68,3 +68,18 @@ footer {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.correct {
+  color: green;
+}
+.wrong {
+  color: red;
+}
+
+
+.ellipsis {
+	display: block;
+	width: 25em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}

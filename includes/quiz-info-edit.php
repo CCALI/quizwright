@@ -1,42 +1,32 @@
-<!-- Lesson Information form filled from recent existing lesson -->
-
+<!-- Revising lesson information  -->
 <?php
-// 3/2/2017 Build final form with initial pages and quiz info to fill in. 
+// 05/19/2017 Revise lesson's information.
 require ("user-session.php");
 
-// Build list of desired pages, include on the final publish form.
-$pages=array();
-foreach ($_POST as $key => $value)
+$lid = intval($_REQUEST['lid']);
+
+$sql = "SELECT * FROM `info` WHERE lid = $lid and uid = $uid";
+if ($result = $mysqli->query($sql))
 {
-	$pid = intval($key);
-	if ($value=='on' && $pid>0)
+	if ($row = $result->fetch_assoc())
 	{
-		 array_push($pages,$pid);
-	} 
+		$data = json_decode($row['data'], TRUE);
+	}
 }
-$pages=join(',',$pages);
+?> 
 
-  
-// Default quiz info (overridden with author's most recent quiz)
-$data['title']='My Quiz';
-$data['subjectarea']='';
-$data['calidescription']='';
-$data['completiontime']='';	//'20 minutes';
-
-?>
 
 <form class="form-horizontal" id="quiz-info-form" method="post">
 <fieldset>
 
 <!-- Form Name -->
 <legend>Quiz Information</legend>
-<input type="hidden" name="pages" value="<?=$pages?>" />
 
 <!-- Text input-->
 <div class="form-group">
   <label class="col-sm-2 control-label" for="title">Title</label>
   <div class="col-sm-8">
-    <input id="title" name="title" placeholder="My Quiz" class="form-control" type="text" value="My Quiz" >
+    <input id="title" name="title" placeholder="My Quiz" class="form-control" type="text" value="<?=htmlspecialchars($data['title'])?>">
     
   </div>
 </div>
@@ -45,7 +35,7 @@ $data['completiontime']='';	//'20 minutes';
 <div class="form-group">
   <label class="col-sm-2 control-label" for="subjectarea">Subject Area</label>
   <div class="col-sm-8">
-    <input id="subjectarea" name="subjectarea" placeholder="" class="form-control" type="text" value="<?=$data['subjectarea']?>">
+    <input id="subjectarea" name="subjectarea" placeholder="Contracts" class="form-control" type="text" value="<?=$data['subjectarea']?>">
     
   </div>
 </div>
@@ -54,7 +44,7 @@ $data['completiontime']='';	//'20 minutes';
 <div class="form-group">
   <label class="col-sm-2 control-label" for="calidescription">Brief Description</label>
   <div class="col-sm-8">                     
-    <textarea id="calidescription" name="calidescription" class="form-control">  </textarea>
+    <textarea id="calidescription" name="calidescription" class="form-control"><?=$data['calidescription']?></textarea>
   </div>
 </div>
 
@@ -62,7 +52,7 @@ $data['completiontime']='';	//'20 minutes';
 <div class="form-group">
   <label class="col-sm-2 control-label" for="completiontime">Est. Completion Time</label>
   <div class="col-sm-8">
-    <input id="completiontime" name="completiontime" placeholder="20 minutes" class="form-control" type="text" value="20 Minutes">
+    <input id="completiontime" name="completiontime" placeholder="20 minutes" class="form-control" type="text" value="<?=$data['completiontime']?>">
     
   </div>
 </div>
@@ -71,23 +61,23 @@ $data['completiontime']='';	//'20 minutes';
 <div class="form-group">
   <label class="col-sm-2 control-label" for="quiz-intro">Introduction page (optional)</label>
   <div class="col-sm-8">                     
-    <textarea id="quiz-intro" name="quiz-intro" class="form-control"> </textarea>
+    <textarea id="quiz-intro" name="quiz-intro" class="form-control"><?=$data['quiz-intro']?></textarea>
   </div>
 </div>
 <!-- Textarea -->
 <div class="form-group">
   <label class="col-sm-2 control-label" for="quiz-conclusion">Conclusion page (optional)</label>
   <div class="col-sm-8">                     
-    <textarea id="quiz-conclusion" name="quiz-conclusion" class="form-control"> </textarea>
+    <textarea id="quiz-conclusion" name="quiz-conclusion" class="form-control"><?=$data['quiz-conclusion']?></textarea>
   </div>
 </div>
-
+<input type=hidden name="lid" value="<?=$lid?>" />
 
 <!-- Button -->
 <div class="form-group">
   <label class="col-sm-2 control-label" for="submit">All done?</label>
   <div class="col-sm-8">
-    <button id="quiz-update-submit"   class="btn btn-primary">Save Quiz</button>
+    <button id="quiz-update-submit"   class="btn btn-primary">Update</button>
   </div>
 </div>
 
@@ -96,15 +86,11 @@ $data['completiontime']='';	//'20 minutes';
 
 
 
-
-
-
-
-<script> 
+<script>
 cawCKEditor('calidescription,quiz-intro,quiz-conclusion');
 $("#quiz-update-submit").click(function(){ // Save quiz. 
 	cawCKEditorUpdates();
-	$.post( "./includes/quiz-create.php", $( "#quiz-info-form" ).serialize() ,function( data ) {
+	$.post( "./includes/quiz-info-update.php", $( "#quiz-info-form" ).serialize() ,function( data ) {
 		$("#main-panel").load("./includes/quiz-detail.php?lid="+data.lid);
 		window.scrollTo(0, 0);
 	},'json');

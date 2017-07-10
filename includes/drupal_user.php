@@ -53,7 +53,7 @@ $user = htmlspecialchars($_GET['u']);
 					// 2: if not add to people table
 					// let's stash the drupal user object in the people table.
 					$data = json_encode($account);
-					$query = "INSERT INTO `people` (uid, username, email, password, data) VALUES ('','$name', '$email', '$password', '$data')";
+					$query = "INSERT INTO `people` (username, email, password, data) VALUES ('$name', '$email', '$password', '$data')";
 					if($result = $mysqli->query($query)){
 						$uid = $mysqli->insert_id;
 						$_SESSION['username'] = $name;

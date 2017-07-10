@@ -1,4 +1,4 @@
-<!-- List quiz questions (TODO, currently all) pages for author to assign to quiz -->
+<!-- List quiz questions written by author independant of quiz -->
 <form class="form-horizontal" id="pages-add-form" method="post">
     <fieldset>
     <legend>My Questions</legend> 
@@ -6,65 +6,131 @@
 	<div class="panel panel-default">
 
 	<!-- Default panel contents -->
-	<div class="panel-heading">Questions</div>
+	<div class="panel-heading">These are all of my questions</div>
 	<!-- Table -->
-	<table class="table">
-		<tr><th>ID#</th><th>Title</th><th>Description</th><th> - </th></tr>
+	<table class="table table-striped table-condensed">
+		<tr><th>Question</th><th>Edit</th><th>Topic</th><th>Author</th><th>Quizzes</th><!--<th>Shares</th>--><th>ID#</th></tr>
 <?php
 require ("user-session.php");
+require ("utility.php");
+
+$pages=array();// for each page, tally lessons using it. 
+$lessons=array();
 
 // List author's pages that are not assigned to a lesson
-$sql = "SELECT * FROM `page` WHERE uid = '$uid' ";
-if ($result = $mysqli->query($sql)) {
+$sql = "SELECT pid,data FROM `page` WHERE uid = '$uid' order by pid";
+if ($result = $mysqli->query($sql))
+{
 	while ($row = $result->fetch_assoc())
 	{
 		$page = json_decode($row['data'], TRUE);
-		$id = $row['pid'];
-		$pageText = $page['page-question'];
-					
-		
-		
-		?> 
-			
-		<tr>
-			<td><?=$id?></td>
-			<td> <?=$pageText?></td>
-			<td><a href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</td>
-			<td>Edit</td>
-		</tr>
-			
-	  <?php 
+		$pid = $row['pid'];
+		$page['lessons']=array();
+		$pages[$pid] = $page;
 	}
+}
+
+
+// 7/7/2017 Gather quiz usage of the pages.
+$sql = "SELECT lid,data FROM `info` where uid = '$uid'";
+if ($result = $mysqli->query($sql))
+{
+	while ($row = $result->fetch_assoc())
+	{
+		$lid = $row['lid'];
+		$lesson = json_decode($row['data'],  TRUE);
+		$lessons[$lid]=$lesson;
+		if ($lesson['pages'])
+		{
+			foreach ($lesson['pages'] as $pid)
+			{	
+				if (isset($pages[$pid]))
+				{
+					$pages[$pid]['lessons'][$lid]=1;
+					// Later, doing count($pages[$pid]['lesson']) will return how many lessons use this page.
+				}
+			}
+		}
+	}
+}
+
+// List author's pages
+foreach ($pages as $pid => $page)
+{
+	 $pageTopic = $page['page-topic'];
+	 $lesson_count = count($page['lessons']);
+	 // Tally lessons using this page.
+	 if ($lesson_count==0)
+	 {
+		  $lesson_info = 'Unused';
+	 }
+	 else
+	 {
+		  $lesson_info='<ol>';
+		  foreach ($page['lessons'] as $lid => $dummy)
+		  {
+				$lesson_info .='<li>'. htmlspecialchars($lessons[$lid]['title']);
+		  }
+	 }
+	?> 
+		  
+	  <tr  >
+		  <td ><a  class=" page-detail" href="./includes/page-detail.php?pid=<?=$pid?>"> <?=compactQuestionDescription($page) ?></a><div class="details"></div></td>
+		  <td><a class="page-edit glyphicon glyphicon-pencil" href="./includes/page-quiz-edit.php?pid=<?=$pid?>">Edit</td>
+		  <td nowrap> <?=$pageTopic?></td>
+		  <td> Me </td>
+		  <td> <button type="button" class="btn" data-toggle="popover" title="Quizzes using this question"  data-placement="left"
+							data-trigger="hover" data-html="true" data-content="<?=$lesson_info?>">
+		  <?=$lesson_count?></button> </td>
+		  <!-- <td> - </td> -->
+		  <td><?=$pid?></td>
+	  </tr>
+			
+	 <?php 
 }
 ?>
 		</table> 
 	</div>
 </div>
-
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="page-submit">  </label>
-            <div class="col-sm-3">
-                <button id="pages-add-submit"  class="btn btn-primary">-</button>
-            </div>
-				 
-        </div>
-
 	 </fieldset>
-	 
-	 
 </form>
 
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-
-<script> 
-$('x#pages-add-submit').click(function(){ // Save page selection, let author prepare quiz
-	$.post( "./includes/quiz-new-auto.php", $( "#pages-add-form" ).serialize() ,function( data ) {
-		$("#main-panel").html(data); 
+<script>
+	 
+$('.page-edit').click(function(){ // Edit inline 
+	var details=$(this).closest('tr').find('.details');
+	$(details).load($(this).attr('href'));
+	//$("#main-panel").load('./includes/question-list.php');//$(this).attr('href'));
+	return false;
+});
+$('.page-detail').click(function(){ // Load details of question into row
+	var details=$(this).closest('tr').find('.details');
+	$.post($(this).attr('href'),'' ,function( html ) {
+		$(details).html(html); 
 	});
 	return false;
 });
-
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
 </script>
 
 
