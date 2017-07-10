@@ -78,7 +78,8 @@ $user = htmlspecialchars($_GET['u']);
 		}
 		if (isset($_SESSION['username'])){
 			$username = $_SESSION['username'];
-			include('./includes/home.php'); 
+			//include('./includes/home.php');
+			return;
 		}else{
 			
 			include('./includes/login.php');
