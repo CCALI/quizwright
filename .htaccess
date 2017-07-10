@@ -2,3 +2,10 @@
 <FilesMatch ".+\.(inc)$">
   Allow from all
 </FilesMatch>
+
+# some PHP settings for sessions
+php_value session.gc_probability			1
+php_value session.gc_divisor				100
+php_value session.gc_maxlifetime			200000
+php_value session.cookie_lifetime			2000000
+
