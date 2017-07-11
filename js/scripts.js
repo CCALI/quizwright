@@ -42,23 +42,6 @@ $("#profile-edit, #author-edit").click(function(){
 });
 });
 
-// homepage buttons
-$("#add-question").click(function(){
-	$("#main-panel").load("./includes/page-quiz.inc"); 
-});
-$("#add-quiz").click(function(){
-	$("#main-panel").load("./includes/quiz-prep-pages.php"); 
-});
-$("#list-questions").click(function(){
-	$("#main-panel").load("./includes/question-list.php"); 
-});
-$("#list-quizzes").click(function(){
-	$("#main-panel").load("./includes/quiz-list.php"); 
-});
-
-
-
-
 function cawCKEditor(names)
 {	// Convert QW TextAreas (comma separated form names) into CKEditor and use our special config.
 	names = names.split(",");
