@@ -120,11 +120,11 @@
                         </a>
                         <a href="#" id="list-questions" class="btn btn-primary col-sm-3">
                             <i class="glyphicon glyphicon-th-list"></i>
-                            <br> List your questions
+                            <br> List my questions
                         </a>
                         <a href="#" id="list-quizzes" class="btn btn-primary col-sm-3">
                             <i class="glyphicon glyphicon-th-list"></i>
-                            <br> List your quizzes
+                            <br> List my quizzes
                         </a>
                     </div>
 				</div>
