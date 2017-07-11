@@ -71,7 +71,7 @@ if ($result = $mysqli->query($sql))
     <li id="quiz-publish"   class="btn btn-primary">Publish Quiz</li>
     <li id="quiz-page-order"   class="btn btn-primary">Change Questions</li>
     <li id="quiz-info-edit"   class="btn btn-primary">Edit Description</li>
-    <li id="quiz-cancel"   class="btn btn-primary">Cancel</li>
+    <li id="quiz-cancel"   class="btn btn-primary">Publish Later</li>
   </div>
 </div>
 
