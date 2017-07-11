@@ -58,13 +58,11 @@ $("#list-quizzes").click(function(){
 
 
 
-
 function cawCKEditor(names)
 {	// Convert QW TextAreas (comma separated form names) into CKEditor and use our special config.
 	names = names.split(",");
 	for (var i in names) {
 		name=names[i];
-		console.log(name);
 		CKEDITOR.replace( name, {
 			customConfig: '/quizwright/js/ckeditor_config.js'
 		} );
@@ -76,6 +74,12 @@ function cawCKEditorUpdates()
 	    CKEDITOR.instances[instance].updateElement();
 	}
 }
+function cawCKEditorLength(editorName)
+{
+	return messageLength = CKEDITOR.instances[editorName].getData().replace(/<[^>]*>/gi, '').length;
+}
+
+         
 function cawSetRB(name,val)
 {	// Set radio button name to value val.
 	val = val || false;
