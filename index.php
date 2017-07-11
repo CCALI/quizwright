@@ -29,8 +29,7 @@ if (isset($_POST["lesson-submit"])){
 	include(USER_MGMNT);
 ?>
 <footer class="text-center"><div id="footer-wrapper">
-    <div class="row"><img src="images/CALI_LogoTagline_DarkGrayMedium.png" /></div>
-	<div class="copyright-text">Copyright &copy; 2017, All Contents Copyright<br>The Center for Computer-Assisted Legal Instruction</div>
+    <div class="copyright-text">Copyright &copy; 2017, All Contents Copyright<br>The Center for Computer-Assisted Legal Instruction</div>
 </footer>
 
 	<!-- script references -->
