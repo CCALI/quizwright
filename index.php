@@ -27,7 +27,6 @@ if (isset($_POST["lesson-submit"])){
 <?php
 // load user control
 	include(USER_MGMNT);
-	include('./includes/home.php');
 ?>
 <footer class="text-center"><div id="footer-wrapper">
     <div class="copyright-text">Copyright &copy; 2017, All Contents Copyright<br>The Center for Computer-Assisted Legal Instruction</div>
@@ -36,7 +35,7 @@ if (isset($_POST["lesson-submit"])){
 	<!-- script references -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="//cdn.ckeditor.com/4.7.0/basic/ckeditor.js"></script>
+      <script src="//cdn.ckeditor.com/4.7.0/basic/ckeditor.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/scripts.js"></script>
 	</body>
