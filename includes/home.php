@@ -106,25 +106,25 @@
 							saves the questions in a personal question bank, allows teachers to bundle the questions
 							into quizzes, turns the quizzes into AutoPublish Lessons that are published to the CALI
 							website and run by students either as LessonLive or LessonLink assessments.</p>
-							<p>Just click one of the buttons below to get started.</p>
+							<p>Get started by adding a question or three and then add a quiz.</p>
 						</div>
 					</div>
 					<div class="btn-group btn-group-justified">
-                        <a href="#" id="add-question" class="btn btn-primary col-sm-3">
+                        <a href="#" id="add-question" class="btn btn-primary col-sm-3" title="Start here!">
                             <i class="glyphicon glyphicon-pencil"></i>
                             <br> Add a question
                         </a>
-                        <a href="#" id="add-quiz" class="btn btn-primary col-sm-3">
+                        <a href="#" id="add-quiz" class="btn btn-primary col-sm-3" title="Remember to add some questions first!">
                             <i class="glyphicon glyphicon-pencil"></i>
                             <br> Add a quiz
                         </a>
                         <a href="#" id="list-questions" class="btn btn-primary col-sm-3">
                             <i class="glyphicon glyphicon-th-list"></i>
-                            <br> List your questions
+                            <br> List my questions
                         </a>
                         <a href="#" id="list-quizzes" class="btn btn-primary col-sm-3">
                             <i class="glyphicon glyphicon-th-list"></i>
-                            <br> List your quizzes
+                            <br> List my quizzes
                         </a>
                     </div>
 				</div>
