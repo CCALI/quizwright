@@ -56,6 +56,8 @@ $("#list-quizzes").click(function(){
 	$("#main-panel").load("./includes/quiz-list.php"); 
 });
 
+
+
 function cawCKEditor(names)
 {	// Convert QW TextAreas (comma separated form names) into CKEditor and use our special config.
 	names = names.split(",");
