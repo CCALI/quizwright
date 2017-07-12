@@ -71,6 +71,7 @@ if ($result = $mysqli->query($sql))
     <li id="quiz-publish"   class="btn btn-primary">Publish Quiz</li>
     <li id="quiz-page-order"   class="btn btn-primary">Change Questions</li>
     <li id="quiz-info-edit"   class="btn btn-primary">Edit Description</li>
+    <li id="quiz-cancel"   class="btn btn-primary">Publish Later</li>
   </div>
 </div>
 
@@ -80,4 +81,5 @@ if ($result = $mysqli->query($sql))
 	$("#quiz-page-order").click(function(){$("#main-panel").load("./includes/quiz-page-order.php?lid=<?php echo $lid;?>");});
 	$("#quiz-info-edit").click(function(){$("#main-panel").load("./includes/quiz-info-edit.php?lid=<?php echo $lid;?>");});
 	$("#quiz-publish").click(function(){$("#main-panel").load("./includes/quiz-publish.php?lid=<?php echo $lid;?>");});
+	$("#quiz-cancel").click(function(){$("#main-panel").load("./includes/quiz-list.php");});
 </script>

@@ -93,6 +93,7 @@
 		  
 						  </div></div> </div></div> 
 						  
+<div class="validate"></div>
 		  
         <!-- Button -->
 
@@ -120,8 +121,20 @@
 cawLoadCALITopics($('#page-topic'));
 cawCKEditor('page-question,page-feedback,page-notes');
 cawCKEditor('page-choice-correct-text,page-choice-wrong-1-text,page-choice-wrong-2-text,page-choice-wrong-3-text');
+function validate()
+{
+	
+	if ((cawCKEditorLength('page-question')==0)  || (cawCKEditorLength('page-choice-correct-text')==0) || (cawCKEditorLength('page-choice-wrong-1-text')==0))
+	{	// validate fields
+		$('.validate').html('<div class="alert alert-danger" role="alert">An MC quiz question requires a question, a correct choice and at least one wrong choice.</div>');
+		return false;
+	}
+	return true;
+}
+	
 $('#page-submit').click(function(){ // Save page let author add new page
 	cawCKEditorUpdates();
+	if (!validate()) return false;
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
 		$("#main-panel").load("./includes/page-quiz.inc");
 		window.scrollTo(0, 0);
@@ -130,6 +143,7 @@ $('#page-submit').click(function(){ // Save page let author add new page
 });
 $('#page-submit-prepare').click(function(){ // Save page let author prepare quiz
 	cawCKEditorUpdates();
+	if (!validate()) return false;
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
 		$("#main-panel").load("./includes/quiz-prep-pages.php"); 
 	});
