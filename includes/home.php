@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-sm-3">
             <!-- Left column -->
-            <a href="#"><strong><i class="glyphicon glyphicon-wrench"></i> Tools</strong></a>
+            <a href="#"><strong><i class="glyphicon glyphicon-wrench"></i> QuizWright Toolbox</strong></a>
 
             <hr>
 
@@ -51,7 +51,7 @@
                         
                     </ul>
                 </li>
-                <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#menu2"> Reports <i class="glyphicon glyphicon-chevron-right"></i></a>
+                <!-- <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#menu2"> Reports <i class="glyphicon glyphicon-chevron-right"></i></a>
 
                     <ul class="nav nav-stacked collapse" id="menu2">
                         <li><a href="#">Information &amp; Stats</a>
@@ -65,25 +65,24 @@
                         <li><a href="#">Alerts</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 
             </ul>
 
             <hr>
 
-            <a href="#"><strong><i class="glyphicon glyphicon-link"></i> Resources</strong></a>
+            <a href="#"><strong><i class="glyphicon glyphicon-link"></i> CALI Teaching Resources</strong></a>
 
             <hr>
 
             <ul class="nav nav-pills nav-stacked">
                 <li class="nav-header"></li>
 					 <!--<li  > <a id="question-list-public" href="#"><i class="glyphicon glyphicon-list"></i> Question Library</a></li>-->
-					<li><a href="#"><i class="glyphicon glyphicon-list"></i> This is a list</a></li>
-					<li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> of things </a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-link"></i>to assist</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> teachers</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-book"></i> creating</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-star"></i> quizzes</a></li>
+					 <li><a href="https://www.cali.org/lessons" target="_blank"><i class="glyphicon glyphicon-list"></i> Lessons</a></li>
+					<li><a href="https://www.cali.org/lessonlink" target="_blank"><i class="glyphicon glyphicon-list"></i> LessonLink</a></li>
+					<li><a href="https://www.cali.org/autopublish" target="_blank"><i class="glyphicon glyphicon-briefcase"></i> AutoPublish</a></li>
+					<li><a href="https://www.cali.org/the-elangdell-bookstore" target="_blank"><i class="glyphicon glyphicon-book"></i> CALI Bookstore</a></li>
+					<li><a href="https://www.cali.org/content/cali-tools" target="_blank"><i class="glyphicon glyphicon-wrench"></i> CALI Power Tools</a></li>
             </ul>
 
            
