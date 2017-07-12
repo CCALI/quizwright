@@ -6,8 +6,9 @@
 <!-- List all pages for author to assign to quiz, option to filter -->
 <form class="form-horizontal" id="pages-add-form" method="post">
     <fieldset>
-    <legend>Quiz Questions</legend>
-	 <p>Select the questions to include in your new quiz. </p>
+    <legend>Quiz Questions</legend> 
+            
+	 <p>Select from my existing questions to include in a new quiz. </p> 
 	 
 	 <!--
 		   <div class="form-group">
@@ -76,7 +77,7 @@ foreach ($pages as $pid => &$page)
 	$page['lessons']= count($page['lessons']);
 	$assigned  = $page['lessons'] == 0 ? 'unassigned' : 'assigned';
 ?>
-	 <li class="<?=$assigned?>">
+	 <li class="question <?=$assigned?>">
 		 <label class="btn btn-primary active">
 			 <input type="checkbox" autocomplete="off" name="<?=$pid?>"  > <?=$page['text']?> (Used by <?=$page['lessons']?> quizzes)
 		 </label>
@@ -93,7 +94,19 @@ foreach ($pages as $pid => &$page)
             </div>
 				 
         </div>
+	 </fieldset>
 
+    <fieldset>
+    <legend>New Question</legend> 
+            
+	 <p>Create a new question for a quiz. </p> 
+	 
+			<div class="form-group"> <label class="col-sm-2 control-label" for="page-new">  </label>
+            <div class="col-sm-3">
+                <button id="page-new"  class="btn btn-primary">Add a new Question</button>
+            </div>
+				</div>
+				
 	 </fieldset>
 	 
 	 
@@ -104,7 +117,14 @@ foreach ($pages as $pid => &$page)
 <script>
 $('.assigned').hide();
 cawSetRB('page-status-filter','unassigned');
+updateForm();
+function updateForm()
+{
+	var count = $('[name=page-status-filter]:checked').val()=='unassigned'  ? $('.unassigned').size() : $('.question').size();
+	if (count==0) $('#pages-add-submit').hide(); else $('#pages-add-submit').show();
+}
 $('[name=page-status-filter]').change(function(){
+	 var count;
 	 switch (this.value){
 		  case 'all':
 				$('.assigned').show();
@@ -113,6 +133,12 @@ $('[name=page-status-filter]').change(function(){
 				$('.assigned').hide();
 				break;
 	}
+	updateForm();
+
+});
+$('#page-new').click(function(){  
+	$("#main-panel").load("./includes/page-quiz.inc"); 
+	return false;
 });
 $('#pages-add-submit').click(function(){ // Save page selection, let author prepare quiz
 	$.post( "./includes/quiz-new-auto.php", $( "#pages-add-form" ).serialize() ,function( data ) {

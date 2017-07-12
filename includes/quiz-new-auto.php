@@ -83,6 +83,8 @@ $data['completiontime']='';	//'20 minutes';
 </div>
 
 
+<div class="validate"></div>
+
 <!-- Button -->
 <div class="form-group">
   <label class="col-sm-2 control-label" for="submit">All done?</label>
@@ -104,6 +106,11 @@ $data['completiontime']='';	//'20 minutes';
 cawCKEditor('calidescription,quiz-intro,quiz-conclusion');
 $("#quiz-update-submit").click(function(){ // Save quiz. 
 	cawCKEditorUpdates();
+	if (cawCKEditorLength('calidescription')==0)
+	{
+		$('.validate').html('<div class="alert alert-danger" role="alert">A quiz requires a description.</div>');
+		return false;
+	}
 	$.post( "./includes/quiz-create.php", $( "#quiz-info-form" ).serialize() ,function( data ) {
 		$("#main-panel").load("./includes/quiz-detail.php?lid="+data.lid);
 		window.scrollTo(0, 0);

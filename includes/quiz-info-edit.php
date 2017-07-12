@@ -73,6 +73,7 @@ if ($result = $mysqli->query($sql))
 </div>
 <input type=hidden name="lid" value="<?=$lid?>" />
 
+<div class="validate"></div>
 <!-- Button -->
 <div class="form-group">
   <label class="col-sm-2 control-label" for="submit">All done?</label>
@@ -90,6 +91,11 @@ if ($result = $mysqli->query($sql))
 cawCKEditor('calidescription,quiz-intro,quiz-conclusion');
 $("#quiz-update-submit").click(function(){ // Save quiz. 
 	cawCKEditorUpdates();
+	if (cawCKEditorLength('calidescription')==0)
+	{
+		$('.validate').html('<div class="alert alert-danger" role="alert">A quiz requires a description.</div>');
+		return false;
+	}
 	$.post( "./includes/quiz-info-update.php", $( "#quiz-info-form" ).serialize() ,function( data ) {
 		$("#main-panel").load("./includes/quiz-detail.php?lid="+data.lid);
 		window.scrollTo(0, 0);

@@ -42,12 +42,25 @@ $("#profile-edit, #author-edit").click(function(){
 });
 });
 
+// homepage buttons
+$("#add-question").click(function(){
+	$("#main-panel").load("./includes/page-quiz.inc"); 
+});
+$("#add-quiz").click(function(){
+	$("#main-panel").load("./includes/quiz-prep-pages.php"); 
+});
+$("#list-questions").click(function(){
+	$("#main-panel").load("./includes/question-list.php"); 
+});
+$("#list-quizzes").click(function(){
+	$("#main-panel").load("./includes/quiz-list.php"); 
+});
+
 function cawCKEditor(names)
 {	// Convert QW TextAreas (comma separated form names) into CKEditor and use our special config.
 	names = names.split(",");
 	for (var i in names) {
 		name=names[i];
-		console.log(name);
 		CKEDITOR.replace( name, {
 			customConfig: '/quizwright/js/ckeditor_config.js'
 		} );
@@ -59,6 +72,12 @@ function cawCKEditorUpdates()
 	    CKEDITOR.instances[instance].updateElement();
 	}
 }
+function cawCKEditorLength(editorName)
+{
+	return messageLength = CKEDITOR.instances[editorName].getData().replace(/<[^>]*>/gi, '').length;
+}
+
+         
 function cawSetRB(name,val)
 {	// Set radio button name to value val.
 	val = val || false;

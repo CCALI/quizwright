@@ -73,6 +73,7 @@
 		  
 						  </div></div> </div></div> 
 						  
+<div class="validate"></div>
         <!-- Button -->
 
         <div class="form-group">
@@ -103,8 +104,21 @@ $('[data-toggle=collapse]').unbind().click(function(){
 
 cawLoadCALITopics($('#page-topic'));
 cawCKEditor('page-question,page-feedback,page-notes');
+function validate()
+{
+	
+	if ((cawCKEditorLength('page-question')==0) )
+	{	// validate fields
+		$('.validate').html('<div class="alert alert-danger" role="alert">A T/F quiz question requires a question.</div>');
+		return false;
+	}
+	return true;
+}
+	
+
 $('#page-submit').click(function(){ // Save page let author add new page
 	cawCKEditorUpdates();
+	if (!validate()) return false;
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
 		$("#main-panel").load("./includes/page-quiz.inc");
 		window.scrollTo(0, 0);
@@ -113,6 +127,7 @@ $('#page-submit').click(function(){ // Save page let author add new page
 });
 $('#page-submit-prepare').click(function(){ // Save page let author prepare quiz
 	cawCKEditorUpdates();
+	if (!validate()) return false;
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
 		$("#main-panel").load("./includes/quiz-prep-pages.php"); 
 	});
