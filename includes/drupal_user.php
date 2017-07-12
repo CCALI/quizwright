@@ -31,7 +31,12 @@ $user = htmlspecialchars($_GET['u']);
 		$count = mysqli_num_rows($result);
 		if ($count == 1){
 			$account = $result->fetch_object();	
-			
+			// check roles, needs CALI Staff or facstaff to proceed
+			$userid = $account->uid;
+			$query = "SELECT * FROM `users_roles` WHERE uid = $userid and rid in (5,6)";
+			$result = $umysqli->query($query);
+			$count = mysqli_num_rows($result);
+			if ($count >= 1) {
 			if(user_check_password($password, $account)){
 				$name = $account->name;
 				$email = $account->mail;
@@ -70,7 +75,7 @@ $user = htmlspecialchars($_GET['u']);
 				
 				
 			}
-			
+		}	
 			
 		}else{
 		$fmsg = "Invalid Login Credentials.";
