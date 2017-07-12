@@ -24,24 +24,6 @@
     <!-- /container -->
 </div>
 <!-- /Header -->
-<!-- Main -->
-<div class="container-fluid">
-    <div class="row">
-		<div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>Welcome to QuizWright</h4>
-			</div>
-            <div class="panel-body">
-                <p>QuizWright is a web app that lets teachers write individual MC, T/F, Y/N questions,
-				saves the questions in a personal question bank, allows teachers to bundle the questions
-				into quizzes, turns the quizzes into AutoPublish Lessons that are published to the CALI
-				website and run by students either as LessonLive or LessonLink assessments.</p>
-				<p>All you need to use QuizWright is a CALI member faculty/staff account.
-				Just enter your CALI username and password below. </p>
-            </div>
-        </div>
-	</div>
-	<div class="row">
 	   <div id="userforms">
 	  <form class="form-signin" method="POST" action="?u=login">
 		<?php if (isset($regalert)){ ?><div class="alert alert-success" role="alert"><?php echo $regalert; ?></div><?php } ?>
@@ -56,6 +38,3 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
       </form>
 	   </div>
-	</div>
-</div>
-<!-- /Main -->
