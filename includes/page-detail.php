@@ -1,7 +1,13 @@
 <!-- List one page's details  -->
 <?php
-// 05/12/2017 Return full detail report of this question to embed in list of questions.
-// TODO include filter to allow other author's questions displayed to this author if PUBLIC.
+/*
+	05/12/2017 Return full detail report of this question to embed in list of questions.
+	TODO include filter to allow other author's questions displayed to this author if PUBLIC.
+	
+	07/14/2017
+		Added: Yes/No question type
+*/
+
 require ("user-session.php");
 $pid = intval($_REQUEST['pid']);
 $sql = "SELECT * FROM `page` WHERE uid = '$uid' and pid = $pid";
@@ -26,9 +32,15 @@ function pageDetailHTML($page)
 	switch ($pagetype)
 	{
 		
+		case 'quiz-yn':	// Yes/No
+			$isyes = $page['yes-is-correct']=='true';
+			$html.='<tr><td>Type</td><td>'
+				. ($isyes ?  '<span class="correct">Yes</span>/No' : 'Yes/<span class="correct">No</span>')
+				.'</td></tr>';
+			break;
+		
 		case 'quiz-tf':	// True/false 
 			$istrue = $page['true-is-correct']=='true';
-			
 			$html.='<tr><td>Type</td><td>'
 				. ($istrue ?  '<span class="correct">True</span>/False' : 'True/<span class="correct">False</span>')
 				.'</td></tr>';

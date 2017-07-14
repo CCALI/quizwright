@@ -1,5 +1,9 @@
 <?php
-// 5/12/2017 Load quiz page for editing. Use page type to decide which editing template to use.
+/*
+	5/12/2017 Load quiz page for editing. Use page type to decide which editing template to use.
+	07/14/2017
+		Added: Yes/No question type
+*/
 
 require ("user-session.php");
 $pid=intval($_GET["pid"]);
@@ -30,10 +34,12 @@ var data=<?=$row['data']?>
 	switch ($pagetype)
 	{
 		// Is this a fuse? :)
+		case "quiz-yn":
+			require "page-quiz-yn-edit.inc";
+			break;
 		case "quiz-tf":
 			require "page-quiz-tf-edit.inc";
-			break;
-		
+			break;		
 		case "quiz-mc":
 		case 'Quiz':
 			require "page-quiz-mc-edit.inc";
