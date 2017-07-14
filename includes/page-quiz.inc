@@ -15,6 +15,9 @@
                 <button id="page-quiz-tf"  class="btn btn-primary">True/False</button>
             </div>
             <div class="col-sm-3">
+                <button id="page-quiz-yn"  class="btn btn-primary">Yes/No</button>
+            </div>
+            <div class="col-sm-3">
                 <button id="page-quiz-mc" class="btn btn-primary">Multiple Choice</button>
             </div>
         </div>
@@ -29,6 +32,10 @@
 <script>
 $('#page-quiz-tf').click(function(){  
 	$("#main-panel").load("./includes/page-quiz-tf.inc"); 
+	return false;
+});
+$('#page-quiz-yn').click(function(){  
+	$("#main-panel").load("./includes/page-quiz-yn.inc"); 
 	return false;
 });
 $('#page-quiz-mc').click(function(){  

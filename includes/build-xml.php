@@ -16,6 +16,8 @@
 		Added: questions arranged in author specified order
 	05/31/2017
 		Fixed: CKEditor full HTML markup encoding
+	07/14/2017
+		Added: Yes/No question type
 */
 function makeQuestionTextXML($text)
 {	// 05/11/2017 SJG Helper function
@@ -117,6 +119,19 @@ function BuildXML($mysqli,$data,$author)
 					$pageXML=''; 
 					switch ($pagetype)
 					{
+						
+						
+						
+// ### Yes/No style of quiz question
+						case 'quiz-yn': // This will be a CA Buttons-only thype.
+							$isyes = $page['yes-is-correct']=='true';
+							$innerXML = makeQuestionTextXML($pageText). makeNotesXML($pageNotes)
+								.'<BUTTON>Yes</BUTTON><BUTTON>No</BUTTON>'
+								.'<FEEDBACK BUTTON="1" DETAIL="1" GRADE="'.(($isyes)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>'
+								.'<FEEDBACK BUTTON="2" DETAIL="1" GRADE="'.((!$isyes)?'RIGHT':'WRONG').'" NEXTPAGE="'.$nextPage.'"></FEEDBACK>'
+								.($pageFeedback!='' ? '<FEEDBACK>'.$pageFeedback.'</FEEDBACK>' : '');
+							$pageXML=makePageXML($pageName, "Multiple Choice", "Choose Buttons",$nextPage, $innerXML);
+							break;
 						
 
 // ### True/False style of quiz question

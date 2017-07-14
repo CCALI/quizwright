@@ -1,5 +1,9 @@
 <?php
-//	3/2017 Utility function used by more than one page.
+/*
+	3/2017 Utility function used by more than one page.
+	07/14/2017
+		Added: Yes/No question type
+*/
 
 function mergeObjects($old,$new)
 {	//	3/2017 SJG Combine elements from new into old, overwriting if needed.
@@ -26,6 +30,9 @@ function compactQuestionDescription($page)
 	$text = oneLinerHTML($page['page-question']);
 	switch ( $page['page-type'] )
 	{
+		case 'quiz-yn':
+			$type='Y/N';
+			break;
 		case 'quiz-tf':
 			$type='T/F';
 			break;
