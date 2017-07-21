@@ -81,7 +81,7 @@ if ($result = $mysqli->query($sql))
 
   <div class="col-sm-3 control-label" for="submit">Ready to give the quiz?</div>
   <div class="col-sm-8">
-    <li id="quiz-publish"   class="btn btn-primary">Publish Quiz</li>
+    <a id="quiz-publish"   class="btn btn-primary" target=_blank href="./includes/quiz-publish.php?lid=<?php echo $lid;?>">Publish Quiz</a>
     <li id="quiz-page-order"   class="btn btn-primary">Change Questions</li>
     <li id="quiz-info-edit"   class="btn btn-primary">Edit Description</li>
     <li id="quiz-cancel"   class="btn btn-primary">Publish Later</li>
@@ -93,6 +93,5 @@ if ($result = $mysqli->query($sql))
 <script>
 	$("#quiz-page-order").click(function(){$("#main-panel").load("./includes/quiz-page-order.php?lid=<?php echo $lid;?>");});
 	$("#quiz-info-edit").click(function(){$("#main-panel").load("./includes/quiz-info-edit.php?lid=<?php echo $lid;?>");});
-	$("#quiz-publish").click(function(){$("#main-panel").load("./includes/quiz-publish.php?lid=<?php echo $lid;?>");});
 	$("#quiz-cancel").click(function(){$("#main-panel").load("./includes/quiz-list.php");});
 </script>
