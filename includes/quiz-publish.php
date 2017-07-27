@@ -1,4 +1,5 @@
 <?php
+
 require ("user-session.php");
 require ("build-xml.php");	// 05/10/2017 Move XML builder to shared library
 
@@ -46,11 +47,12 @@ if ($result = $mysqli->query($SQL))
         $response = curl_exec($ch);
 		// $response is a bit of XML
          //echo $response;
-		 $xml = new SimpleXMLElement($response);
+			$xml = new SimpleXMLElement($response);
 		// var_dump($xml);
 		 $apURL = $xml->URL[0];
-		 //header("Location: $apURL");
-		 echo "<script type='text/javascript'>window.open('$apURL', '_blank')</script>";
+		 header("Location: $apURL");
+		 //echo $response;
+		 //echo "<script type='text/javascript'>window.open('$apURL', '_blank')</script>";
 	} 
          curl_close($ch);
 		 
