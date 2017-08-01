@@ -5,7 +5,7 @@
 	<legend>Questions in this Quiz</legend>
 	 <p>Uncheck questions to remove them. Click/drag to change the order. </p>
 <div class="panel panel-default">
-	 	 <ul id="sortable"> 
+	 	 <ol id="sortable"> 
 <?php
 require ("user-session.php");
 require ("utility.php");
@@ -40,7 +40,7 @@ if ($result = $mysqli->query($sql))
 			}
 		}
 		?>
-		</ul>
+		</ol>
 		<?php 
 	}
 }

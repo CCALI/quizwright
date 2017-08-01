@@ -49,9 +49,9 @@ function BuildXML($mysqli,$data,$author)
 		.'<BR /><BR />'
 		.'<DIV style="font-size: .8em">'.htmlspecialchars( $data['title'])
 		.'<BR />by '
-		.'<BR />'.$author['authorfullname']
-		.'<BR />'.$author['authortitle']
-		.'<BR />'.$author['authorschool']
+		.'<BR />'.htmlspecialchars($author['authorfullname'])
+		.'<BR />'.htmlspecialchars($author['authortitle'])
+		.'<BR />'.htmlspecialchars($author['authorschool'])
 		.'</DIV>';
 		
 	$info=array(
