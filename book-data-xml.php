@@ -21,7 +21,7 @@ if ($result = $mysqli->query($SQL))
 	{
 		$data = json_decode($row['data'], TRUE);
 		$profile = json_decode($row['profile'], TRUE);
-		echo BuildXML($mysqli,$data,$profile);
+		echo BuildXML($mysqli,$lid,$data,$profile);
 		return;
 	}
 }
