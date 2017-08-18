@@ -6,7 +6,7 @@
 <?php
 require ("user-session.php");
 require ("utility.php");
-
+//error_reporting(E_ALL); 
 $lid = intval($_REQUEST['lid']);
 $sql = "SELECT * FROM `info` WHERE uid = '$uid' and lid = $lid";
 if ($result = $mysqli->query($sql))
@@ -81,7 +81,7 @@ if ($result = $mysqli->query($sql))
 ?>
 <!-- Button -->
 
-<? if ($published) { ?>
+<?php if ($published) { ?>
 	<div class="col-sm-3 control-label" for="submit">This quiz was published <?=$publishdate?></div>
 	<div class="col-sm-8">
 		<a id="quiz-run"   class="btn btn-primary" target=_blank href="<?=$published?>">Run the Quiz</a>
