@@ -6,7 +6,7 @@
 <?php
 require ("user-session.php");
 require ("utility.php");
-
+//error_reporting(E_ALL); 
 $lid = intval($_REQUEST['lid']);
 $sql = "SELECT * FROM `info` WHERE uid = '$uid' and lid = $lid";
 if ($result = $mysqli->query($sql))
@@ -14,6 +14,8 @@ if ($result = $mysqli->query($sql))
 	if ($row = $result->fetch_assoc())
 	{
 		$data = json_decode($row['data'], TRUE);
+		$published=$row['location'];
+		$publishdate=$row['publishdate'];
 		$numPages = count($data['pages']); // .pages is array of pid's, order matches lesson order.
 		?>
 		<ul>
@@ -79,14 +81,24 @@ if ($result = $mysqli->query($sql))
 ?>
 <!-- Button -->
 
+<?php if ($published) { ?>
+	<div class="col-sm-3 control-label" for="submit">This quiz was published <?=$publishdate?></div>
+	<div class="col-sm-8">
+		<a id="quiz-run"   class="btn btn-primary" target=_blank href="<?=$published?>">Run the Quiz</a>
+	</div>
+	</div>
+  <?php } else { ?>
+ 
   <div class="col-sm-3 control-label" for="submit">Ready to give the quiz?</div>
   <div class="col-sm-8">
     <a id="quiz-publish"   class="btn btn-primary" target=_blank href="./includes/quiz-publish.php?lid=<?php echo $lid;?>">Publish Quiz</a>
-    <li id="quiz-page-order"   class="btn btn-primary">Change Questions</li>
-    <li id="quiz-info-edit"   class="btn btn-primary">Edit Description</li>
-    <li id="quiz-cancel"   class="btn btn-primary">Publish Later</li>
+    <a id="quiz-page-order"   class="btn btn-primary">Change Questions</a>
+    <a id="quiz-info-edit"   class="btn btn-primary">Edit Description</a>
+    <a id="quiz-cancel"   class="btn btn-primary">Publish Later</a>
   </div>
 </div>
+  
+  <?php } ?>
 
 
 

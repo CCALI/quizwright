@@ -18,6 +18,8 @@
 		Fixed: CKEditor full HTML markup encoding
 	07/14/2017
 		Added: Yes/No question type
+	08/16/2017
+		Added: Quiz table ID for use by Drupal
 */
 function makeQuestionTextXML($text)
 {	// 05/11/2017 SJG Helper function
@@ -40,7 +42,7 @@ function HTML2XML($str)
 	//$str = '<![CDATA['.$str.']]>'; Would be best but Viewer doesn't understand it.??
 	return $str;
 }
-function BuildXML($mysqli,$data,$author)
+function BuildXML($mysqli,$lid,$data,$author)
 {	// 03/02/2017 SJG $data is lesson $data block with meta info and page list.
 	$xml='';
 	$description=
@@ -58,6 +60,7 @@ function BuildXML($mysqli,$data,$author)
 		'TITLE'=>htmlspecialchars($data['title']),
 		'VERSION'=> date("Y-m-d H:i:s"),
 		'GENERATOR'=>'QW', // QuizWright
+		'QWID'=> $lid, // Quiz ID
 		'SUBJECTAREA'=>htmlspecialchars($data['subjectarea']),
 		'COMPLETIONTIME'=>htmlspecialchars($data['completiontime']),
 		'NOTES'=>'Book automatically created by QuizWright',

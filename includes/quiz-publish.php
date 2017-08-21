@@ -18,7 +18,7 @@ if ($result = $mysqli->query($SQL))
 	{
 		$data = json_decode($row['data'], TRUE);
 		$profile = json_decode($row['profile'], TRUE);
-		$jqbookdata = BuildXML($mysqli,$data,$profile);
+		$jqbookdata = BuildXML($mysqli,$lid,$data,$profile);
 		
 		//some CURL stuff
 		//$URL = "https://d7.calidev.org/autopublish/upload";

@@ -94,7 +94,7 @@
             <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> QuizWright Builder</strong></a>
             <hr>
 
-            <div class="row">
+            
 				<div id="main-panel">
 					<div class="panel panel-default">
 						<div class="panel-heading">
@@ -126,7 +126,7 @@
                             <br> List my quizzes
                         </a>
                     </div>
-				</div>
+				
             </div>
             <!--/row-->
 
