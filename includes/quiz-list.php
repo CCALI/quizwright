@@ -49,7 +49,7 @@ if ($result = $mysqli->query($sql))
 				
 				</td>
 			<?php } else { ?>
-			<td> <span class="badge"> <?=$numPages?> </span> <a class="btn btn-default"  href="./includes/quiz-page-order.php?lid=<?=$lid?>">+/-</a></td>
+			<td nowrap> <span class="badge"> <?=$numPages?> </span> <a class="btn btn-default"  href="./includes/quiz-page-order.php?lid=<?=$lid?>">+/-</a></td>
 			<td nowrap><a class="btn btn-primary"  href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</a> 
 			<a class="btn btn-default"  href="./includes/quiz-info-edit.php?lid=<?=$lid?>">Desc</a> 
 			<a class="btn btn-default" target=_blank href="./cav/web/preview/index.php?quiz=<?=$lid?>">Preview</a> 
