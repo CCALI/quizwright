@@ -9,7 +9,7 @@
 	<div class="panel-heading">Quizzes</div>
 	<!-- Table -->
 	<table class="table">
-		<tr><th>ID#</th><th>Title</th><th>Description</th><th>Questions</th><th>Publish</th><th>Description</th><th></th><th></th></tr>
+		<tr><th>ID#</th><th>Title</th><th>Description</th><th>Questions</th><th>More</th></tr>
 <?php
 //error_reporting(E_ALL); 
 require ("user-session.php");
@@ -21,26 +21,39 @@ if ($result = $mysqli->query($sql))
 	while ($row = $result->fetch_assoc())
 	{
 		$lid=$row['lid'];
-		$published=$row['location'];/* see if already published */
 		$data = json_decode($row['data'], TRUE);
-		$numPages=count($data['pages']); 
+		$numPages=count($data['pages']);
+		$published=$row['location'];/* see if already published */
+		$publishdate=$row['publishdate'];
 		?>
 		<tr>
 			<td><?=$lid?></td>
 			<td> <?=$data['title']?></td>
 			<td> <?=oneLinerHTML($data['calidescription'])?></td>
+			
+			
 			<?php if ($published) { /* If published include only link to review and run */ ?>
-			<td> <?=$numPages?> </td>
-			<td><a href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</td>
-			<td> <a id="quiz-run"   class="btn btn-primary" target=_blank href="<?=$published?>">Run</a></td>
-			<td>-</td>
-			<td><a target=_blank href="./book-data-xml.php?lid=<?=$lid?>">XML</td>
+			
+			<td> <span class="badge"> <?=$numPages?> </span> </td>
+			
+			<td>
+				<a id="quiz-run"   class="btn btn-primary" target=_blank href="<?=$published?>">Run</a>
+				<a class="btn btn-default" href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</a>
+				 
+				<span class="label label-default"  data-toggle="popover" title="Published"  data-placement="left"
+							data-trigger="hover" data-html="true" data-content="<?=$publishdate?>"><?=$publishdate?></span>
+				
+				
+				
+				
+				
+				</td>
 			<?php } else { ?>
-			<td><a href="./includes/quiz-page-order.php?lid=<?=$lid?>"><?=$numPages?> +/-</td>
-			<td><a href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</td>
-			<td><a href="./includes/quiz-info-edit.php?lid=<?=$lid?>">Desc</td>
-			<td><a target=_blank href="./cav/web/preview/index.php?quiz=<?=$lid?>">Preview</a></td>
-			<td><a target=_blank href="./book-data-xml.php?lid=<?=$lid?>">XML</td>
+			<td> <span class="badge"> <?=$numPages?> </span> <a class="btn btn-default"  href="./includes/quiz-page-order.php?lid=<?=$lid?>">+/-</a></td>
+			<td nowrap><a class="btn btn-primary"  href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</a> 
+			<a class="btn btn-default"  href="./includes/quiz-info-edit.php?lid=<?=$lid?>">Desc</a> 
+			<a class="btn btn-default" target=_blank href="./cav/web/preview/index.php?quiz=<?=$lid?>">Preview</a> 
+			<a class="btn btn-default" target=_blank href="./book-data-xml.php?lid=<?=$lid?>">XML</a></td>
 			<?php } ?>
 		</tr>
 		<?php 
@@ -56,4 +69,7 @@ $('#main-panel a[target!="_blank"]').click(function(){
 	$("#main-panel").load($(this).attr('href')); 
 	return false;
 });
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
 </script>
