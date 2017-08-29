@@ -85,6 +85,7 @@ if ($result = $mysqli->query($sql))
 	<div class="col-sm-3 control-label" for="submit">This quiz was published <?=$publishdate?></div>
 	<div class="col-sm-8">
 		<a id="quiz-run"   class="btn btn-primary" target=_blank href="<?=$published?>">Run the Quiz</a>
+		<a id="quiz-clone"   class="btn btn-default">Duplicate Quiz</a>
 	</div>
 	</div>
   <?php } else { ?>
@@ -92,9 +93,9 @@ if ($result = $mysqli->query($sql))
   <div class="col-sm-3 control-label" for="submit">Ready to give the quiz?</div>
   <div class="col-sm-8">
     <a id="quiz-publish"   class="btn btn-primary" target=_blank href="./includes/quiz-publish.php?lid=<?php echo $lid;?>">Publish Quiz</a>
-    <a id="quiz-page-order"   class="btn btn-primary">Change Questions</a>
-    <a id="quiz-info-edit"   class="btn btn-primary">Edit Description</a>
-    <a id="quiz-cancel"   class="btn btn-primary">Publish Later</a>
+    <a id="quiz-page-order"   class="btn btn-default">Change Questions</a>
+    <a id="quiz-info-edit"   class="btn btn-default">Edit Description</a>
+    <a id="quiz-cancel"   class="btn btn-default">Publish Later</a>
   </div>
 </div>
   
@@ -106,4 +107,5 @@ if ($result = $mysqli->query($sql))
 	$("#quiz-page-order").click(function(){$("#main-panel").load("./includes/quiz-page-order.php?lid=<?php echo $lid;?>");});
 	$("#quiz-info-edit").click(function(){$("#main-panel").load("./includes/quiz-info-edit.php?lid=<?php echo $lid;?>");});
 	$("#quiz-cancel").click(function(){$("#main-panel").load("./includes/quiz-list.php");});
+	$("#quiz-clone").click(function(){$("#main-panel").load("./includes/quiz-clone.php?lid=<?php echo $lid;?>");});
 </script>
