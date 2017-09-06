@@ -27,7 +27,7 @@
 <!-- Main -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <!-- Left column -->
             <a href="#"><strong><i class="glyphicon glyphicon-wrench"></i> QuizWright Toolbox</strong></a>
 
@@ -87,8 +87,8 @@
 
            
         </div>
-        <!-- /col-3 -->
-        <div class="col-sm-9">
+        <!-- /col-2 -->
+        <div class="col-sm-10">
 
             <!-- column 2 -->
             <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> QuizWright Builder</strong></a>
@@ -132,7 +132,7 @@
 
           
         </div>
-        <!--/col-span-9-->
+        <!--/col-span-10-->
     </div>
 </div>
 <!-- /Main -->

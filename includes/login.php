@@ -46,7 +46,7 @@
 	  <form class="form-signin" method="POST" action="?u=login">
 		<?php if (isset($regalert)){ ?><div class="alert alert-success" role="alert"><?php echo $regalert; ?></div><?php } ?>
         <h2 class="form-signin-heading">Please Login</h2>
-		<h4 class="form-signin-heading"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Need an account? <a href="?u=register">Register here.</a></h4>
+		<h4 class="form-signin-heading"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Need an account? <a href="?u=register">Register here.</a></h4>
         <div class="input-group">
 	  <span class="input-group-addon" id="basic-addon1">@</span>
 	  <input type="text" name="username" class="form-control" placeholder="Username" required>
