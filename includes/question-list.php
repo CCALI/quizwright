@@ -6,10 +6,10 @@
 	<div class="panel panel-default">
 
 	<!-- Default panel contents -->
-	<div class="panel-heading">These are all of my questions</div>
+	<!--<div class="panel-heading">These are all of my questions</div>-->
 	<!-- Table -->
 	<table class="table table-striped table-condensed">
-		<tr><th>Question</th><th>Edit</th><th>Topic</th><th>Author</th><th>Quizzes</th><!--<th>Shares</th>--><th>ID#</th></tr>
+		<tr><th>Question</th><th>Edit</th><th>Topic</th><th>Author</th><th>&nbsp;</th><!--<th>Shares</th>--><th>ID#</th></tr>
 <?php
 require ("user-session.php");
 require ("utility.php");
@@ -79,9 +79,9 @@ foreach ($pages as $pid => $page)
 		  <td><a class="page-edit glyphicon glyphicon-pencil" href="./includes/page-quiz-edit.php?pid=<?=$pid?>">Edit</td>
 		  <td nowrap> <?=$pageTopic?></td>
 		  <td> Me </td>
-		  <td> <button type="button" class="btn" data-toggle="popover" title="Quizzes using this question"  data-placement="left"
+		  <td> <span class="badge" data-toggle="popover" title="Quizzes using this question"  data-placement="left"
 							data-trigger="hover" data-html="true" data-content="<?=$lesson_info?>">
-		  <?=$lesson_count?></button> </td>
+		  <?=$lesson_count?></span> </td>
 		  <!-- <td> - </td> -->
 		  <td><?=$pid?></td>
 	  </tr>
