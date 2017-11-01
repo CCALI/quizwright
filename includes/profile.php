@@ -3,9 +3,6 @@
 <?php
 
 require ("user-session.php");
-var_dump($uid);
-var_dump($_SESSION);
-var_dump($mysqli);
 
 $sql = "SELECT profile FROM `people` WHERE uid = '$uid'";
 if ($result = $mysqli->query($sql)) {

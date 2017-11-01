@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 require ("./includes/config.php");
 
 if (isset($_POST["lesson-submit"])){

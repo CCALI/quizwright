@@ -1,5 +1,5 @@
 <?php
-	session_start();
 	require ("./config.php");
+	session_start();
 	$uid = $_SESSION['uid'];
 ?>
