@@ -92,7 +92,9 @@ if ($result = $mysqli->query($sql))
  
   <div class="col-sm-3 control-label" for="submit">Ready to give the quiz?</div>
   <div class="col-sm-8">
-    <a id="quiz-publish"   class="btn btn-primary" target=_blank href="./includes/quiz-publish.php?lid=<?php echo $lid;?>">Publish Quiz</a>
+	
+    <div id="success"></div>
+    <a id="quiz-publish"   class="btn btn-primary" target=_blank data-href="./includes/quiz-publish.php?lid=<?php echo $lid;?>">Publish Quiz</a>
     <a id="quiz-page-order"   class="btn btn-default">Change Questions</a>
     <a id="quiz-info-edit"   class="btn btn-default">Edit Description</a>
     <a id="quiz-cancel"   class="btn btn-default">Publish Later</a>
@@ -108,4 +110,11 @@ if ($result = $mysqli->query($sql))
 	$("#quiz-info-edit").click(function(){$("#main-panel").load("./includes/quiz-info-edit.php?lid=<?php echo $lid;?>");});
 	$("#quiz-cancel").click(function(){$("#main-panel").load("./includes/quiz-list.php");});
 	$("#quiz-clone").click(function(){$("#main-panel").load("./includes/quiz-clone.php?lid=<?php echo $lid;?>");});
+	$("#quiz-publish").click(function(){
+		$(this).hide();
+		$("#success").html('<div class="alert alert-info" role="info">Publishing...</div>'); 
+		window.open("./includes/quiz-publish.php?lid=<?php echo $lid;?>");
+		setTimeout(function(){$("#main-panel").load("./includes/quiz-list.php?lid=<?php echo $lid;?>");},5000);
+	});
 </script>
+
