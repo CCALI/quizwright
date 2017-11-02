@@ -15,6 +15,8 @@
 require ("user-session.php");
 require ("utility.php");
 
+$publishlid=intval($_GET['lid']);
+
 $sql = "SELECT * FROM `info` WHERE uid = '$uid'";
 if ($result = $mysqli->query($sql))
 {
@@ -26,7 +28,7 @@ if ($result = $mysqli->query($sql))
 		$published=$row['location'];/* see if already published */
 		$publishdate=$row['publishdate'];
 		?>
-		<tr>
+		<tr <?=($lid==$publishlid)?"class=success":""?> >
 			<td> <?=$data['title']?></td>
 			<td> <?=oneLinerHTML($data['calidescription'])?></td>
 			
