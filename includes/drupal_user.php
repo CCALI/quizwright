@@ -23,7 +23,63 @@ $user = htmlspecialchars($_GET['u']);
  
  switch($user) {
 	case "login":				
-		if (isset($_POST['username']) and isset($_POST['password'])){
+		if (isset($_GET['token'])){
+   $sid = $_GET['token'];
+   $query = "SELECT uid FROM `sessions` WHERE sid = '$sid'";
+   $result = $umysqli->query($query);
+   $row = mysqli_fetch_assoc($result);
+   $uid = $row['uid'];
+   $query = "SELECT * FROM `users` WHERE uid=$uid";
+		 $result = $umysqli->query($query);
+  $count = mysqli_num_rows($result);
+		if ($count == 1){
+			$account = $result->fetch_object();	
+			// check roles, needs CALI Staff or facstaff to proceed
+			$userid = $account->uid;
+			$query = "SELECT * FROM `users_roles` WHERE uid = $userid and rid in (5,6)";
+			$result = $umysqli->query($query);
+			$count = mysqli_num_rows($result);
+			if ($count >= 1) {
+				$name = $account->name;
+				$email = $account->mail;
+				$password = $account->pass;
+				// 1: check to see if user in people table
+				/**
+				 * at this point we've verified the passwd in Drupal and
+				 * matched it to a username. If that username already exists
+				 * in the local people table, let's just carry on
+				 */
+				$query = "SELECT * FROM `people` WHERE username='$name'";
+				$result = $mysqli->query($query);
+				$count = mysqli_num_rows($result);
+				if ($count == 1){
+					$row = $result->fetch_array(MYSQLI_ASSOC);
+					$_SESSION['username'] = $row['username'];
+					$_SESSION['uid'] = $row['uid'];
+				} else {
+					// 2: if not add to people table
+					// let's stash the drupal user object in the people table.
+					$data = json_encode($account);
+					$query = "INSERT INTO `people` (username, email, password, data) VALUES ('$name', '$email', '$password', '$data')";
+					if($result = $mysqli->query($query)){
+						$uid = $mysqli->insert_id;
+						$_SESSION['username'] = $name;
+						$_SESSION['uid'] = $uid;
+					} else {
+						 printf("Error: %s\n", $mysqli->error);
+					}
+					
+					
+				}
+				
+				
+				// 3: update user in people table if necessary
+				
+				
+			}
+   }
+   
+  }elseif (isset($_POST['username']) and isset($_POST['password'])){
 		$name = $_POST['username'];
 		$password = $_POST['password'];
 		$query = "SELECT * FROM `users` WHERE name='$name'";
