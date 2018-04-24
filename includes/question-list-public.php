@@ -9,36 +9,45 @@
 	<div class="panel-heading">These are questions publicly shared by the QuizWright community. </div>
 	<!-- Table -->
 	<table class="table table-striped table-condensed">
-		<tr><th>Question</th><th>Copy</th><th>Topic</th><th>Author</th><th>Quizzes</th><th>Shares</th><th>ID#</th></tr>
+		<tr><th></th><th>Topic / Question</th><th>Copy</th><th>Author</th><th>Quizzes</th><th>Shares</th><th></th></tr>
 <?php
 require ("user-session.php");
 
-// TODO List all publicly shared pages 
+// TODO List all publicly shared pages
+
+$qs=array();
 $sql = "select page.pid,people.uid,page.data, people.profile from page, people where page.uid = people.uid and   1=1";
 if ($result = $mysqli->query($sql)) {
 	while ($row = $result->fetch_assoc())
 	{
 		$page = json_decode($row['data'], TRUE);
-		$author = json_decode($row['profile'], TRUE);
-		$pid = $row['pid'];
-		$pageText = $page['page-question'];
-		$pageTopic = $page['page-topic'];
-		$pageAuthor = $author['authorfullname'];
-		?> 
-			
-		<tr  >
-			<td ><a  class="ellipsis page-detail" href="./includes/page-detail.php?pid=<?=$pid?>"> <?=$pageText?></a><div class="details"></div></td>
-			<td><a title="TODO" xhref="./includes/todo-detail.php?pid=<?=$pid?>">[Copy]</td>
-			<td nowrap> <?=$pageTopic?></td>
-			<td nowrap> <?=$pageAuthor?> </td>
-			<td> - </td>
-			<td> - </td>
-			<td><?=$pid?></td>
-		</tr>
-			
-	  <?php 
+		$public= $page['public']=='true';
+		if ($public)
+		{
+			$bank= $page['bank']=='true';
+			$author = json_decode($row['profile'], TRUE);
+			$pid = $row['pid'];
+			$pageText = $page['page-question'];
+			$pageTopic = $page['page-topic'];
+			$pageAuthor = $author['authorfullname'];
+			$trace=$pid.' '.$bank.','.$page['public'];
+			$row='<tr>
+				<td>'.$bank.'</td>
+				<td>'.$pageTopic.'<br /><a  class="ellipsis page-detail" href="./includes/page-detail.php?pid='.$pid.'">'.substr( strip_tags($pageText),0,50).'</a><div class="details"></div></td>
+				<td><a title="TODO" xhref="./includes/todo-detail.php?pid='.$pid.'">[Copy]</td>
+				<td>'.$pageAuthor.' </td>
+				<td> - </td>
+				<td> - </td>
+				<td>'.$trace.'</td>
+			</tr>';
+			// osrt by CALI Bank, Topic area. Unspecified topics sort to bottom.
+			$sort=$bank.(in_array($pageTopic,array('','Not specified')) ? '0':'').$pageTopic.$pid;
+			$qs[$sort]=$row;
+		}
 	}
 }
+ksort($qs);
+echo implode($qs);
 ?>
 		</table> 
 	</div>

@@ -77,7 +77,7 @@
 
             <ul class="nav nav-pills nav-stacked">
                 <li class="nav-header"></li>
-					 <!--<li  > <a id="question-list-public" href="#"><i class="glyphicon glyphicon-list"></i> Question Library</a></li>-->
+					 <li  > <a id="question-list-public" href="#"><i class="glyphicon glyphicon-list"></i> Question Library</a></li>
 					 <li><a href="https://www.cali.org/lessons" target="_blank"><i class="glyphicon glyphicon-list"></i> Lessons</a></li>
 					<li><a href="https://www.cali.org/lessonlink" target="_blank"><i class="glyphicon glyphicon-list"></i> LessonLink</a></li>
 					<li><a href="https://www.cali.org/autopublish" target="_blank"><i class="glyphicon glyphicon-briefcase"></i> AutoPublish</a></li>
