@@ -63,7 +63,7 @@ function pageDetailHTML($page)
 	}
 	if ($page['page-feedback']!='') $html.='<tr><td>Feedback</td><td>'.$page['page-feedback'].'</td></tr>';
 	if ($page['page-attribution']!='') $html.='<tr><td>Attribution</td><td>'.$page['page-attribution'].'</td></tr>';
-	if ($page['page-notes']!='') $html.='<tr><td>Teacher&nbsp;Notes</td><td>'.$page['page-notes'].'</td></tr>';
+	if ($page['page-notes']!='') $html.='<tr><td>Notes</td><td>'.$page['page-notes'].'</td></tr>';
 	return $html;
 }
 

@@ -9,9 +9,12 @@
 	<div class="panel-heading">These are questions publicly shared by the QuizWright community. </div>
 	<!-- Table -->
 	<table class="table table-striped table-condensed">
-		<tr><th></th><th>Topic / Question</th><th>Copy</th><th>Author</th><th>Quizzes</th><th>Shares</th><th></th></tr>
 <?php
 require ("user-session.php");
+
+$showdev=true;
+
+echo '<tr><th>Topic / Question</th><th>Copy</th><th>Author</th><th>Quizzes</th><th>Shares</th>'.($showdev?'<th class=devinfo>Details</th>':'').'</tr>';
 
 // TODO List all publicly shared pages
 
@@ -30,15 +33,18 @@ if ($result = $mysqli->query($sql)) {
 			$pageText = $page['page-question'];
 			$pageTopic = $page['page-topic'];
 			$pageAuthor = $author['authorfullname'];
+			if ($bank)
+			{
+				$pageAuthor='<div class=calibank> </div>';
+			}
 			$trace=$pid.' '.$bank.','.$page['public'];
 			$row='<tr>
-				<td>'.$bank.'</td>
 				<td>'.$pageTopic.'<br /><a  class="ellipsis page-detail" href="./includes/page-detail.php?pid='.$pid.'">'.substr( strip_tags($pageText),0,50).'</a><div class="details"></div></td>
 				<td><a title="TODO" xhref="./includes/todo-detail.php?pid='.$pid.'">[Copy]</td>
 				<td>'.$pageAuthor.' </td>
 				<td> - </td>
 				<td> - </td>
-				<td>'.$trace.'</td>
+				'.($showdev?'<td class=devinfo>'.$trace.'</td>':'').'
 			</tr>';
 			// osrt by CALI Bank, Topic area. Unspecified topics sort to bottom.
 			$sort=$bank.(in_array($pageTopic,array('','Not specified')) ? '0':'').$pageTopic.$pid;
