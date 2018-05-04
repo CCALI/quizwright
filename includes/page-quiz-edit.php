@@ -67,8 +67,15 @@ var data=<?=$row['data']?>
 					<select name="page-topic" id="page-topic" class="form-control"></select>
             </div>
         </div>
+			 <div class="form-group">
+            <label class="col-sm-2 control-label" for="page-topic-tags">Topic Tags (optional)</label>
+ 
+            <div class="col-sm-8">
+		      <input id="page-topic-tags" name="page-topic-tags" placeholder="" class="form-control" type="text" value="">
+            </div>
+        </div>
 		   <div class="form-group">
-            <label class="col-sm-2 control-label" for="page-topic">Attribution (optional)</label>
+            <label class="col-sm-2 control-label" for="page-attribution">Attribution (optional)</label>
  
             <div class="col-sm-8">
 		      <input id="page-attribution" name="page-attribution" placeholder="" class="form-control" type="text" value="">
@@ -89,8 +96,8 @@ var data=<?=$row['data']?>
 				<label class="col-sm-2 control-label" for="page">Share?</label>
 				<div class="col-sm-4">
 					<div class="btn-group" data-toggle="buttons">
-						<label class="btn btn-default "> <input type="radio"  name="public" value="false" autocomplete="off" > Private   </label>
-						<label class="btn btn-default"> 	<input type="radio" name="public" value="true" autocomplete="off"> Public   </label>
+						<label class="btn btn-default "> <input type="radio" name="public" value="false" autocomplete="off" > Private   </label>
+						<label class="btn btn-default"> 	<input type="radio" name="public" value="true" autocomplete="off"> Share with Question Bank   </label>
 					</div>
 				</div> 
 			</div>
@@ -114,6 +121,7 @@ var data=<?=$row['data']?>
 $('[name=page-question]').text(data['page-question']);
 $('[name=page-feedback]').text(data['page-feedback']);
 cawSetRB('public',data['public']);
+$('[name=page-topic-tags]').val(data['page-topic-tags']);
 $('[name=page-attribution]').val(data['page-attribution']);
 $('[name=page-notes]').text(data['page-notes']);
 cawLoadCALITopics($('#page-topic'),data['page-topic']);
@@ -126,7 +134,8 @@ $('[data-toggle=collapse]').unbind().click(function(){
 $('#page-submit').click(function(){ // Save page let author add new page
 	cawCKEditorUpdates();
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
-		$("#main-panel").load('./includes/question-list.php');//$(this).attr('href'));
+		$("#main-panel").html('').load('./includes/question-list.php');//$(this).attr('href'));
+		//$('#page-quiz-form').closest('tr').find('.details').html('');
 	});
 	return false;
 });

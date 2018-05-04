@@ -47,7 +47,7 @@
 							<li><a id="question-new" href="#" ><i class="glyphicon glyphicon-plus"></i>Question</a></li>
 							<li><a id="quiz-new" href="#" ><i class="glyphicon glyphicon-plus"></i>Quiz</a></li>
 						</ul>
-                        <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Options</a></li>
+                        <!--<li><a href="#"><i class="glyphicon glyphicon-cog"></i> Options</a></li> -->
                         
                     </ul>
                 </li>
@@ -77,7 +77,7 @@
 
             <ul class="nav nav-pills nav-stacked">
                 <li class="nav-header"></li>
-					 <li  > <a id="question-list-public" href="#"><i class="glyphicon glyphicon-list"></i> Question Library</a></li>
+					 <li  > <a id="question-list-public" href="#"><i class="glyphicon glyphicon-list"></i> Question Bank</a></li>
 					 <li><a href="https://www.cali.org/lessons" target="_blank"><i class="glyphicon glyphicon-list"></i> Lessons</a></li>
 					<li><a href="https://www.cali.org/lessonlink" target="_blank"><i class="glyphicon glyphicon-list"></i> LessonLink</a></li>
 					<li><a href="https://www.cali.org/autopublish" target="_blank"><i class="glyphicon glyphicon-briefcase"></i> AutoPublish</a></li>

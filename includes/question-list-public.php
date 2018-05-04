@@ -11,15 +11,16 @@
 	<table class="table table-striped table-condensed">
 <?php
 require ("user-session.php");
+require "utility.php";
 
-$showdev=true;
+$showdev=( 0  ==1);
 
-echo '<tr><th>Topic / Question</th><th>Copy</th><th>Author</th><th>Quizzes</th><th>Shares</th>'.($showdev?'<th class=devinfo>Details</th>':'').'</tr>';
+echo '<tr><th>Topic / Question</th><th>Copy</th><th>Author</th><!--<th>Quizzes</th><th>Shares</th>-->'.($showdev?'<th class=devinfo>Details</th>':'').'</tr>';
 
 // TODO List all publicly shared pages
 
 $qs=array();
-$sql = "select page.pid,people.uid,page.data, people.profile from page, people where page.uid = people.uid and   1=1";
+$sql = "select page.pid,people.uid,page.data, people.profile from page, people where page.uid = people.uid  limit 100";
 if ($result = $mysqli->query($sql)) {
 	while ($row = $result->fetch_assoc())
 	{
@@ -31,7 +32,6 @@ if ($result = $mysqli->query($sql)) {
 			$author = json_decode($row['profile'], TRUE);
 			$pid = $row['pid'];
 			$pageText = $page['page-question'];
-			$pageTopic = $page['page-topic'];
 			$pageAuthor = $author['authorfullname'];
 			if ($bank)
 			{
@@ -39,15 +39,15 @@ if ($result = $mysqli->query($sql)) {
 			}
 			$trace=$pid.' '.$bank.','.$page['public'];
 			$row='<tr>
-				<td>'.$pageTopic.'<br /><a  class="ellipsis page-detail" href="./includes/page-detail.php?pid='.$pid.'">'.substr( strip_tags($pageText),0,50).'</a><div class="details"></div></td>
-				<td><a title="TODO" xhref="./includes/todo-detail.php?pid='.$pid.'">[Copy]</td>
+				<td><span class="summary"><a  class=" ellipsis page-detail" href="./includes/page-detail.php?pid='.$pid.'">'.compactQuestionDescription($page).'</a><span class="page-topic">'.niceTopicAndTags($page).'</span></span><div class="details"></div></td>
+				<td><a title="Copy to my questions" class="page-clone glyphicon glyphicon-duplicate" href="./includes/page-clone.php?pid='.$pid.'"> </a></td>
 				<td>'.$pageAuthor.' </td>
-				<td> - </td>
-				<td> - </td>
+				<!--<td> - </td>
+				<td> - </td>-->
 				'.($showdev?'<td class=devinfo>'.$trace.'</td>':'').'
 			</tr>';
-			// osrt by CALI Bank, Topic area. Unspecified topics sort to bottom.
-			$sort=$bank.(in_array($pageTopic,array('','Not specified')) ? '0':'').$pageTopic.$pid;
+			// Sort by CALI Bank, Topic area. Unspecified topics sort to bottom.
+			$sort=$bank.(in_array($pageTopic,array('Not specified','')) ? '0':'').$pageTopic.$pid;
 			$qs[$sort]=$row;
 		}
 	}
@@ -63,11 +63,19 @@ echo implode($qs);
 
 
 
-<script> 
+<script>
+$('.page-clone').click(function(){ // Edit inline 
+	$(this).closest('td').load($(this).attr('href'));
+	return false;
+});
 $('.page-detail').click(function(){ // Load details of question into row
 	var details=$(this).closest('td').find('.details');
 	$.post($(this).attr('href'),'' ,function( html ) {
-		$(details).html(html); 
+		$(details).closest('.summary').hide();
+		$(details).html('').append($('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
+		.click(function(){$(this).closest('.details').html('');$(this).closest('td').find('.summary').show();}));
+		$(details).append(html);
+	
 	});
 	return false;
 });

@@ -9,25 +9,39 @@
 */
 
 require ("user-session.php");
+require "utility.php";
 $pid = intval($_REQUEST['pid']);
-$sql = "SELECT * FROM `page` WHERE uid = '$uid' and pid = $pid";
+$sql = "SELECT uid,data FROM `page` WHERE pid = $pid";
 if ($result = $mysqli->query($sql))
 {
 	if ($row = $result->fetch_assoc())
 	{
 		// Check page type so we get accurate detail (but as of 3/2017 there are all quiz type)
 		$page = json_decode($row['data'] , TRUE );
-//		var_dump($page);
-		echo pageDetailHTML($page);
+		if ($page['public'] || $row['uid']==$uid)
+		{
+	//		var_dump($page);
+			echo pageDetailHTML($page);
+		}
+		else
+		{
+			echo "Page $pid not accessible to user $uid";
+		}
+	}
+	else
+	{
+		echo "Page $pid not found";
 	}
 }
-
 function pageDetailHTML($page)
 {	// Return pleasant HTML markup description of page.
 	// TODO: move to shared library so we can display this in other places.
 	$pagetype = $page['page-type'];
 	$html='<table class="table">';
-	if ($page['page-topic']!='') $html.='<tr><td>Topic</td><td>'.$page['page-topic'].'</td></tr>';
+	
+	$topic=niceTopicAndTags($page);
+	if ($topic!='') $html.='<tr><td>Topic</td><td>'.$topic.'</td></tr>';
+
 	if ($page['page-question']!='') $html.='<tr><td>Question</td><td>'.$page['page-question'].'</td></tr>';
 	switch ($pagetype)
 	{
