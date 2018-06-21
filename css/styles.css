@@ -75,11 +75,24 @@ footer {
   color: red;
 }
 
-
 .ellipsis {
 	display: block;
-	width: 25em;
+	xwidth: 25em;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+}
+.calibank {
+	width: 48px;
+	height: 12px;
+	background-image: url("../images/CALI Bank.png");
+	background-repeat: no-repeat;
+	background-size: 48px 12px;
+}
+.devinfo {
+	color: #fff;
+	background-color: #000;
+}
+.page-topic{
+	font-size: smaller;
 }
