@@ -95,4 +95,11 @@ footer {
 }
 .page-topic{
 	font-size: smaller;
+	display: inline-block;
+	color: white;
+	margin: 0.2em 0.2em;
+	padding: 0 0.4em;
+	background-color: #1D2D44;
+	border-radius: 0.4em;
+	opacity: 0.2;
 }
