@@ -10,7 +10,29 @@ $('[data-toggle=collapse]').click(function(){
 /*$("#new").click(function(){
                 $("#newlesson").load("./includes/newlesson.inc"); 
             });*/
+// routes
+var base = "/";
 
+var routes = [
+	"login",
+	"lesson-info",
+	"page",
+	"question-new",
+	"quiz-new",
+	"quiz-list",
+	"question-list",
+	"question-list-public",
+	"add-question",
+	"add-quiz",
+	"list-question",
+	"list-quiz"
+];
+
+$.each(routes, function(i, page) {
+    $.router.add(base + page, function() {
+		
+	});
+});
 $("#lesson-info").click(function(){
 	$("#main-panel").load("./includes/lesson-new.inc"); 
 });
