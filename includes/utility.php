@@ -16,7 +16,7 @@ function mergeObjects($old,$new)
 function oneLinerHTML($html)
 {	// 06/28/2017 SJG Strip html of HTML tags and shorten to MAXCHARS characters for use in lists of questions/quizzes.
 	//	Ideally, use CSS markup for wrapping. This hack works for now and reduces traffic a bit. 
-	define('MAXCHARS',60);
+	define('MAXCHARS',120);
 	$text = trim(strip_tags($html));
 	if (strlen($text)>MAXCHARS)
 	{
@@ -25,16 +25,25 @@ function oneLinerHTML($html)
 	return $text;
 }
 
-function compactQuestionDescription($page)
+
+function niceTopicAndTags(&$page)
+{	// 5/1/18 Format topic and tag nicely for display.
+	$html='';
+	if ($page['page-topic']!='') $html.= $page['page-topic'];
+	if ($page['page-topic-tags']!='') $html.=': '.$page['page-topic-tags'];
+	return $html;
+}
+
+function compactQuestionDescription(&$page)
 {	// 06/28/2017 SJG Given $page JSON object, return compact question description including question text and some type/choice info.
 	$text = oneLinerHTML($page['page-question']);
-	switch ( $page['page-type'] )
+	/*switch ( $page['page-type'] )
 	{
 		case 'quiz-yn':
-			$type='Y/N';
+			$type='YN';//'Y/N';
 			break;
 		case 'quiz-tf':
-			$type='T/F';
+			$type='TF';//'T/F';
 			break;
 		default:
 			$choices=1;
@@ -45,10 +54,14 @@ function compactQuestionDescription($page)
 					$choices ++;
 				}
 			}
-			$type=$choices.' choices';
+			//$type=$choices;//.' choices';
+			$type=substr('1234567',0,$choices);
 			break;
 	}
-	return $text. ' ('.$type.')';
+	//return $text. ' ('.$type.')';
+	return $text. ' <span class="label label-primary">'.$type.'</span>';
+	*/
+	return $text;
 }
 
 ?>

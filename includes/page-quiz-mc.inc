@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="page">Teacher Notes (Optional)</label>
+            <label class="col-sm-2 control-label" for="page">Notes (Optional)</label>
 
             <div class="col-sm-8">
                 <textarea name="page-notes"  class="form-control"></textarea>
