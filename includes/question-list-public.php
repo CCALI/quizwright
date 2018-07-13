@@ -1,12 +1,12 @@
 <!-- List quiz questions written by author -->
 <form class="form-horizontal" id="pages-add-form" method="post">
     <fieldset>
-    <legend>Shared Questions</legend> 
+    <legend>Question Bank</legend> 
 
 	<div class="panel panel-default">
 
 	<!-- Default panel contents -->
-	<div class="panel-heading">These are questions publicly shared by the QuizWright community. </div>
+	<div class="panel-heading">These are questions publicly shared by the QuizWright community and extracted from CALI Lessons. To use one of these questions click the copy icon to add it to your My Questions list.</div>
 	<!-- Table -->
 	<table class="table table-striped table-condensed">
 <?php
@@ -15,7 +15,7 @@ require "utility.php";
 
 $showdev=( 0  ==1);
 
-echo '<tr><th>Topic / Question</th><th>Copy</th><th>Author</th><!--<th>Quizzes</th><th>Shares</th>-->'.($showdev?'<th class=devinfo>Details</th>':'').'</tr>';
+echo '<tr><th>Question / Topic</th><th>Copy</th><th>Author</th><!--<th>Quizzes</th><th>Shares</th>-->'.($showdev?'<th class=devinfo>Details</th>':'').'</tr>';
 
 // TODO List all publicly shared pages
 
