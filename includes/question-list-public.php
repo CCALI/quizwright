@@ -20,7 +20,7 @@ echo '<tr><th>Question / Topic</th><th>Copy</th><th>Author</th><!--<th>Quizzes</
 // TODO List all publicly shared pages
 
 $qs=array();
-$sql = "select page.pid,people.uid,page.data, people.profile from page, people where page.uid = people.uid  limit 100";
+$sql = "select page.pid,people.uid,page.data, people.profile from page, people where page.data like '%public\":true%' and page.uid = people.uid";
 if ($result = $mysqli->query($sql)) {
 	while ($row = $result->fetch_assoc())
 	{
