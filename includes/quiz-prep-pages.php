@@ -34,7 +34,7 @@
 		
 		
 <table class="table table-striped table-condensed">
-<tr><th>Question / Topic</th><th>Quiz Usage</th></tr>
+<tr><th>Question / Topic</th><th>Used</th></tr>
 
 <?php
 
@@ -80,9 +80,8 @@ foreach ($pages as $pid => &$page)
 	$assigned  = $page['lessons'] == 0 ? 'unassigned' : 'assigned';
 ?>
 	 <tr class="question <?=$assigned?>">
-		 <td class="summary">
-			 <input type="checkbox" autocomplete="off" name="<?=$pid?>"  > <?=$page['text']?> </td>
-			<td>(Used by <?=$page['lessons']?> quizzes)</td>
+		 <td> <span class="summary"><input type="checkbox" autocomplete="off" name="<?=$pid?>"  > <?=$page['text']?></span> </td>
+			<td> <span class="badge"><?=$page['lessons']?></span> </td>
 		 
 	 </tr>			 
  <?php 
