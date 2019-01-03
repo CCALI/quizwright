@@ -33,7 +33,9 @@
 			</div>
 		
 		
-<ul>
+<table class="table table-striped table-condensed">
+<tr><th>Question / Topic</th><th>Used</th></tr>
+
 <?php
 
 $pages=array(); // key is page id, quizzes using the page
@@ -77,15 +79,15 @@ foreach ($pages as $pid => &$page)
 	$page['lessons']= count($page['lessons']);
 	$assigned  = $page['lessons'] == 0 ? 'unassigned' : 'assigned';
 ?>
-	 <li class="question <?=$assigned?>">
-		 <label class="btn btn-primary active">
-			 <input type="checkbox" autocomplete="off" name="<?=$pid?>"  > <?=$page['text']?> (Used by <?=$page['lessons']?> quizzes)
-		 </label>
-	 </li>			 
+	 <tr class="question <?=$assigned?>">
+		 <td> <span class="summary"><input type="checkbox" autocomplete="off" name="<?=$pid?>"  > <?=$page['text']?></span> </td>
+			<td> <span class="badge"><?=$page['lessons']?></span> </td>
+		 
+	 </tr>			 
  <?php 
 }
 ?>
-</ul>
+</table>
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="page-submit">  </label>
