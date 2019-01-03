@@ -136,7 +136,7 @@ $('#page-submit').click(function(){ // Save page let author add new page
 	cawCKEditorUpdates();
 	if (!validate()) return false;
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
-		$("#main-panel").load("./includes/page-quiz.inc");
+		$("#main-panel").load("./includes/page-quiz.php");
 		window.scrollTo(0, 0);
 	});
 	return false;
