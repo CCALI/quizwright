@@ -20,7 +20,7 @@ $("#page").click(function(){
 });
 
 $("#question-new").click(function(){
-	$("#main-panel").load("./includes/page-quiz.inc"); 
+	$("#main-panel").load("./includes/page-quiz.php"); 
 });
 
 $("#quiz-new").click(function(){
@@ -44,7 +44,7 @@ $("#profile-edit, #author-edit").click(function(){
 
 // homepage buttons
 $("#add-question").click(function(){
-	$("#main-panel").load("./includes/page-quiz.inc"); 
+	$("#main-panel").load("./includes/page-quiz.php"); 
 });
 $("#add-quiz").click(function(){
 	$("#main-panel").load("./includes/quiz-prep-pages.php"); 
