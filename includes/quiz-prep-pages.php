@@ -137,7 +137,7 @@ $('[name=page-status-filter]').change(function(){
 
 });
 $('#page-new').click(function(){  
-	$("#main-panel").load("./includes/page-quiz.inc"); 
+	$("#main-panel").load("./includes/page-quiz.php"); 
 	return false;
 });
 $('#pages-add-submit').click(function(){ // Save page selection, let author prepare quiz
