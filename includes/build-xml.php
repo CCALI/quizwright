@@ -67,7 +67,7 @@ function BuildXML($mysqli,$lid,$data,$author)
 		'SUBJECTAREA'=>htmlspecialchars($data['subjectarea']),
 		'COMPLETIONTIME'=>htmlspecialchars($data['completiontime']),
 		'NOTES'=>$qwinfo,
-		'DESCRIPTION'=> ( $description) + $qwinfo
+		'DESCRIPTION'=>  $description . $qwinfo
 		);
 	$xml.='<INFO>';
 	foreach ($info as $key=>$value) $xml.='<'.$key.'>'. $value .'</'.$key.'>';
