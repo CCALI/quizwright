@@ -51,7 +51,9 @@ if ($result = $mysqli->query($sql))
 				<a class="btn btn-default" title="Review details of my quiz"  href="./includes/quiz-detail.php?lid=<?=$lid?>">Details</a> 
 				<a class="btn btn-default glyphicon glyphicon-pencil" title="Edit quiz information"   href="./includes/quiz-info-edit.php?lid=<?=$lid?>"> </a>
 				<a class="btn btn-default glyphicon glyphicon-th-list" title="Change questions in the quiz"   href="./includes/quiz-page-order.php?lid=<?=$lid?>"></a>
-				<a class="btn btn-default" title="Preview the quiz in the test viewer" target=_blank href="./cav/web/preview/index.php?quiz=<?=$lid?>">Preview</a> 
+				<!--
+					<a class="btn btn-default" title="Preview the quiz in the test viewer" target=_blank href="./cav/web/preview/index.php?quiz=<?=$lid?>">Preview</a>
+				-->
 				<a class="btn btn-default" title="View the XML data that makes up a quiz" target=_blank href="./book-data-xml.php?lid=<?=$lid?>">XML</a>
 			</td>
 			<?php } ?>
