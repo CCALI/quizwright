@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CALI QuizWright</a>
+            <a class="navbar-brand" href="#">CALI QuizWright®</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -34,17 +34,20 @@
             <hr>
 
             <ul class="nav nav-stacked">
-                <li><a id="author-edit" href="#"> <i  class="glyphicon glyphicon-user"></i> My Profile</a></li>
-                <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userQuestionMenu">Questions <i class="glyphicon glyphicon-chevron-down"></i></a> 
-                    <ul class="nav nav-stacked collapse in" id="userQuestionMenu">
-                        <li class="active"> <a id="question-list" href="#"><i class="glyphicon glyphicon-th-list"></i> My Questions</a></li>
-                        <li> <a id="question-list-public" href="#"><i class="glyphicon glyphicon-list"></i> Question Bank</a></li>
-                        <li><a id="question-new" href="#" ><i class="glyphicon glyphicon-edit"></i> Add a Question</a></li>
-                    </ul>
-                <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userQuizMenu">Quizzes <i class="glyphicon glyphicon-chevron-down"></i></a> 
-                    <ul class="nav nav-stacked collapse in" id="userQuizMenu">
+                <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Quizzes <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <ul class="nav nav-stacked collapse in" id="userMenu">
+								
+                        <li><a id="author-edit" href="#"> <i  class="glyphicon glyphicon-user"></i> My Profile</a></li>
                         <li class="active"> <a id="quiz-list" href="#"><i class="glyphicon glyphicon-th-list"></i> My Quizzes</a></li>
-                        <li><a id="quiz-new" href="#" ><i class="glyphicon glyphicon-edit"></i> Add a Quiz</a></li>
+                        <li class="active"> <a id="question-list" href="#"><i class="glyphicon glyphicon-th-list"></i> My Questions</a></li>
+                        <li><a id="new" href="#" data-toggle="collapse" data-target="#lessonMenu"><i class="glyphicon glyphicon-plus"></i> New</a></li>
+						<ul class="nav nav-stacked collapse" id="lessonMenu">
+							<!--<li><a id="lesson-info" href="#" ><i class="glyphicon glyphicon-plus"></i>Info</a></li>-->
+							<!--<li><a id="page" href="#" ><i class="glyphicon glyphicon-plus"></i>Page</a></li>-->
+							<li><a id="question-new" href="#" ><i class="glyphicon glyphicon-plus"></i>Question</a></li>
+							<li><a id="quiz-new" href="#" ><i class="glyphicon glyphicon-plus"></i>Quiz</a></li>
+						</ul>
+                        <!--<li><a href="#"><i class="glyphicon glyphicon-cog"></i> Options</a></li> -->
                         
                     </ul>
                 </li>
@@ -74,7 +77,8 @@
 
             <ul class="nav nav-pills nav-stacked">
                 <li class="nav-header"></li>
-					<li><a href="https://www.cali.org/lessons" target="_blank"><i class="glyphicon glyphicon-list"></i> Lessons</a></li>
+					 <li  > <a id="question-list-public" href="#"><i class="glyphicon glyphicon-list"></i> Question Bank</a></li>
+					 <li><a href="https://www.cali.org/lessons" target="_blank"><i class="glyphicon glyphicon-list"></i> Lessons</a></li>
 					<li><a href="https://www.cali.org/lessonlink" target="_blank"><i class="glyphicon glyphicon-list"></i> LessonLink</a></li>
 					<li><a href="https://www.cali.org/autopublish" target="_blank"><i class="glyphicon glyphicon-briefcase"></i> AutoPublish</a></li>
 					<li><a href="https://www.cali.org/the-elangdell-bookstore" target="_blank"><i class="glyphicon glyphicon-book"></i> CALI Bookstore</a></li>
@@ -94,7 +98,7 @@
 				<div id="main-panel">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4>Welcome to QuizWright</h4>
+							<h4>Welcome to QuizWright®</h4>
 						</div>
 						<div class="panel-body">
 							<p>QuizWright is a web app that lets teachers write individual MC, T/F, Y/N questions,
