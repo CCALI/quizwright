@@ -13,10 +13,10 @@ function mergeObjects($old,$new)
 	return $old;
 }
 
+define('MAXCHARS',120);
 function oneLinerHTML($html)
 {	// 06/28/2017 SJG Strip html of HTML tags and shorten to MAXCHARS characters for use in lists of questions/quizzes.
 	//	Ideally, use CSS markup for wrapping. This hack works for now and reduces traffic a bit. 
-	define('MAXCHARS',120);
 	$text = trim(strip_tags($html));
 	if (strlen($text)>MAXCHARS)
 	{
