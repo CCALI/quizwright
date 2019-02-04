@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CALI QuizWright®</a>
+            <a class="navbar-brand" href="#">CALI QuizWrightÂ®</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -98,7 +98,7 @@
 				<div id="main-panel">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4>Welcome to QuizWright®</h4>
+							<h4>Welcome to QuizWrightÂ®</h4>
 						</div>
 						<div class="panel-body">
 							<p>QuizWright is a web app that lets teachers write individual MC, T/F, Y/N questions,
