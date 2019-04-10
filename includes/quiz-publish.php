@@ -7,7 +7,7 @@ require ("build-xml.php");	// 05/10/2017 Move XML builder to shared library
 
 // Note: user id is ignored since students will need this
 $lid = intval($_GET['lid']);
-//$SQL="select data from info where lid = $lid";
+
 
 // Query to get lesson and author data
 $SQL="select info.data, people.profile from info,people where lid = $lid and info.uid = people.uid";
@@ -19,21 +19,24 @@ if ($result = $mysqli->query($SQL))
 		$data = json_decode($row['data'], TRUE);
 		$profile = json_decode($row['profile'], TRUE);
 		$jqbookdata = BuildXML($mysqli,$lid,$data,$profile);
-		
+		// Create quiz folder and add/update jqBookData.
+		$dir = "../quizzes/$lid";
+		if (!is_dir($dir))
+		{
+			mkdir($dir);
+		}
+		file_put_contents($dir.'/jqBookData.xml',$jqbookdata);
+	
 		//some CURL stuff
-		//$URL = "https://d7.calidev.org/autopublish/upload";
-
     //setting the curl parameters.
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL,PUBLISH_URL);
+    curl_setopt($ch, CURLOPT_URL,PUBLISH_URL."/$lid");// Pass quiz id on publish url
     curl_setopt($ch, CURLOPT_VERBOSE, 1);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $jqbookdata);
 
         if (curl_errno($ch)) 
     {
