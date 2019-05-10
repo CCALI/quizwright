@@ -53,8 +53,8 @@ if ($result = $mysqli->query($SQL))
 				//getting response from server
 				$response = curl_exec($ch);
 				// $response is a bit of XML
-				 echo $response;
-				 die;
+				//echo $response;
+				//die;
 				$xml = new SimpleXMLElement($response);
 				// var_dump($xml);
 				 $apURL = $xml->URL[0];
