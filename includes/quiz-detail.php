@@ -85,6 +85,7 @@ if ($result = $mysqli->query($sql))
 	<div class="col-sm-3 control-label" for="submit">This quiz was published <?=$publishdate?></div>
 	<div class="col-sm-8">
 		<a id="quiz-run"   class="btn btn-primary" target=_blank href="<?=$published?>">Run the Quiz</a>
+		<a id="quiz-text"   class="btn btn-default" target=_blank href="./includes/quiz-report.php?lid=<?php echo $lid;?>">Full Quiz Report</a>
 		<a id="quiz-clone"   class="btn btn-default">Duplicate Quiz</a>
 	</div>
 	</div>
@@ -97,6 +98,7 @@ if ($result = $mysqli->query($sql))
     <a id="quiz-publish"   class="btn btn-primary" target=_blank data-href="./includes/quiz-publish.php?lid=<?php echo $lid;?>">Publish Quiz</a>
     <a id="quiz-page-order"   class="btn btn-default">Change Questions</a>
     <a id="quiz-info-edit"   class="btn btn-default">Edit Description</a>
+		<a id="quiz-text"   class="btn btn-default" target=_blank href="./includes/quiz-report.php?lid=<?php echo $lid;?>">Full Quiz Report</a>
     <a id="quiz-cancel"   class="btn btn-default">Publish Later</a>
   </div>
 </div>
