@@ -32,7 +32,9 @@ if ($result = $mysqli->query($SQL))
 			$upload_url = PUBLISH_URL."/".$lid;
 			$cfile = curl_file_create($dir.'/jqBookData.xml','application/xml','jqBookData.xml');			
 			$data = array('quiz_files' => $cfile);
-			 
+			$fp = fopen(dirname(__FILE__).'/errorlog.txt', 'w');
+			curl_setopt($ch, CURLOPT_VERBOSE, 1);
+			curl_setopt($ch, CURLOPT_STDERR, $fp);
 			curl_setopt($ch, CURLOPT_URL,$upload_url);
 			curl_setopt($ch, CURLOPT_VERBOSE, 1);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
