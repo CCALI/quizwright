@@ -32,6 +32,7 @@ if ($result = $mysqli->query($sql)) {
 			$author = json_decode($row['profile'], TRUE);
 			$pid = $row['pid'];
 			$pageText = $page['page-question'];
+			$pageTopic = $page['page-topic'];
 			$pageAuthor = $author['authorfullname'];
 			if ($bank)
 			{
