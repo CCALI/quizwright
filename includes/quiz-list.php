@@ -17,7 +17,7 @@ require ("utility.php");
 
 $publishlid=intval($_GET['lid']);
 
-$sql = "SELECT * FROM `info` WHERE uid = '$uid'";
+$sql = "SELECT * FROM `info` WHERE uid = '$uid' order by lid desc";
 if ($result = $mysqli->query($sql))
 {
 	while ($row = $result->fetch_assoc())
