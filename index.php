@@ -55,8 +55,9 @@ var_dump($params);
 	<!-- script references -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-      <script src="//cdn.ckeditor.com/4.7.0/basic/ckeditor.js"></script>
+        <script src="//cdn.ckeditor.com/4.7.0/basic/ckeditor.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.router.js"></script>
 		<script src="js/scripts.js"></script>
 	</body>
 </html>
