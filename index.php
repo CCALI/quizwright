@@ -1,5 +1,12 @@
 <?php
+// server should keep session data for AT LEAST 1 hour
+ini_set('session.gc_maxlifetime', 64800);
+
+// each client should remember their session id for EXACTLY 1 hour
+session_set_cookie_params(64800);
 session_start();
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 require ("./includes/config.php");
 
 if (isset($_POST["lesson-submit"])){
@@ -31,6 +38,18 @@ if (isset($_POST["lesson-submit"])){
 <footer class="text-center"><div id="footer-wrapper">
     <div ><img src="images/CALI_LogoTagline_DarkGrayMedium.png" /></div>
 	<div class="copyright-text">Copyright &copy; 2017, All Contents Copyright<br>The Center for Computer-Assisted Legal Instruction</div>
+<?php
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 64800)) {
+    // last request was more than 30 minutes ago
+    session_unset();     // unset $_SESSION variable for the run-time 
+    session_destroy();   // destroy session data in storage
+	}
+	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+var_dump($_SESSION);
+echo "<b>".session_id()."</b>";
+$params = session_get_cookie_params();
+var_dump($params);
+?>
 </footer>
 
 	<!-- script references -->
