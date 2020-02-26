@@ -11,7 +11,7 @@ $('[data-toggle=collapse]').click(function(){
                 $("#newlesson").load("./includes/newlesson.inc"); 
             });*/
 // routes
-var base = "/";
+var base = "/quizwright/";
 
 var routes = [
 	"login",
@@ -30,7 +30,14 @@ var routes = [
 
 $.each(routes, function(i, page) {
     $.router.add(base + page, function() {
-		
+		$.get(base + page, function(html) {
+            var htmlObj = $(html);
+
+            $('title').replaceWith(htmlObj.filter('title'));
+            $('.container').replaceWith(htmlObj.filter('.container'));
+
+            window.history.replaceState({}, '', htmlObj.filter('meta[name=page-path]').attr('content'));
+        });
 	});
 });
 $("#lesson-info").click(function(){
