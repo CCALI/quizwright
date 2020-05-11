@@ -39,7 +39,7 @@ if ($result = $mysqli->query($sql))
 			$pageTopic = $page['page-topic'];
 			$nicetags=niceTopicAndTags($page);
 			// Question information
-			$row="<tr valign=top><td nowrap>$topic</td><td>$lsn</td><td nowrap>$pagename</td><td>$nicetags</td><td>$attr</td><td>$added</td><td>$pid</td></tr>";
+			$row="<tr valign=top><td nowrap>$topic</td><td>$lsn</td><td nowrap>$pagename</td><td>$nicetags</td><td>$attr</td><td>$added</td><td align=right>#$pid</td></tr>";
 			$sort=$topic.' '.$lsn.' '.$pagename;
 			$qs[$sort]=$row;
 			if (!isset($areaTotals[$topic]))
@@ -64,18 +64,22 @@ $list=implode($qs);
 
 ksort($areaTotals);
 $topics='';
+
+
 foreach ($areaTotals as $area=>$total)
 {
-	$topics.='<li>'.$total.' '.$area;
+	$topics.='<tr><td>'.$area.'</td><td align=right>'.$total.'</td></tr>';
 }
-	$topics.='<li>'.$counter.' Total';
+	$topics.='<tr><td>&nbsp;</td><td align=right>'.$counter.'</td></tr>';
 ?>
 
+	
 <p>Index current as of <?php echo date("m/d/Y");?> </p>
 <h2>CALI Topics</h2>
-<ul>
+<table>
 	<?php echo $topics;?>
-</ul>
+</table>
+
 <h2>Imported CALI Lesson index</h2>
 	<table cellpadding=5 class="table table-striped table-condensed">
 		<tr><th>CALI Topic</th><th>CALI Lesson</th><th>Date added</th><th>Pages</th><th>CALI Attribution</th></tr>
