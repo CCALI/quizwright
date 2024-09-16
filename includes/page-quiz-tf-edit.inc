@@ -12,7 +12,6 @@
 	 </div>
 </div>
 
-
 <script>
 cawSetRB('true-is-correct',data['true-is-correct']);
 </script>

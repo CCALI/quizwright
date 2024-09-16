@@ -18,7 +18,7 @@ if ($result = $mysqli->query($sql))
 	{
 		// Check page type so we get accurate detail (but as of 3/2017 there are all quiz type)
 		$page = json_decode($row['data'] , TRUE );
-		if ($page['public'] || $row['uid']==$uid)
+		if (($page['public']??false) || $row['uid']==$uid)
 		{
 	//		var_dump($page);
 			echo pageDetailHTML($page);
@@ -47,14 +47,14 @@ function pageDetailHTML($page)
 	{
 		
 		case 'quiz-yn':	// Yes/No
-			$isyes = $page['yes-is-correct']=='true';
+			$isyes = ($page['yes-is-correct']??'true')=='true';
 			$html.='<tr><td>Type</td><td>'
 				. ($isyes ?  '<span class="correct">Yes</span>/No' : 'Yes/<span class="correct">No</span>')
 				.'</td></tr>';
 			break;
 		
 		case 'quiz-tf':	// True/false 
-			$istrue = $page['true-is-correct']=='true';
+			$istrue = ($page['true-is-correct']??'true')=='true';
 			$html.='<tr><td>Type</td><td>'
 				. ($istrue ?  '<span class="correct">True</span>/False' : 'True/<span class="correct">False</span>')
 				.'</td></tr>';
@@ -66,7 +66,7 @@ function pageDetailHTML($page)
 			$html.='<tr><td class="correct">Correct</td><td>'.$page['page-choice-correct-text'].'</td></tr>';
 			for ($wrong=1;$wrong<=7;$wrong++)
 			{
-				$wrongText = $page['page-choice-wrong-'.$wrong.'-text'];
+				$wrongText = $page['page-choice-wrong-'.$wrong.'-text']??'';
 				if ($wrongText!='') {
 					$html.='<tr><td class="wrong">Wrong</td><td>'.$wrongText.'</td></tr>';
 				}
