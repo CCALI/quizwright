@@ -3,3 +3,5 @@
 includes/config.php
 .gitignore~
 .htaccess~
+
+quizzes/
