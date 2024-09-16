@@ -56,7 +56,7 @@ var data=<?=$row['data']?>
             <label class="col-sm-2 control-label" for="page">Feedback (Optional)</label>
 
             <div class="col-sm-8">
-                <textarea name="page-feedback"  class="form-control"></textarea>
+                <textarea name="page-feedback" id="page-feedback" class="form-control"></textarea>
             </div>
         </div>
 		  
@@ -85,7 +85,7 @@ var data=<?=$row['data']?>
             <label class="col-sm-2 control-label" for="page">Notes (Optional)</label>
 
             <div class="col-sm-8">
-                <textarea name="page-notes"  class="form-control"></textarea>
+                <textarea name="page-notes" id="page-notes" class="form-control"></textarea>
             </div>
         </div>
 		  
@@ -133,6 +133,7 @@ $('[data-toggle=collapse]').unbind().click(function(){
 });
 $('#page-submit').click(function(){ // Save page let author add new page
 	cawCKEditorUpdates();
+	//console.log($( "#page-quiz-form" ).serialize() );
 	$.post( "./includes/page-update.php", $( "#page-quiz-form" ).serialize() ,function( data ) {
 		$("#main-panel").html('').load('./includes/question-list.php');//$(this).attr('href'));
 		//$('#page-quiz-form').closest('tr').find('.details').html('');

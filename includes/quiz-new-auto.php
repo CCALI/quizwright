@@ -104,7 +104,7 @@ $data['completiontime']='';	//'20 minutes';
 
 <script> 
 cawCKEditor('calidescription,quiz-intro,quiz-conclusion');
-$("#quiz-update-submit").click(function(){ // Save quiz. 
+$("#quiz-update-submit").click(function(){ // Save quiz.
 	cawCKEditorUpdates();
 	if (cawCKEditorLength('calidescription')==0)
 	{

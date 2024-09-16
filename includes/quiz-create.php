@@ -12,5 +12,5 @@ mysqli_stmt_bind_param($stmt, "iis", $lid, $uid, $data);
 mysqli_stmt_execute($stmt);
 $result=mysqli_connect_error();
 $lid = $mysqli->insert_id;
-echo json_encode(array( 'lid'=>$lid,'SQL'=>$SQL,'result'=>$result ));
+echo json_encode(array( 'lid'=>$lid,'result'=>$result ));
 ?>

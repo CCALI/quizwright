@@ -26,8 +26,8 @@
                     
 		<div class="btn-group" data-toggle="buttons">
   
-	  <label class="btn btn-primary ">    <input type="radio" name="true-is-correct" value="true" autocomplete="off"> True   </label>
-	<label class="btn btn-primary">    <input type="radio" name="true-is-correct" value="false" autocomplete="off"> False   </label>
+	  <label class="btn btn-primary ">    <input type="radio" name="true-is-correct" value="true" autocomplete="off"></input> True   </label>
+	<label class="btn btn-primary">    <input type="radio" name="true-is-correct" value="false" autocomplete="off"></input> False   </label>
 	</div>
                 </div> 
             </div>
@@ -67,7 +67,7 @@
             <label class="col-sm-2 control-label" for="page">Notes (Optional)</label>
 
             <div class="col-sm-8">
-                <textarea name="page-notes"  class="form-control"></textarea>
+                <textarea name="page-notes" id="page-notes" class="form-control"></textarea>
             </div>
         </div>
 		  

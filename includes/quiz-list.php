@@ -15,7 +15,7 @@
 require ("user-session.php");
 require ("utility.php");
 
-$publishlid=intval($_GET['lid']);
+$publishlid=intval($_GET['lid']??0);
 
 $sql = "SELECT * FROM `info` WHERE uid = '$uid' order by lid desc";
 if ($result = $mysqli->query($sql))

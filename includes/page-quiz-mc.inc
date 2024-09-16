@@ -10,7 +10,7 @@
             <label class="col-sm-2 control-label" for="page">Text of your question</label>
 
             <div class="col-sm-8">
-                <textarea name="page-question"  class="form-control">
+                <textarea name="page-question" id="page-question" class="form-control">
 </textarea>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <label class="col-sm-2 control-label" for="page">Correct choice text</label>
 
             <div class="col-sm-8">
-                <textarea name="page-choice-correct-text"   class="form-control">
+                <textarea name="page-choice-correct-text" id="page-choice-correct-text" class="form-control">
 </textarea>
             </div>
         </div>
@@ -32,7 +32,7 @@
             <label class="col-sm-2 control-label" for="page">Wrong choice #1</label>
 
             <div class="col-sm-8">
-                <textarea  name="page-choice-wrong-1-text" class="form-control" />
+                <textarea  name="page-choice-wrong-1-text" id="page-choice-wrong-1-text" class="form-control" />
             </div>
         </div>
         
@@ -40,7 +40,7 @@
             <label class="col-sm-2 control-label" for="page">Wrong choice #2<br>(optional)</label>
 
             <div class="col-sm-8">
-                <textarea  name="page-choice-wrong-2-text" class="form-control" />
+                <textarea  name="page-choice-wrong-2-text" id="page-choice-wrong-2-text" class="form-control" />
             </div>
         </div>
         
@@ -48,7 +48,7 @@
             <label class="col-sm-2 control-label" for="page">Wrong choice #3<br>(optional)</label>
 
             <div class="col-sm-8">
-                <textarea name="page-choice-wrong-3-text" class="form-control" />
+                <textarea name="page-choice-wrong-3-text" id="page-choice-wrong-3-text" class="form-control" />
             </div>
         </div>
         
@@ -56,7 +56,7 @@
             <label class="col-sm-2 control-label" for="page">Feedback (Optional)</label>
 
             <div class="col-sm-8">
-                <textarea name="page-feedback"  class="form-control"></textarea>
+                <textarea name="page-feedback" id="page-feedback" class="form-control"></textarea>
             </div>
         </div>
 		  
@@ -87,7 +87,7 @@
             <label class="col-sm-2 control-label" for="page">Notes (Optional)</label>
 
             <div class="col-sm-8">
-                <textarea name="page-notes"  class="form-control"></textarea>
+                <textarea name="page-notes" id="page-notes" class="form-control"></textarea>
             </div>
         </div>
 		  
