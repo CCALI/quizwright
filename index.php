@@ -54,7 +54,7 @@ if (isset($_POST["lesson-submit"])){
 <script type="module" >
 	//console.log('module');
 	import { ClassicEditor, Essentials, Bold, Italic, Paragraph, Underline, Superscript, Subscript, Strikethrough, List , Indent, Undo } from 'ckeditor5';
-	import coreTranslations from 'ckeditor5/translations/pl.js';
+	import coreTranslations from 'ckeditor5/translations/en.js';
 	window.CKEditorConstruct=function(id){
 		//console.log('module CKEditorConstruct');
 		return ClassicEditor
