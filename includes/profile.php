@@ -1,13 +1,13 @@
 <!-- Author profile information - used to populate lesson author info-->
 
 <?php
-
+//error_reporting(REPORT_ALL);
 require ("user-session.php");
 
 $sql = "SELECT profile FROM `people` WHERE uid = '$uid'";
 if ($result = $mysqli->query($sql)) {
 	 while ($row = $result->fetch_assoc()) {
-        $data = json_decode($row['profile'], TRUE); 
+	      $data = json_decode($row['profile'], TRUE); 
 		  ?> 
  
 

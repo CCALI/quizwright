@@ -1,4 +1,5 @@
 
+
 $(document).ready(function(){$(".alert").addClass("in").fadeOut(4500);
 
 /* swap open/close side menu icons */
@@ -57,27 +58,6 @@ $("#list-quizzes").click(function(){
 });
 
 
-
-function cawCKEditor(names)
-{	// Convert QW TextAreas (comma separated form names) into CKEditor and use our special config.
-	names = names.split(",");
-	for (var i in names) {
-		name=names[i];
-		CKEDITOR.replace( name, {
-			customConfig: '/quizwright/js/ckeditor_config.js'
-		} );
-	}
-}
-function cawCKEditorUpdates()
-{	// Ensure CK fields are AJAX/POST ready.
-	for ( instance in CKEDITOR.instances ){
-	    CKEDITOR.instances[instance].updateElement();
-	}
-}
-function cawCKEditorLength(editorName)
-{
-	return messageLength = CKEDITOR.instances[editorName].getData().replace(/<[^>]*>/gi, '').length;
-}
 
          
 function cawSetRB(name,val)
@@ -145,3 +125,28 @@ var cawCALITopics = [
 
 // Load JSON file into a SELECT list
 //function loadlist(selobj,url,nameattr){ $(selobj).empty(); $.getJSON(url,{},function(data) { $.each(data, function(i,obj) { $(selobj).append( $('<option></option>') .val(obj[nameattr]) .html(obj[nameattr])); }); }); }
+
+let editors={};// Save CKEditor instances for later updating.
+function cawCKEditor(names)
+{	// Convert QW TextAreas (comma separated form names) into CKEditor and use our special config.
+	editors={};
+	names = names.split(",");
+	for (var i in names) {
+		name=names[i];
+		//console.log('CKEditor #'+name);
+		window.CKEditorConstruct('#'+name);		
+	}
+}
+function cawCKEditorUpdates()
+{	// Ensure CK fields are AJAX/POST ready.
+	for (var instance in editors)
+	{
+		//console.log(editors[instance].getData());
+		editors[instance].updateSourceElement();
+	}
+}
+function cawCKEditorLength(editorName)
+{
+	return messageLength = editors['#'+editorName].getData().replace(/<[^>]*>/gi, '').length;
+}
+
