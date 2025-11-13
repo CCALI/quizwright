@@ -5,3 +5,5 @@ includes/config.php
 .htaccess~
 
 quizzes/
+
+.idea
