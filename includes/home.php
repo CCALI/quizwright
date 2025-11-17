@@ -17,7 +17,7 @@
                         <li><a id="profile-edit" href="#">My Profile</a></li>
                     </ul>
                 </li>
-                <li><a href="?u=logout"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+                <li><a href="logout.php"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
             </ul>
         </div>
     </div>

@@ -7,7 +7,7 @@ require ("user-session.php");
 $sql = "SELECT profile FROM `people` WHERE uid = '$uid'";
 if ($result = $mysqli->query($sql)) {
 	 while ($row = $result->fetch_assoc()) {
-	      $data = json_decode($row['profile'], TRUE); 
+	      $data = json_decode($row['profile'] ?? '{}', TRUE) ?: []; 
 		  ?> 
  
 
@@ -28,8 +28,8 @@ if ($result = $mysqli->query($sql)) {
 <div class="form-group">
   <label class="col-sm-2 control-label" for="authorfullname">Author Name</label>
   <div class="col-sm-8">
-    <input id="authorfullname" name="authorfullname" placeholder="Your full name here" class="form-control" type="text" value="<?=$data['authorfullname']?>">
-    
+    <input id="authorfullname" name="authorfullname" placeholder="Your full name here" class="form-control" type="text" value="<?=$data['authorfullname'] ?? ''?>">
+
   </div>
 </div>
 
@@ -37,8 +37,8 @@ if ($result = $mysqli->query($sql)) {
 <div class="form-group">
   <label class="col-sm-2 control-label" for="authortitle">Author title</label>
   <div class="col-sm-8">
-    <input id="authortitle" name="authortitle" placeholder="Your title" class="form-control" type="text" value="<?=$data['authortitle']?>">
-    
+    <input id="authortitle" name="authortitle" placeholder="Your title" class="form-control" type="text" value="<?=$data['authortitle'] ?? ''?>">
+
   </div>
 </div>
 
@@ -46,8 +46,8 @@ if ($result = $mysqli->query($sql)) {
 <div class="form-group">
   <label class="col-sm-2 control-label" for="authorschool">School</label>
   <div class="col-sm-8">
-    <input id="authorschool" name="authorschool" placeholder="Your school" class="form-control" type="text" value="<?=$data['authorschool']?>">
-    
+    <input id="authorschool" name="authorschool" placeholder="Your school" class="form-control" type="text" value="<?=$data['authorschool'] ?? ''?>">
+
   </div>
 </div>
 
@@ -55,8 +55,8 @@ if ($result = $mysqli->query($sql)) {
 <div class="form-group">
   <label class="col-sm-2 control-label" for="authoremail">Email</label>
   <div class="col-sm-8">
-    <input id="authoremail" name="authoremail" placeholder="Your email address" class="form-control" type="text" value="<?=$data['authoremail']?>">
-    
+    <input id="authoremail" name="authoremail" placeholder="Your email address" class="form-control" type="text" value="<?=$data['authoremail'] ?? ''?>">
+
   </div>
 </div>
 
@@ -64,8 +64,8 @@ if ($result = $mysqli->query($sql)) {
 <div class="form-group">
   <label class="col-sm-2 control-label" for="authorphone">Phone</label>
   <div class="col-sm-8">
-    <input id="authorphone" name="authorphone" placeholder="234-456-7890" class="form-control" type="text" value="<?=$data['authorphone']?>">
-    
+    <input id="authorphone" name="authorphone" placeholder="234-456-7890" class="form-control" type="text" value="<?=$data['authorphone'] ?? ''?>">
+
   </div>
 </div>
 
