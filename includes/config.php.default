@@ -12,7 +12,7 @@ const DB_HOST = 'db';
 $mysqli = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 
 // full path to user management
-const USER_MGMNT = '/var/www/html/web/quizwright/includes/saml_user.php';
+const USER_MGMNT = '/var/www/html/quizwright/includes/saml_user.php';
 const DRUPAL_REGISTER = 'http://your.drupal/regsiter/page';
 
 // define connection info for user info source.

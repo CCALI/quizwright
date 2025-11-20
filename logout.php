@@ -7,7 +7,7 @@
 use SimpleSAML\Auth\Simple;
 use SimpleSAML\Configuration;
 
-require_once(__DIR__ . '/../../vendor/autoload.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
 require_once(__DIR__ . '/includes/config.php');
 
 // Use the same session as SimpleSAMLphp
