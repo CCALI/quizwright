@@ -98,14 +98,17 @@ function userLoginViaSAML(): string
 
 function userLogoutViaSAML(): void
 {
-    $as = new Simple('quizwright-sp');
-
-    // Destroy local session
+    // Local logout only - does NOT log out of IdP (Drupal)
+    // Just destroy the local PHP session
     session_unset();
     session_destroy();
 
-    // Full SAML logout - logs out of both SP and IdP (Drupal)
-    // The return URL will be used after logout completes
-    $returnUrl = SITE_URL ?? '/quizwright/';
-    $as->logout($returnUrl);
+    // Clear SimpleSAMLphp auth data from session without triggering SAML logout
+    if (isset($_COOKIE['SimpleSAMLAuthToken'])) {
+        setcookie('SimpleSAMLAuthToken', '', time() - 3600, '/', '', false, true);
+    }
+
+    // Redirect back to the app login page
+    header('Location: ' . (SITE_URL ?? '/quizwright/'));
+    exit;
 }
