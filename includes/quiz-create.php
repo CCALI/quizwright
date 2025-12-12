@@ -7,8 +7,8 @@ $_POST['pages'] = explode(",",$_POST['pages']);// ensure pages are a JS array, n
 $data = json_encode($_POST);
 
 // Old, bad quotes: $mysqli->query("INSERT INTO info (lid,uid,data) VALUES ('',$uid,'$data')");
-$stmt = mysqli_prepare($mysqli, "INSERT INTO info (lid,uid,data) VALUES (?,?,?)"); 
-mysqli_stmt_bind_param($stmt, "iis", $lid, $uid, $data);
+$stmt = mysqli_prepare($mysqli, "INSERT INTO info (uid,data) VALUES (?,?)");
+mysqli_stmt_bind_param($stmt, "is", $uid, $data);
 mysqli_stmt_execute($stmt);
 $result=mysqli_connect_error();
 $lid = $mysqli->insert_id;

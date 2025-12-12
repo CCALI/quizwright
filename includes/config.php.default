@@ -29,4 +29,4 @@ $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SE
 define("SITE_URL", $protocol . ($_SERVER['HTTP_HOST'] ?? 'cali-d10.ddev.site') . '/quizwright/');
 
 //where to publish quizzes
-const PUBLISH_URL = 'http://where.is.my.publish.endpoint/';
+define('PUBLISH_URL', $protocol . ($_SERVER['HTTP_HOST'] ?? 'cali-d10.ddev.site') . '/publisher/publish/qw');
