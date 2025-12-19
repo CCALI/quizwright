@@ -46,13 +46,13 @@ function userLoginViaSAML(): string
     // Check for required role - QuizWright requires CALI Staff or facstaff role
     $hasRequiredRole = false;
     $CALIStaff = false;
-    $requiredRoles = ['CALI Staff', 'facstaff'];
+    $requiredRoles = ['cali_staff', 'facstaff'];
 
     foreach ($roles as $role) {
         if (in_array($role, $requiredRoles)) {
             $hasRequiredRole = true;
             // Check if user is CALI Staff
-            if ($role === 'CALI Staff') {
+            if ($role === 'cali_staff') {
                 $CALIStaff = true;
             }
             break;
@@ -60,6 +60,7 @@ function userLoginViaSAML(): string
     }
 
     if (!$hasRequiredRole) {
+
         return "User does not have required role. QuizWright requires a CALI member faculty/staff account.";
     }
 
