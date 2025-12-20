@@ -6,8 +6,8 @@
 //error_reporting(E_ALL); 
 require ("user-session.php");
 require ("utility.php");
-$pid = $_POST['pid'];
-if (!isset($pid))
+$pid = $_POST['pid'] ?? null;
+if (empty($pid))
 {	// No ID? Must be a brand new page.
 	if ($_POST['page-type'] != '')
 	{
