@@ -3,9 +3,7 @@
   Require all granted
 </FilesMatch>
 
-# some PHP settings for sessions
-php_value session.gc_probability			1
-php_value session.gc_divisor				100
-php_value session.gc_maxlifetime			200000
-php_value session.cookie_lifetime			2000000
-
+# Session settings used to live here as php_value directives. They are inert
+# under the PHP-FPM/FastCGI SAPI, so they never took effect. They now live in
+# includes/session.php, which must be required before any output and before
+# session_start(). Do not re-add them here.
