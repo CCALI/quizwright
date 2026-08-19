@@ -45,10 +45,37 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     return;
 }
 
-// Same memcached node SimpleSAMLphp already uses. Override per environment.
-$qwMemcached = getenv('QW_MEMCACHED') ?: '10.x.x.x:11211';
+// Deploy-specific settings live in session-config.php, which is gitignored —
+// copy includes/session-config.php.default and fill it in. They are kept out of
+// config.php on purpose: config.php is required *after* the session is already
+// open, it connects to MySQL at include time, and this file has to stay free of
+// dependencies to be safe as the first require in an entry point.
+if (is_file(__DIR__ . '/session-config.php')) {
+    require_once __DIR__ . '/session-config.php';
+}
 
-if (extension_loaded('memcached')) {
+// Either source works: the environment wins if set, otherwise the constant from
+// session-config.php. $_SERVER is checked as well because values injected as
+// FastCGI params land there and getenv() does not always see them.
+//
+// There is deliberately no built-in default. A plausible-looking wrong address
+// switches the save handler to memcached and then silently loses every session
+// on every request — a worse failure than not using memcached at all.
+$qwMemcached = getenv('QW_MEMCACHED')
+    ?: (string)($_SERVER['QW_MEMCACHED'] ?? '')
+    ?: (defined('QW_MEMCACHED_HOST') ? QW_MEMCACHED_HOST : '');
+
+if ($qwMemcached === '') {
+    // Defining QW_MEMCACHED_HOST as '' is how a single-node environment says
+    // "no shared store needed" — node-local sessions are correct there, so stay
+    // quiet. Not configuring it at all is a broken multi-pod deploy: say so, or
+    // the login flapping this file exists to fix comes back with no explanation.
+    if (!defined('QW_MEMCACHED_HOST')) {
+        error_log('session.php: no memcached host configured. Set QW_MEMCACHED in the '
+            . 'environment, or QW_MEMCACHED_HOST in includes/session-config.php. '
+            . 'Sessions will be node-local files and will NOT be shared across pods.');
+    }
+} elseif (extension_loaded('memcached')) {
     ini_set('session.save_handler', 'memcached');
     ini_set('session.save_path',    $qwMemcached);
 
@@ -67,10 +94,10 @@ if (extension_loaded('memcached')) {
     ini_set('session.save_path',
         'tcp://' . $qwMemcached . '?persistent=1&weight=1&timeout=1&retry_interval=15');
 } else {
-    // No shared store available: sessions stay node-local and the multi-pod
-    // login/logout flapping this file exists to fix will come straight back.
-    error_log('session.php: neither the memcached nor the memcache extension is '
-        . 'loaded; falling back to node-local file sessions.');
+    // A host is configured but there is no way to reach it, so sessions stay
+    // node-local and the multi-pod login/logout flapping comes straight back.
+    error_log('session.php: a memcached host is configured but neither the memcached '
+        . 'nor the memcache extension is loaded; falling back to node-local file sessions.');
 }
 
 // The four settings below lived in .htaccess and have never actually applied
@@ -81,7 +108,13 @@ ini_set('session.cookie_lifetime', '0');      // expire with the browser session
 
 // Escape hatch for a plain-HTTP dev box only. Leave unset everywhere else — a
 // non-secure session cookie is sent over cleartext.
-ini_set('session.cookie_secure',   getenv('QW_SESSION_COOKIE_SECURE') === '0' ? '0' : '1');
+$qwCookieSecure = '1';
+if (getenv('QW_SESSION_COOKIE_SECURE') === '0'
+    || ($_SERVER['QW_SESSION_COOKIE_SECURE'] ?? null) === '0'
+    || (defined('QW_SESSION_COOKIE_SECURE') && !QW_SESSION_COOKIE_SECURE)) {
+    $qwCookieSecure = '0';
+}
+ini_set('session.cookie_secure',   $qwCookieSecure);
 ini_set('session.cookie_httponly', '1');
 ini_set('session.cookie_samesite', 'Lax');
 ini_set('session.use_strict_mode', '1');      // reject attacker-supplied session IDs

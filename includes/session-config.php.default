@@ -1,0 +1,51 @@
+<?php
+/**
+ * Deploy-specific session settings.
+ *
+ * Copy this file to includes/session-config.php and fill it in. The copy is
+ * gitignored: it names internal infrastructure, which should not be published
+ * with the source.
+ *
+ * Why this is not part of config.php: includes/session.php has to run before any
+ * output and before the session is opened, which is earlier than config.php can
+ * be loaded. config.php is required *after* session_start() in the older entry
+ * points, it connects to MySQL at include time, and it defines USER_MGMNT, whose
+ * target requires session.php back. Reading the memcached address from it is not
+ * possible without reordering every entry point in the app.
+ *
+ * Keep this file free of dependencies: constants only. No database connections,
+ * no requires, no output — and no closing `?>` tag, because a single stray byte
+ * after it is enough to make the session cookie impossible to set.
+ */
+
+/**
+ * The memcached node holding shared sessions. 'host:port', or several addresses
+ * separated by commas.
+ *
+ * Use the same node SimpleSAMLphp on this host already uses — the current value
+ * is in `memcache_store.servers` in its config.
+ *
+ * Every pod must point at the same node. Any pod that does not will fall back to
+ * node-local file sessions, and users whose requests land there will appear to
+ * log themselves out at random.
+ *
+ * Leave this line commented out and nothing is configured: session.php logs a
+ * warning on every request and sessions stay node-local. Define it as '' to say
+ * "this environment has no shared store" — correct on a single-node dev box, and
+ * silent, because it is a deliberate choice rather than a missed deploy step.
+ *
+ * This can also be supplied as the QW_MEMCACHED environment variable (an
+ * `env[QW_MEMCACHED]` line in the PHP-FPM pool config, or the container
+ * environment). If both are set, the environment wins.
+ */
+// define('QW_MEMCACHED_HOST', '10.0.0.1:11211');
+
+/**
+ * Set to false ONLY on a plain-HTTP dev box. It stops the session cookie from
+ * being marked Secure, which means the cookie travels in cleartext. Leave this
+ * commented out in every deployed environment.
+ *
+ * Also available as the QW_SESSION_COOKIE_SECURE environment variable, set to
+ * the string '0'.
+ */
+// define('QW_SESSION_COOKIE_SECURE', false);
