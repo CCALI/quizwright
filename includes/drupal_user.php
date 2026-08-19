@@ -19,26 +19,37 @@
  */
 require "password.inc";
  
-$user = htmlspecialchars($_GET['u']);
+$user = htmlspecialchars($_GET['u'] ?? '');
  
  switch($user) {
 	case "login":				
 		if (isset($_GET['token'])){
+   // NOTE: this authenticates on a Drupal session id handed over in a query
+   // string. It leaks through Referer headers, proxy logs and browser history.
+   // It should be replaced with the SAML flow; parameterized here so it is at
+   // least not also an injection point.
    $sid = $_GET['token'];
-   $query = "SELECT uid FROM `sessions` WHERE sid = '$sid'";
-   $result = $umysqli->query($query);
-   $row = mysqli_fetch_assoc($result);
-   $uid = $row['uid'];
-   $query = "SELECT * FROM `users` WHERE uid=$uid";
-		 $result = $umysqli->query($query);
-  $count = mysqli_num_rows($result);
+   $stmt = $umysqli->prepare("SELECT uid FROM `sessions` WHERE sid = ?");
+   $stmt->bind_param("s", $sid);
+   $stmt->execute();
+   $row = $stmt->get_result()->fetch_assoc();
+   $stmt->close();
+   $uid = (int) ($row['uid'] ?? 0);
+   $stmt = $umysqli->prepare("SELECT * FROM `users` WHERE uid = ?");
+   $stmt->bind_param("i", $uid);
+   $stmt->execute();
+   $result = $stmt->get_result();
+  $count = $result->num_rows;
+  $stmt->close();
 		if ($count == 1){
 			$account = $result->fetch_object();	
 			// check roles, needs CALI Staff or facstaff to proceed
 			$userid = $account->uid;
-			$query = "SELECT * FROM `users_roles` WHERE uid = $userid and rid in (5,6)";
-			$result = $umysqli->query($query);
-			$count = mysqli_num_rows($result);
+			$stmt = $umysqli->prepare("SELECT * FROM `users_roles` WHERE uid = ? and rid in (5,6)");
+			$stmt->bind_param("i", $userid);
+			$stmt->execute();
+			$count = $stmt->get_result()->num_rows;
+			$stmt->close();
 			if ($count >= 1) {
 				$name = $account->name;
 				$email = $account->mail;
@@ -49,20 +60,28 @@ $user = htmlspecialchars($_GET['u']);
 				 * matched it to a username. If that username already exists
 				 * in the local people table, let's just carry on
 				 */
-				$query = "SELECT * FROM `people` WHERE username='$name'";
-				$result = $mysqli->query($query);
-				$count = mysqli_num_rows($result);
+				$stmt = $mysqli->prepare("SELECT * FROM `people` WHERE username = ?");
+				$stmt->bind_param("s", $name);
+				$stmt->execute();
+				$result = $stmt->get_result();
+				$count = $result->num_rows;
+				$stmt->close();
 				if ($count == 1){
 					$row = $result->fetch_array(MYSQLI_ASSOC);
+					// New privilege level for this session — reissue the id.
+					session_regenerate_id(true);
 					$_SESSION['username'] = $row['username'];
 					$_SESSION['uid'] = $row['uid'];
 				} else {
 					// 2: if not add to people table
 					// let's stash the drupal user object in the people table.
 					$data = json_encode($account);
-					$query = "INSERT INTO `people` (username, email, password, data) VALUES ('$name', '$email', '$password', '$data')";
-					if($result = $mysqli->query($query)){
+					$stmt = $mysqli->prepare("INSERT INTO `people` (username, email, password, data) VALUES (?, ?, ?, ?)");
+					$stmt->bind_param("ssss", $name, $email, $password, $data);
+					if($result = $stmt->execute()){
 						$uid = $mysqli->insert_id;
+						// New privilege level for this session — reissue the id.
+						session_regenerate_id(true);
 						$_SESSION['username'] = $name;
 						$_SESSION['uid'] = $uid;
 					} else {
@@ -82,16 +101,21 @@ $user = htmlspecialchars($_GET['u']);
   }elseif (isset($_POST['username']) and isset($_POST['password'])){
 		$name = $_POST['username'];
 		$password = $_POST['password'];
-		$query = "SELECT * FROM `users` WHERE name='$name'";
-		$result = $umysqli->query($query);
-		$count = mysqli_num_rows($result);
+		$stmt = $umysqli->prepare("SELECT * FROM `users` WHERE name = ?");
+		$stmt->bind_param("s", $name);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$count = $result->num_rows;
+		$stmt->close();
 		if ($count == 1){
 			$account = $result->fetch_object();	
 			// check roles, needs CALI Staff or facstaff to proceed
 			$userid = $account->uid;
-			$query = "SELECT * FROM `users_roles` WHERE uid = $userid and rid in (5,6)";
-			$result = $umysqli->query($query);
-			$count = mysqli_num_rows($result);
+			$stmt = $umysqli->prepare("SELECT * FROM `users_roles` WHERE uid = ? and rid in (5,6)");
+			$stmt->bind_param("i", $userid);
+			$stmt->execute();
+			$count = $stmt->get_result()->num_rows;
+			$stmt->close();
 			if ($count >= 1) {
 			if(user_check_password($password, $account)){
 				$name = $account->name;
@@ -103,20 +127,28 @@ $user = htmlspecialchars($_GET['u']);
 				 * matched it to a username. If that username already exists
 				 * in the local people table, let's just carry on
 				 */
-				$query = "SELECT * FROM `people` WHERE username='$name'";
-				$result = $mysqli->query($query);
-				$count = mysqli_num_rows($result);
+				$stmt = $mysqli->prepare("SELECT * FROM `people` WHERE username = ?");
+				$stmt->bind_param("s", $name);
+				$stmt->execute();
+				$result = $stmt->get_result();
+				$count = $result->num_rows;
+				$stmt->close();
 				if ($count == 1){
 					$row = $result->fetch_array(MYSQLI_ASSOC);
+					// New privilege level for this session — reissue the id.
+					session_regenerate_id(true);
 					$_SESSION['username'] = $row['username'];
 					$_SESSION['uid'] = $row['uid'];
 				} else {
 					// 2: if not add to people table
 					// let's stash the drupal user object in the people table.
 					$data = json_encode($account);
-					$query = "INSERT INTO `people` (username, email, password, data) VALUES ('$name', '$email', '$password', '$data')";
-					if($result = $mysqli->query($query)){
+					$stmt = $mysqli->prepare("INSERT INTO `people` (username, email, password, data) VALUES (?, ?, ?, ?)");
+					$stmt->bind_param("ssss", $name, $email, $password, $data);
+					if($result = $stmt->execute()){
 						$uid = $mysqli->insert_id;
+						// New privilege level for this session — reissue the id.
+						session_regenerate_id(true);
 						$_SESSION['username'] = $name;
 						$_SESSION['uid'] = $uid;
 					} else {
@@ -151,10 +183,11 @@ $user = htmlspecialchars($_GET['u']);
 		
 		break;
 	case "logout":	
-		session_destroy();
+		qw_session_destroy();
 		header('Location:'.SITE_URL.'?u=login');
-		break;
+		exit;
 	default:
 		header('Location:'.SITE_URL.'?u=login');
+		exit;
 }
  ?>

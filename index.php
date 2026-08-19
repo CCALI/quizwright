@@ -1,11 +1,16 @@
 <?php
-session_start();
-require ("./includes/config.php");
+require_once __DIR__ . '/includes/session.php';   // must be first: opens the shared session
+require_once __DIR__ . '/includes/config.php';
 
-if (isset($_POST["lesson-submit"])){
+if (isset($_POST["lesson-submit"])) {
 	$data = json_encode($_POST);
-	$uid = $_SESSION['uid'];
-	$mysqli->query("INSERT INTO info (lid,uid,data) VALUES ('',$uid,'$data')");
+	$uid  = (int) ($_SESSION['uid'] ?? 0);
+	if ($uid > 0) {
+		$stmt = $mysqli->prepare("INSERT INTO info (lid,uid,data) VALUES (0,?,?)");
+		$stmt->bind_param("is", $uid, $data);
+		$stmt->execute();
+		$stmt->close();
+	}
 }
 ?>
 <!DOCTYPE html>
